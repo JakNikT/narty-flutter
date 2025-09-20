@@ -970,6 +970,7 @@ class SkiApp(QMainWindow):
         self.cal_od_btn.setFixedSize(25, 25)
         self.cal_od_btn.setToolTip("Otwórz kalendarz")
         self.cal_od_btn.clicked.connect(lambda: self.open_calendar("od"))
+        
         self.cal_od_btn.setStyleSheet("""
             QPushButton {
                 background-color: #2196F3;
@@ -1320,6 +1321,11 @@ class SkiApp(QMainWindow):
         # Jeśli to pole roku - sprawdź czy ma 4 cyfry (pełny rok)
         if current_field in [self.od_rok, self.do_rok]:
             if len(text) == 4 and text.isdigit():
+                next_field.setFocus()
+                next_field.selectAll()
+        # Jeśli to pole wzrostu - sprawdź czy ma 3 cyfry
+        elif current_field == self.wzrost_entry:
+            if len(text) == 3 and text.isdigit():
                 next_field.setFocus()
                 next_field.selectAll()
         # Jeśli to inne pole - sprawdź czy ma 2 cyfry
