@@ -738,7 +738,7 @@ class SkiApp(QMainWindow):
         form_layout = QVBoxLayout()
         form_layout.setSpacing(8)  # Zmniejszone odstępy między rzędami
         
-        # RZĄD 1: Daty rezerwacji - 3 okienka dla każdej daty
+        # RZĄD 1: Daty rezerwacji - 3 okienka koło siebie
         row1_layout = QVBoxLayout()
         
         # Data od
@@ -749,26 +749,21 @@ class SkiApp(QMainWindow):
         self.od_dzien = QLineEdit()
         self.od_dzien.setPlaceholderText("DD")
         self.od_dzien.setMaxLength(2)
-        self.od_dzien.setFixedWidth(35)
-        self.od_dzien.setText(datetime.now().strftime("%d"))
+        self.od_dzien.setFixedWidth(45)  # Zwiększone z 35 na 45
         od_layout.addWidget(self.od_dzien)
-        od_layout.addWidget(QLabel("/"))
         
         # Miesiąc
         self.od_miesiac = QLineEdit()
         self.od_miesiac.setPlaceholderText("MM")
         self.od_miesiac.setMaxLength(2)
-        self.od_miesiac.setFixedWidth(35)
-        self.od_miesiac.setText(datetime.now().strftime("%m"))
+        self.od_miesiac.setFixedWidth(45)  # Zwiększone z 35 na 45
         od_layout.addWidget(self.od_miesiac)
-        od_layout.addWidget(QLabel("/"))
         
         # Rok
         self.od_rok = QLineEdit()
         self.od_rok.setPlaceholderText("RR")
         self.od_rok.setMaxLength(4)
-        self.od_rok.setFixedWidth(50)
-        self.od_rok.setText(datetime.now().strftime("%y"))
+        self.od_rok.setFixedWidth(60)  # Zwiększone z 50 na 60
         od_layout.addWidget(self.od_rok)
         
         # Przycisk kalendarza
@@ -800,26 +795,20 @@ class SkiApp(QMainWindow):
         self.do_dzien = QLineEdit()
         self.do_dzien.setPlaceholderText("DD")
         self.do_dzien.setMaxLength(2)
-        self.do_dzien.setFixedWidth(35)
-        self.do_dzien.setText((datetime.now() + timedelta(days=7)).strftime("%d"))
+        self.do_dzien.setFixedWidth(45)  # Zwiększone z 35 na 45
         do_layout.addWidget(self.do_dzien)
-        do_layout.addWidget(QLabel("/"))
         
-        # Miesiąc
         self.do_miesiac = QLineEdit()
         self.do_miesiac.setPlaceholderText("MM")
         self.do_miesiac.setMaxLength(2)
-        self.do_miesiac.setFixedWidth(35)
-        self.do_miesiac.setText((datetime.now() + timedelta(days=7)).strftime("%m"))
+        self.do_miesiac.setFixedWidth(45)  # Zwiększone z 35 na 45
         do_layout.addWidget(self.do_miesiac)
-        do_layout.addWidget(QLabel("/"))
         
         # Rok
         self.do_rok = QLineEdit()
         self.do_rok.setPlaceholderText("RR")
         self.do_rok.setMaxLength(4)
-        self.do_rok.setFixedWidth(50)
-        self.do_rok.setText((datetime.now() + timedelta(days=7)).strftime("%y"))
+        self.do_rok.setFixedWidth(60)  # Zwiększone z 50 na 60
         do_layout.addWidget(self.do_rok)
         
         # Przycisk kalendarza
