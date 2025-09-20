@@ -1528,8 +1528,22 @@ class SkiApp(QMainWindow):
         narta = narta_info['dane']
         dopasowanie = narta_info['dopasowanie']
         
-        # 1. Nazwa narty i długość
-        self.wyniki_text.append(f"► {narta['MARKA']} {narta['MODEL']} ({narta['DLUGOSC']} cm)")
+        # ===== WYŚWIETL WSPÓŁCZYNNIK IDEALNOŚCI =====
+        wspolczynnik = narta_info.get('wspolczynnik_idealnosci', 0)
+        if wspolczynnik >= 90:
+            wspolczynnik_emoji = "🎯"
+        elif wspolczynnik >= 80:
+            wspolczynnik_emoji = "✅"
+        elif wspolczynnik >= 70:
+            wspolczynnik_emoji = "👍"
+        elif wspolczynnik >= 60:
+            wspolczynnik_emoji = "⚡"
+        else:
+            wspolczynnik_emoji = "📊"
+        # ===== KONIEC NOWEGO KODU =====
+        
+        # 1. Nazwa narty i długość z współczynnikiem
+        self.wyniki_text.append(f"► {narta['MARKA']} {narta['MODEL']} ({narta['DLUGOSC']} cm) {wspolczynnik_emoji} {wspolczynnik}%")
         
         # 2. Sprawdź rezerwacje dla tej narty
         ilosc_sztuk = int(narta.get('ILOSC', '1') or '1')
