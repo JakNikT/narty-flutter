@@ -971,7 +971,7 @@ class SkiApp(QMainWindow):
         row1_layout.addLayout(do_layout)
         form_layout.addLayout(row1_layout)
         
-        # Ustaw walidatory
+        # Ustaw walidatory dla pól dat (poziomy i płeć będą ustawione później)
         self.setup_date_validators()
         
         # RZĄD 2: Wzrost i Waga
@@ -990,26 +990,19 @@ class SkiApp(QMainWindow):
         # RZĄD 3: Poziom i Płeć
         row3_layout = QHBoxLayout()
         row3_layout.addWidget(QLabel("🎯 Poziom:"))
-        self.poziom_combo = QComboBox()
-        poziomy = ["1 - Świeżak", "2 - Początkujący Turysta", "3 - Niedzielny Śmigacz", 
-                  "4 - Zajakowicz", "5 - Zawodnik", "6 - Lokalna Legenda"]
-        self.poziom_combo.addItems(poziomy)
-        self.poziom_combo.setFixedWidth(150)  # Przywrócone do oryginalnej szerokości
-        row3_layout.addWidget(self.poziom_combo)
-        row3_layout.addWidget(QLabel("👤 Płeć:"))
+        self.poziom_entry = QLineEdit()
+        self.poziom_entry.setPlaceholderText("1-6")
+        self.poziom_entry.setFixedWidth(80)
+        self.poziom_entry.setToolTip("Wpisz poziom 1-6 (1=Świeżak, 2=Początkujący, 3=Śmigacz, 4=Zajakowicz, 5=Zawodnik, 6=Legenda)")
+        row3_layout.addWidget(self.poziom_entry)
         
-        # Radio buttony dla płci - utwórz grupę
-        plec_group_widget = QGroupBox()
-        plec_group_widget.setStyleSheet("QGroupBox { border: none; }")
-        plec_layout = QHBoxLayout(plec_group_widget)
-        self.plec_group = QRadioButton("👩")
-        self.plec_group2 = QRadioButton("👨")
-        self.plec_group3 = QRadioButton("👥")
-        self.plec_group3.setChecked(True)
-        plec_layout.addWidget(self.plec_group)
-        plec_layout.addWidget(self.plec_group2)
-        plec_layout.addWidget(self.plec_group3)
-        row3_layout.addWidget(plec_group_widget)
+        row3_layout.addWidget(QLabel("👤 Płeć:"))
+        self.plec_entry = QLineEdit()
+        self.plec_entry.setPlaceholderText("M/K/U")
+        self.plec_entry.setFixedWidth(80)
+        self.plec_entry.setToolTip("M=Mężczyzna, K=Kobieta, U=Wszyscy")
+        row3_layout.addWidget(self.plec_entry)
+        
         row3_layout.addStretch()
         form_layout.addLayout(row3_layout)
         
@@ -1129,6 +1122,9 @@ class SkiApp(QMainWindow):
         # Ustaw obsługę automatycznego przechodzenia między polami (po utworzeniu wszystkich pól)
         self.setup_date_handlers()
         
+        # Ustaw walidatory dla poziomu i płci (po utworzeniu pól)
+        self.setup_additional_validators()
+        
         return top_frame
         
         
@@ -1238,6 +1234,18 @@ class SkiApp(QMainWindow):
         self.od_rok.setValidator(year_validator)
         self.do_rok.setValidator(year_validator)
     
+    def setup_additional_validators(self):
+        """Ustawia walidatory dla pól poziomu i płci"""
+        # Walidator dla poziomu (1-6)
+        poziom_regex = QRegExp(r"^[1-6]$")
+        poziom_validator = QRegExpValidator(poziom_regex)
+        self.poziom_entry.setValidator(poziom_validator)
+        
+        # Walidator dla płci (M, K, U - wielkość liter nieważna)
+        plec_regex = QRegExp(r"^[MKUmku]$")
+        plec_validator = QRegExpValidator(plec_regex)
+        self.plec_entry.setValidator(plec_validator)
+    
     def setup_date_handlers(self):
         """Ustawia obsługę automatycznego przechodzenia między polami"""
         # Data od
@@ -1252,8 +1260,10 @@ class SkiApp(QMainWindow):
         self.do_rok.textChanged.connect(lambda: self.auto_complete_year_safe(self.do_rok))
         self.do_rok.textChanged.connect(lambda: self.auto_next_field(self.do_rok, self.wzrost_entry))
         
-        # Wzrost i waga - automatyczne przechodzenie
+        # Wzrost, waga, poziom, płeć - automatyczne przechodzenie
         self.wzrost_entry.textChanged.connect(lambda: self.auto_next_field(self.wzrost_entry, self.waga_entry))
+        self.waga_entry.textChanged.connect(lambda: self.auto_next_field(self.waga_entry, self.poziom_entry))
+        self.poziom_entry.textChanged.connect(lambda: self.auto_next_field(self.poziom_entry, self.plec_entry))
     
     def auto_complete_year_safe(self, year_field):
         """Bezpieczne uzupełnianie roku i przechodzenie do następnego pola"""
@@ -1300,10 +1310,29 @@ class SkiApp(QMainWindow):
                 try:
                     waga = int(text)
                     if 20 <= waga <= 200:
-                        # Przejdź do poziomu (combo box)
-                        self.poziom_combo.setFocus()
+                        # Przejdź do poziomu
+                        next_field.setFocus()
+                        next_field.selectAll()
                 except ValueError:
                     pass
+        # Jeśli to pole poziomu - sprawdź czy ma 1 cyfrę (1-6)
+        elif current_field == self.poziom_entry:
+            if len(text) == 1 and text.isdigit():
+                try:
+                    poziom = int(text)
+                    if 1 <= poziom <= 6:
+                        next_field.setFocus()
+                        next_field.selectAll()
+                except ValueError:
+                    pass
+        # Jeśli to pole płci - sprawdź czy to M, K lub U
+        elif current_field == self.plec_entry:
+            if len(text) == 1 and text.upper() in ['M', 'K', 'U']:
+                # Automatycznie popraw na wielką literę
+                current_field.setText(text.upper())
+                # Przejdź do przeznaczenia (pierwszy radio button)
+                if hasattr(self, 'styl_group'):
+                    self.styl_group.setFocus()
         # Jeśli to inne pole - sprawdź czy ma 2 cyfry
         else:
             if len(text) == 2 and text.isdigit():
@@ -1366,25 +1395,38 @@ class SkiApp(QMainWindow):
             QMessageBox.critical(self, "Błąd Danych", "Waga musi być między 20 a 200 kg!")
             return
         
-        poziom_text = self.poziom_combo.currentText()
+        # Sprawdź poziom
+        poziom_text = self.poziom_entry.text().strip()
         if not poziom_text:
-            QMessageBox.critical(self, "Błąd Danych", "Wybierz poziom umiejętności.")
+            QMessageBox.critical(self, "Błąd Danych", "Wpisz poziom umiejętności (1-6)!")
             return
             
         try:
-            # Wyciągnij numer poziomu z tekstu (np. "1 - Świeżak" -> 1)
-            poziom_klienta = int(poziom_text.split(' ')[0])
-        except (ValueError, IndexError):
-            QMessageBox.critical(self, "Błąd Danych", f"Błąd parsowania poziomu: '{poziom_text}'. Wybierz poziom z listy.")
+            poziom_klienta = int(poziom_text)
+            if poziom_klienta < 1 or poziom_klienta > 6:
+                QMessageBox.critical(self, "Błąd Danych", "Poziom musi być między 1 a 6!")
+                return
+        except ValueError:
+            QMessageBox.critical(self, "Błąd Danych", f"Poziom musi być liczbą od 1 do 6! Wpisałeś: '{poziom_text}'")
             return
 
-        # Pobierz płeć
-        if self.plec_group.isChecked():
-            plec_klienta = "Kobieta"
-        elif self.plec_group2.isChecked():
-            plec_klienta = "Mężczyzna"
-        else:
-            plec_klienta = "Wszyscy"
+        # Sprawdź płeć
+        plec_text = self.plec_entry.text().strip().upper()
+        if not plec_text:
+            QMessageBox.critical(self, "Błąd Danych", "Wpisz płeć (M/K/U)!")
+            return
+            
+        if plec_text not in ['M', 'K', 'U']:
+            QMessageBox.critical(self, "Błąd Danych", "Płeć musi być M (Mężczyzna), K (Kobieta) lub U (Wszyscy)!")
+            return
+            
+        # Mapuj na pełne nazwy
+        plec_mapping = {
+            'M': 'Mężczyzna',
+            'K': 'Kobieta', 
+            'U': 'Wszyscy'
+        }
+        plec_klienta = plec_mapping[plec_text]
         
         # Pobierz daty rezerwacji z nowych pól
         od_dzien = self.od_dzien.text().strip()
@@ -1613,8 +1655,8 @@ class SkiApp(QMainWindow):
         """Czyści formularz"""
         self.wzrost_entry.clear()
         self.waga_entry.clear()
-        self.poziom_combo.setCurrentIndex(0)  # Ustawi pierwszy poziom (1M)
-        self.plec_group3.setChecked(True)
+        self.poziom_entry.clear()
+        self.plec_entry.clear()
         self.styl_group.setChecked(True)
         
         # Wyczyść nowe pola dat i ustaw domyślne wartości
