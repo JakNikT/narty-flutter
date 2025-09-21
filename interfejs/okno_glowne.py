@@ -4,10 +4,12 @@ Zawiera interfejs użytkownika i logikę obsługi zdarzeń
 """
 import os
 import sys
+import csv
 from datetime import datetime, timedelta
 from PyQt5.QtWidgets import (QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, 
                              QLabel, QPushButton, QLineEdit, QRadioButton, 
-                             QTextEdit, QGroupBox, QMessageBox, QCalendarWidget, QDialog, QFrame)
+                             QTextEdit, QGroupBox, QMessageBox, QCalendarWidget, QDialog, QFrame,
+                             QTableWidget, QTableWidgetItem, QComboBox)
 from PyQt5.QtCore import Qt, QRegExp
 from PyQt5.QtGui import QFont, QPixmap, QRegExpValidator
 
@@ -306,12 +308,17 @@ class SkiApp(QMainWindow):
         self.wyczysc_button.setStyleSheet(get_button_style(ModernTheme.WARNING))
         self.wyczysc_button.clicked.connect(self.wyczysc_formularz)
         
-        self.odswiez_rezerwacje_button = QPushButton("🔄 Odśwież rezerwacje")
+        self.przegladaj_button = QPushButton("📋 Przeglądaj")
+        self.przegladaj_button.setStyleSheet(get_button_style(ModernTheme.ACCENT))
+        self.przegladaj_button.clicked.connect(self.pokaz_wszystkie_narty)
+        
+        self.odswiez_rezerwacje_button = QPushButton("🔄 Rezerwacje")
         self.odswiez_rezerwacje_button.setStyleSheet(get_button_style(ModernTheme.INFO))
         self.odswiez_rezerwacje_button.clicked.connect(self.odswiez_rezerwacje)
         
         button_layout.addWidget(self.znajdz_button)
         button_layout.addWidget(self.wyczysc_button)
+        button_layout.addWidget(self.przegladaj_button)
         button_layout.addWidget(self.odswiez_rezerwacje_button)
         button_layout.addStretch()
         
@@ -870,3 +877,203 @@ class SkiApp(QMainWindow):
             self.wyniki_text.append(f"Wystąpił błąd: {e}")
             self.wyniki_text.append("")
             self.wyniki_text.append("Sprawdź czy plik rez.csv istnieje i ma poprawny format.")
+    
+    def pokaz_wszystkie_narty(self):
+        """Pokazuje okno przeglądania wszystkich nart z tabelą"""
+        logger.info("Otwieranie okna przeglądania nart")
+        
+        # Utwórz nowe okno
+        self.narty_window = QMainWindow()
+        self.narty_window.setWindowTitle("🎿 Zaawansowany Przegląd Nart")
+        self.narty_window.setGeometry(200, 200, 1400, 800)
+        
+        # Główny widget
+        central_widget = QWidget()
+        self.narty_window.setCentralWidget(central_widget)
+        
+        # Layout główny
+        main_layout = QVBoxLayout(central_widget)
+        
+        # Nagłówek
+        header_layout = QHBoxLayout()
+        title_label = QLabel("🎿 Zaawansowany Przegląd Nart")
+        title_label.setFont(QFont("Segoe UI", 20, QFont.Bold))
+        title_label.setStyleSheet(f"color: {ModernTheme.TEXT_PRIMARY.name()};")
+        header_layout.addWidget(title_label)
+        
+        self.count_label = QLabel("")
+        self.count_label.setFont(QFont("Segoe UI", 12))
+        self.count_label.setStyleSheet(f"color: {ModernTheme.TEXT_SECONDARY.name()};")
+        header_layout.addStretch()
+        header_layout.addWidget(self.count_label)
+        
+        main_layout.addLayout(header_layout)
+        
+        # Panel filtrów
+        filter_group = QGroupBox("🔍 Filtry i Wyszukiwanie")
+        filter_layout = QVBoxLayout(filter_group)
+        
+        # Wyszukiwanie
+        search_layout = QHBoxLayout()
+        search_layout.addWidget(QLabel("🔍 Szukaj:"))
+        self.search_entry = QLineEdit()
+        self.search_entry.setPlaceholderText("Wpisz markę lub model...")
+        self.search_entry.textChanged.connect(self.apply_filters)
+        search_layout.addWidget(self.search_entry)
+        search_layout.addStretch()
+        
+        # Filtry
+        filters_layout = QHBoxLayout()
+        filters_layout.addWidget(QLabel("Marka:"))
+        self.marka_combo = QComboBox()
+        self.marka_combo.currentTextChanged.connect(self.apply_filters)
+        filters_layout.addWidget(self.marka_combo)
+        
+        filters_layout.addWidget(QLabel("Poziom:"))
+        self.poziom_combo = QComboBox()
+        self.poziom_combo.currentTextChanged.connect(self.apply_filters)
+        filters_layout.addWidget(self.poziom_combo)
+        
+        filters_layout.addWidget(QLabel("Płeć:"))
+        self.plec_combo = QComboBox()
+        self.plec_combo.currentTextChanged.connect(self.apply_filters)
+        filters_layout.addWidget(self.plec_combo)
+        
+        filter_button = QPushButton("🔄 Filtruj")
+        filter_button.clicked.connect(self.apply_filters)
+        filters_layout.addWidget(filter_button)
+        
+        clear_button = QPushButton("🗑️ Wyczyść")
+        clear_button.clicked.connect(self.clear_filters)
+        filters_layout.addWidget(clear_button)
+        
+        filter_layout.addLayout(search_layout)
+        filter_layout.addLayout(filters_layout)
+        main_layout.addWidget(filter_group)
+        
+        # Tabela nart
+        self.table = QTableWidget()
+        self.table.setAlternatingRowColors(True)
+        self.table.setSelectionBehavior(QTableWidget.SelectRows)
+        self.table.setSortingEnabled(True)
+        self.table.setEditTriggers(QTableWidget.DoubleClicked | QTableWidget.EditKeyPressed)
+        self.table.setWordWrap(True)
+        self.table.verticalHeader().setDefaultSectionSize(60)
+        
+        # Kolumny tabeli
+        columns = ["ID", "Marka", "Model", "Długość", "Szt.", "Poziom", "Płeć", "Waga Min", "Waga Max", 
+                  "Wzrost Min", "Wzrost Max", "Przeznaczenie", "Rok", "Uwagi"]
+        self.table.setColumnCount(len(columns))
+        self.table.setHorizontalHeaderLabels(columns)
+        
+        # Ustaw szerokości kolumn
+        column_widths = [40, 80, 180, 60, 50, 80, 70, 70, 70, 75, 75, 100, 60, 200]
+        for i, width in enumerate(column_widths):
+            self.table.setColumnWidth(i, width)
+        
+        main_layout.addWidget(self.table)
+        
+        # Załaduj dane
+        self.load_data()
+        
+        # Pokaż okno
+        self.narty_window.show()
+    
+    def load_data(self):
+        """Ładuje dane z CSV do tabeli"""
+        try:
+            # Sprawdź w katalogu programu
+            current_dir = os.path.dirname(os.path.abspath(__file__))
+            csv_file = os.path.join(current_dir, '..', 'pliki_danych', 'NOWABAZA_final.csv')
+            
+            with open(csv_file, 'r', newline='', encoding='utf-8-sig') as file:
+                reader = csv.DictReader(file)
+                self.all_data = list(reader)
+                
+                # Wypełnij comboboxy filtrów
+                marki = sorted(set(item.get('MARKA', '') for item in self.all_data if item.get('MARKA')))
+                poziomy = sorted(set(item.get('POZIOM', '') for item in self.all_data if item.get('POZIOM')))
+                plcie = sorted(set(item.get('PLEC', '') for item in self.all_data if item.get('PLEC')))
+                
+                self.marka_combo.addItems(['Wszystkie'] + marki)
+                self.poziom_combo.addItems(['Wszystkie'] + poziomy)
+                self.plec_combo.addItems(['Wszystkie'] + plcie)
+                
+                # Ustaw domyślne wartości
+                self.marka_combo.setCurrentText('Wszystkie')
+                self.poziom_combo.setCurrentText('Wszystkie')
+                self.plec_combo.setCurrentText('Wszystkie')
+                
+                self.apply_filters()
+                logger.info(f"Załadowano {len(self.all_data)} nart")
+                
+        except Exception as e:
+            logger.error(f"Błąd podczas ładowania danych: {e}")
+            QMessageBox.critical(self.narty_window, "Błąd", f"Nie można załadować danych: {e}")
+    
+    def apply_filters(self):
+        """Stosuje filtry do danych"""
+        if not hasattr(self, 'all_data'):
+            return
+            
+        filtered = self.all_data.copy()
+        
+        # Filtr wyszukiwania
+        search_text = self.search_entry.text().lower()
+        if search_text:
+            filtered = [item for item in filtered if 
+                       search_text in f"{item.get('MARKA', '')} {item.get('MODEL', '')}".lower()]
+        
+        # Filtry combobox
+        if self.marka_combo.currentText() != 'Wszystkie':
+            filtered = [item for item in filtered if item.get('MARKA') == self.marka_combo.currentText()]
+        if self.poziom_combo.currentText() != 'Wszystkie':
+            poziom_filter = self.poziom_combo.currentText()
+            filtered = [item for item in filtered if item.get('POZIOM') == poziom_filter]
+        if self.plec_combo.currentText() != 'Wszystkie':
+            filtered = [item for item in filtered if item.get('PLEC') == self.plec_combo.currentText()]
+        
+        self.filtered_data = filtered
+        self.update_table()
+    
+    def clear_filters(self):
+        """Czyści wszystkie filtry"""
+        self.search_entry.clear()
+        self.marka_combo.setCurrentText('Wszystkie')
+        self.poziom_combo.setCurrentText('Wszystkie')
+        self.plec_combo.setCurrentText('Wszystkie')
+        self.apply_filters()
+    
+    def update_table(self):
+        """Aktualizuje tabelę z przefiltrowanymi danymi"""
+        if not hasattr(self, 'filtered_data'):
+            return
+            
+        # Ustaw liczbę wierszy
+        self.table.setRowCount(len(self.filtered_data))
+        
+        # Dodaj dane
+        for i, narta in enumerate(self.filtered_data):
+            values = [
+                i+1,
+                narta.get('MARKA', ''),
+                narta.get('MODEL', ''),
+                narta.get('DLUGOSC', ''),
+                narta.get('ILOSC', '1'),
+                narta.get('POZIOM', ''),
+                narta.get('PLEC', ''),
+                narta.get('WAGA_MIN', ''),
+                narta.get('WAGA_MAX', ''),
+                narta.get('WZROST_MIN', ''),
+                narta.get('WZROST_MAX', ''),
+                narta.get('PRZEZNACZENIE', ''),
+                narta.get('ROK', ''),
+                narta.get('UWAGI', '')
+            ]
+            
+            for j, value in enumerate(values):
+                item = QTableWidgetItem(str(value))
+                self.table.setItem(i, j, item)
+        
+        # Aktualizuj licznik
+        self.count_label.setText(f"Wyświetlane: {len(self.filtered_data)} / {len(self.all_data)} nart")
