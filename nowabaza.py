@@ -247,10 +247,17 @@ def wczytaj_rezerwacje_firesnow():
         
         # Użyj sprawdzonego pliku rez.csv
         if os.path.exists(rez_csv):
-            # Użyj pliku CSV (konwersja z Excel) - header=1 bo pierwszy wiersz to "Unnamed"
-            df = pd.read_csv(rez_csv, encoding='utf-8-sig', header=1)
-            logger.info("Wczytano dane z rez.csv")
-            return przetworz_dane_narty(df)
+            # Użyj pliku CSV - header=1 bo pierwszy wiersz to "Unnamed", ale sprawdź strukturę
+            try:
+                df = pd.read_csv(rez_csv, encoding='utf-8-sig', header=1)
+                logger.info("Wczytano dane z rez.csv")
+                return przetworz_dane_narty(df)
+            except Exception as e:
+                logger.warning(f"Błąd parsowania z header=1, próbuję header=0: {e}")
+                # Fallback: spróbuj z header=0
+                df = pd.read_csv(rez_csv, encoding='utf-8-sig', header=0)
+                logger.info("Wczytano dane z rez.csv (header=0)")
+                return przetworz_dane_narty(df)
         elif os.path.exists(rez_xlsx):
             # Wczytaj dane z Excel
             df = pd.read_excel(rez_xlsx, header=1)
@@ -267,11 +274,20 @@ def wczytaj_rezerwacje_firesnow():
 def przetworz_dane_narty(df):
     """Przetwarza surowe dane rezerwacji i wyciąga informacje o nartach"""
     try:
-        # Filtruj tylko wiersze z rezerwacjami (mają daty w kolumnach Od i Do)
-        df_rezerwacje = df.dropna(subset=['Od', 'Do']).copy()
-        
-        # Filtruj tylko narty (zawierają "NARTY" w kolumnie Sprzęt)
-        df_narty = df_rezerwacje[df_rezerwacje['Sprzęt'].str.contains('NARTY', na=False)].copy()
+        # Sprawdź czy kolumny istnieją - obsłuż różne formaty
+        if 'Od' in df.columns and 'Do' in df.columns and 'Sprzęt' in df.columns:
+            # Nowy format z polskimi nazwami kolumn
+            df_rezerwacje = df.dropna(subset=['Od', 'Do']).copy()
+            df_narty = df_rezerwacje[df_rezerwacje['Sprzęt'].str.contains('NARTY', na=False)].copy()
+        elif 'Data_Od' in df.columns and 'Data_Do' in df.columns and 'Sprzet' in df.columns:
+            # Stary format z angielskimi nazwami kolumn
+            df_rezerwacje = df.dropna(subset=['Data_Od', 'Data_Do']).copy()
+            df_narty = df_rezerwacje[df_rezerwacje['Sprzet'].str.contains('NARTY', na=False)].copy()
+            # Mapuj na nowe nazwy
+            df_narty = df_narty.rename(columns={'Data_Od': 'Od', 'Data_Do': 'Do', 'Sprzet': 'Sprzęt'})
+        else:
+            logger.warning(f"Nieznany format kolumn: {list(df.columns)}")
+            return pd.DataFrame()
         
         if len(df_narty) == 0:
             logger.info("Brak rezerwacji nart w pliku")
@@ -354,13 +370,13 @@ def sprawdz_czy_narta_zarezerwowana(marka, model, dlugosc, data_od=None, data_do
                 
                 # Konwertuj daty rezerwacji - sprawdź różne nazwy kolumn
                 try:
-                    # Sprawdź czy to nowy format (Data_Od, Data_Do) czy stary (Od, Do)
-                    if 'Data_Od' in rezerwacja and 'Data_Do' in rezerwacja:
-                        data_od_rez = pd.to_datetime(rezerwacja['Data_Od']).date()
-                        data_do_rez = pd.to_datetime(rezerwacja['Data_Do']).date()
-                    elif 'Od' in rezerwacja and 'Do' in rezerwacja:
+                    # Sprawdź czy to nowy format (Od, Do) czy stary (Data_Od, Data_Do)
+                    if 'Od' in rezerwacja and 'Do' in rezerwacja:
                         data_od_rez = pd.to_datetime(rezerwacja['Od']).date()
                         data_do_rez = pd.to_datetime(rezerwacja['Do']).date()
+                    elif 'Data_Od' in rezerwacja and 'Data_Do' in rezerwacja:
+                        data_od_rez = pd.to_datetime(rezerwacja['Data_Od']).date()
+                        data_do_rez = pd.to_datetime(rezerwacja['Data_Do']).date()
                     else:
                         continue
                     
@@ -1643,16 +1659,26 @@ class SkiApp(QMainWindow):
             self.wyniki_text.append("🔄 REZERWACJE Z FIRESNOW")
             self.wyniki_text.append("=" * 50)
             
-            # Wczytaj plik CSV
-            df = pd.read_csv(rez_file, encoding='utf-8-sig', header=1)
-            logger.info(f"Wczytano {len(df)} wierszy z rez.csv")
+            # Wczytaj plik CSV - spróbuj różne formaty
+            try:
+                df = pd.read_csv(rez_file, encoding='utf-8-sig', header=1)
+                logger.info(f"Wczytano {len(df)} wierszy z rez.csv (header=1)")
+            except Exception as e:
+                logger.warning(f"Błąd z header=1, próbuję header=0: {e}")
+                df = pd.read_csv(rez_file, encoding='utf-8-sig', header=0)
+                logger.info(f"Wczytano {len(df)} wierszy z rez.csv (header=0)")
             
-            # Filtruj tylko wiersze z rezerwacjami (mają daty w kolumnach Od i Do)
-            df_rezerwacje = df.dropna(subset=['Od', 'Do']).copy()
-            logger.info(f"Znaleziono {len(df_rezerwacje)} wierszy z datami")
-            
-            # Filtruj tylko narty (zawierają "NARTY" w kolumnie Sprzęt)
-            df_narty = df_rezerwacje[df_rezerwacje['Sprzęt'].str.contains('NARTY', na=False)].copy()
+            # Sprawdź czy kolumny istnieją
+            if 'Od' in df.columns and 'Do' in df.columns and 'Sprzęt' in df.columns:
+                # Nowy format z polskimi nazwami kolumn
+                df_rezerwacje = df.dropna(subset=['Od', 'Do']).copy()
+                logger.info(f"Znaleziono {len(df_rezerwacje)} wierszy z datami")
+                df_narty = df_rezerwacje[df_rezerwacje['Sprzęt'].str.contains('NARTY', na=False)].copy()
+            else:
+                logger.warning(f"Nieznany format kolumn: {list(df.columns)}")
+                self.wyniki_text.append(f"❌ BŁĄD: Nieznany format kolumn w pliku rez.csv")
+                self.wyniki_text.append(f"Dostępne kolumny: {', '.join(df.columns)}")
+                return
             logger.info(f"Znaleziono {len(df_narty)} rezerwacji nart")
             
             if len(df_narty) == 0:
