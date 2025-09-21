@@ -159,7 +159,7 @@ class SkiApp(QMainWindow):
         
         # Formularz
         form_layout = QVBoxLayout()
-        form_layout.setSpacing(8)
+        form_layout.setSpacing(4)  # Zmniejszony odstęp między elementami
         
         # RZĄD 1: Daty rezerwacji
         row1_layout = QVBoxLayout()
@@ -269,6 +269,7 @@ class SkiApp(QMainWindow):
         styl_group_widget = QGroupBox()
         styl_group_widget.setStyleSheet("QGroupBox { border: none; }")
         styl_container_layout = QVBoxLayout(styl_group_widget)
+        styl_container_layout.setSpacing(2)  # Zmniejszony odstęp między liniami przeznaczenia
         
         # Pierwsza linia stylów
         styl_line1 = QHBoxLayout()
@@ -374,7 +375,7 @@ class SkiApp(QMainWindow):
         # Pole tekstowe na wyniki
         self.wyniki_text = QTextEdit()
         self.wyniki_text.setReadOnly(True)
-        self.wyniki_text.setMinimumHeight(350)  # Zmniejszona wysokość
+        self.wyniki_text.setMinimumHeight(450)  # Zwiększona wysokość
         self.wyniki_text.setStyleSheet(get_results_text_style())
         
         layout.addWidget(self.wyniki_text)
