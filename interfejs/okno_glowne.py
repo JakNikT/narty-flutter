@@ -157,11 +157,15 @@ class SkiApp(QMainWindow):
         header_label.setStyleSheet(f"color: {ModernTheme.TEXT_PRIMARY.name()}; background-color: {ModernTheme.SECONDARY.name()};")
         right_layout.addWidget(header_label)
         
-        # Formularz
-        form_layout = QVBoxLayout()
-        form_layout.setSpacing(4)  # Zmniejszony odstęp między elementami
+        # Formularz - układ poziomy: lewa strona (daty, wzrost, waga, poziom, płeć) + prawa strona (przeznaczenie, przyciski)
+        form_layout = QHBoxLayout()
+        form_layout.setSpacing(20)  # Odstęp między lewą i prawą stroną
         
-        # RZĄD 1: Daty rezerwacji
+        # LEWA STRONA - Formularz danych
+        left_form_layout = QVBoxLayout()
+        left_form_layout.setSpacing(4)  # Zmniejszony odstęp między elementami
+        
+        # RZĄD 1: Daty rezerwacji (na wysokości przeznaczenia)
         row1_layout = QVBoxLayout()
         
         # Data od
@@ -228,9 +232,9 @@ class SkiApp(QMainWindow):
         
         row1_layout.addLayout(od_layout)
         row1_layout.addLayout(do_layout)
-        form_layout.addLayout(row1_layout)
+        left_form_layout.addLayout(row1_layout)
         
-        # RZĄD 2: Wzrost i Waga
+        # RZĄD 2: Wzrost i Waga (na środku między datami a poziomem)
         row2_layout = QHBoxLayout()
         row2_layout.addWidget(QLabel("📏 Wzrost (cm):"))
         self.wzrost_entry = QLineEdit()
@@ -241,9 +245,9 @@ class SkiApp(QMainWindow):
         self.waga_entry.setFixedWidth(80)
         row2_layout.addWidget(self.waga_entry)
         row2_layout.addStretch()
-        form_layout.addLayout(row2_layout)
+        left_form_layout.addLayout(row2_layout)
         
-        # RZĄD 3: Poziom i Płeć
+        # RZĄD 3: Poziom i Płeć (na wysokości przycisku "Przeglądaj")
         row3_layout = QHBoxLayout()
         row3_layout.addWidget(QLabel("🎯 Poziom:"))
         self.poziom_entry = QLineEdit()
@@ -258,34 +262,36 @@ class SkiApp(QMainWindow):
         self.plec_entry.setFixedWidth(80)
         self.plec_entry.setToolTip("M=Mężczyzna, K=Kobieta, U=Wszyscy")
         row3_layout.addWidget(self.plec_entry)
-        
         row3_layout.addStretch()
-        form_layout.addLayout(row3_layout)
+        left_form_layout.addLayout(row3_layout)
+        left_form_layout.addStretch()  # Wyrównanie do góry
         
-        # RZĄD 4: Przeznaczenie i Przyciski - obok siebie
-        row4_layout = QHBoxLayout()
-        row4_layout.setSpacing(15)
+        # PRAWA STRONA - Przeznaczenie i Przyciski
+        right_form_layout = QVBoxLayout()
+        right_form_layout.setSpacing(4)
         
-        # Lewa strona - Przeznaczenie
+        # Przeznaczenie
         przeznaczenie_layout = QVBoxLayout()
+        przeznaczenie_layout.setSpacing(1)  # Zmniejszony odstęp
         przeznaczenie_layout.addWidget(QLabel("🎿 Przeznaczenie:"))
         
+        # Przeznaczenie w formacie 2x3
         styl_group_widget = QGroupBox()
         styl_group_widget.setStyleSheet("QGroupBox { border: none; }")
         styl_container_layout = QVBoxLayout(styl_group_widget)
-        styl_container_layout.setSpacing(2)
+        styl_container_layout.setSpacing(0)  # Brak odstępu między liniami
         
-        # Pierwsza linia stylów
+        # Pierwsza linia stylów (3 elementy)
         styl_line1 = QHBoxLayout()
         self.styl_group = QRadioButton("Wszystkie")
         self.styl_group2 = QRadioButton("Slalom (SL)")
         self.styl_group3 = QRadioButton("Gigant (G)")
+        self.styl_group.setChecked(True)
         styl_line1.addWidget(self.styl_group)
         styl_line1.addWidget(self.styl_group2)
         styl_line1.addWidget(self.styl_group3)
-        self.styl_group.setChecked(True)
         
-        # Druga linia stylów
+        # Druga linia stylów (3 elementy)
         styl_line2 = QHBoxLayout()
         self.styl_group4 = QRadioButton("Performance (SLG)")
         self.styl_group5 = QRadioButton("Cały dzień (C)")
@@ -298,36 +304,40 @@ class SkiApp(QMainWindow):
         styl_container_layout.addLayout(styl_line2)
         przeznaczenie_layout.addWidget(styl_group_widget)
         
-        # Prawa strona - Przyciski 2x2
+        # Przyciski 2x2 pod przeznaczeniem (wyrównane długością)
         button_layout = QVBoxLayout()
-        button_layout.setSpacing(6)
+        button_layout.setSpacing(2)  # Zmniejszony odstęp między rzędami przycisków
         
-        # Pierwszy rząd przycisków
+        # Pierwszy rząd przycisków (2 przyciski)
         row1_buttons = QHBoxLayout()
         row1_buttons.setSpacing(8)
         
         self.znajdz_button = QPushButton("🔍 Znajdź")
         self.znajdz_button.setStyleSheet(get_button_style(ModernTheme.SUCCESS))
         self.znajdz_button.clicked.connect(self.znajdz_i_wyswietl)
+        self.znajdz_button.setMinimumWidth(120)  # Wyrównana szerokość
         
         self.wyczysc_button = QPushButton("🗑️ Wyczyść")
         self.wyczysc_button.setStyleSheet(get_button_style(ModernTheme.WARNING))
         self.wyczysc_button.clicked.connect(self.wyczysc_formularz)
+        self.wyczysc_button.setMinimumWidth(120)  # Wyrównana szerokość
         
         row1_buttons.addWidget(self.znajdz_button)
         row1_buttons.addWidget(self.wyczysc_button)
         
-        # Drugi rząd przycisków
+        # Drugi rząd przycisków (2 przyciski)
         row2_buttons = QHBoxLayout()
         row2_buttons.setSpacing(8)
         
         self.przegladaj_button = QPushButton("📋 Przeglądaj")
         self.przegladaj_button.setStyleSheet(get_button_style(ModernTheme.ACCENT))
         self.przegladaj_button.clicked.connect(self.pokaz_wszystkie_narty)
+        self.przegladaj_button.setMinimumWidth(120)  # Wyrównana szerokość
         
         self.odswiez_rezerwacje_button = QPushButton("🔄 Rezerwacje")
         self.odswiez_rezerwacje_button.setStyleSheet(get_button_style(ModernTheme.INFO))
         self.odswiez_rezerwacje_button.clicked.connect(self.odswiez_rezerwacje)
+        self.odswiez_rezerwacje_button.setMinimumWidth(120)  # Wyrównana szerokość
         
         row2_buttons.addWidget(self.przegladaj_button)
         row2_buttons.addWidget(self.odswiez_rezerwacje_button)
@@ -335,11 +345,14 @@ class SkiApp(QMainWindow):
         button_layout.addLayout(row1_buttons)
         button_layout.addLayout(row2_buttons)
         
-        # Dodaj obie strony do głównego layoutu
-        row4_layout.addLayout(przeznaczenie_layout)
-        row4_layout.addLayout(button_layout)
+        # Dodaj przeznaczenie i przyciski do prawej strony
+        right_form_layout.addLayout(przeznaczenie_layout)
+        right_form_layout.addLayout(button_layout)
+        right_form_layout.addStretch()  # Wyrównanie do góry
         
-        form_layout.addLayout(row4_layout)
+        # Połącz lewą i prawą stronę
+        form_layout.addLayout(left_form_layout)
+        form_layout.addLayout(right_form_layout)
         right_layout.addLayout(form_layout)
         
         header_layout.addWidget(right_side)
@@ -378,7 +391,7 @@ class SkiApp(QMainWindow):
         # Pole tekstowe na wyniki
         self.wyniki_text = QTextEdit()
         self.wyniki_text.setReadOnly(True)
-        self.wyniki_text.setMinimumHeight(450)  # Zwiększona wysokość
+        self.wyniki_text.setMinimumHeight(600)  # Maksymalna wysokość - teraz mamy więcej miejsca!
         self.wyniki_text.setStyleSheet(get_results_text_style())
         
         layout.addWidget(self.wyniki_text)
