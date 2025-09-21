@@ -7,6 +7,7 @@ import pandas as pd
 from datetime import datetime, timedelta
 import os
 import logging
+import math
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout, 
                              QHBoxLayout, QLabel, QPushButton, 
                              QLineEdit, QComboBox, QRadioButton, QTextEdit,
@@ -30,22 +31,205 @@ def setup_logging():
 
 logger = setup_logging()
 
+# ===== SYSTEM WSPÓŁCZYNNIKA IDEALNOŚCI I WAG =====
+class CompatibilityScorer:
+    """Klasa do obliczania współczynnika idealności dopasowania nart"""
+    
+    def __init__(self):
+        # Domyślne wagi kryteriów (suma = 1.0)
+        self.wagi_kryteriow = {
+            'poziom': 0.35,      # 35% - Najważniejsze (bezpieczeństwo)
+            'waga': 0.25,        # 25% - Bardzo ważne (kontrola nart)
+            'wzrost': 0.20,      # 20% - Ważne (stabilność i zwrotność)
+            'plec': 0.15,        # 15% - Mniej ważne (ergonomia)
+            'przeznaczenie': 0.05 # 5% - Najmniej ważne (styl jazdy)
+        }
+        
+        # Parametry funkcji gaussowskich dla różnych kryteriów
+        self.tolerancje = {
+            'poziom': 1.0,       # Standardowe odchylenie dla poziomu
+            'waga': 8.0,         # Standardowe odchylenie dla wagi (kg)
+            'wzrost': 8.0,       # Standardowe odchylenie dla wzrostu (cm)
+        }
+    
+    def gaussian_score(self, value, target, tolerance):
+        """
+        Oblicza wynik na podstawie funkcji gaussowskiej
+        Zwraca wartość 0-1, gdzie 1 = idealne dopasowanie
+        """
+        if tolerance == 0:
+            return 1.0 if value == target else 0.0
+        
+        distance = abs(value - target)
+        return math.exp(-0.5 * (distance / tolerance) ** 2)
+    
+    def score_poziom(self, poziom_klienta, poziom_narty_info):
+        """Ocenia dopasowanie poziomu umiejętności"""
+        # Wyciągnij rzeczywisty poziom z informacji o narcie
+        if isinstance(poziom_narty_info, tuple) and len(poziom_narty_info) >= 3:
+            status, opis, poziom_str = poziom_narty_info
+            
+            if status == 'green' and 'OK' in opis:
+                return 1.0  # Idealne dopasowanie
+            elif status == 'orange':
+                if 'jeden poziom' in opis:
+                    return 0.7  # Dobry wynik dla 1 poziom różnicy
+                else:
+                    return 0.4  # Słabszy wynik dla większych różnic
+            else:
+                return 0.1  # Bardzo słaby wynik
+        
+        return 0.5  # Domyślny wynik gdy nie można sparsować
+    
+    def score_waga(self, waga_klienta, waga_narty_info):
+        """Ocenia dopasowanie wagi"""
+        if isinstance(waga_narty_info, tuple) and len(waga_narty_info) >= 4:
+            status, opis, waga_min, waga_max = waga_narty_info
+            
+            if status == 'green':
+                # Oblicz jak blisko środka zakresu jest klient
+                waga_srodek = (waga_min + waga_max) / 2
+                return self.gaussian_score(waga_klienta, waga_srodek, self.tolerancje['waga'])
+            elif status == 'orange':
+                # Klient jest poza zakresem ale w tolerancji
+                if waga_klienta > waga_max:
+                    distance = waga_klienta - waga_max
+                else:
+                    distance = waga_min - waga_klienta
+                
+                # Im mniejsza odległość od zakresu, tym lepszy wynik
+                return max(0.3, 0.8 - (distance / 10.0))
+            else:
+                return 0.1
+        
+        return 0.5
+    
+    def score_wzrost(self, wzrost_klienta, wzrost_narty_info):
+        """Ocenia dopasowanie wzrostu"""
+        if isinstance(wzrost_narty_info, tuple) and len(wzrost_narty_info) >= 4:
+            status, opis, wzrost_min, wzrost_max = wzrost_narty_info
+            
+            if status == 'green':
+                # Oblicz jak blisko środka zakresu jest klient
+                wzrost_srodek = (wzrost_min + wzrost_max) / 2
+                return self.gaussian_score(wzrost_klienta, wzrost_srodek, self.tolerancje['wzrost'])
+            elif status == 'orange':
+                # Klient jest poza zakresem ale w tolerancji
+                if wzrost_klienta > wzrost_max:
+                    distance = wzrost_klienta - wzrost_max
+                else:
+                    distance = wzrost_min - wzrost_klienta
+                
+                # Im mniejsza odległość od zakresu, tym lepszy wynik
+                return max(0.3, 0.8 - (distance / 15.0))
+            else:
+                return 0.1
+        
+        return 0.5
+    
+    def score_plec(self, plec_klienta, plec_narty_info):
+        """Ocenia dopasowanie płci"""
+        if isinstance(plec_narty_info, tuple) and len(plec_narty_info) >= 2:
+            status, opis = plec_narty_info[:2]
+            
+            if status == 'green' and 'OK' in opis:
+                return 1.0  # Idealne dopasowanie
+            elif status == 'orange':
+                if 'Narta męska' in opis or 'Narta kobieca' in opis:
+                    return 0.6  # Narta dla przeciwnej płci
+                else:
+                    return 0.8  # Inne problemy z płcią
+            else:
+                return 0.2
+        
+        return 0.5
+    
+    def score_przeznaczenie(self, styl_klienta, przeznaczenie_narty_info):
+        """Ocenia dopasowanie przeznaczenia/stylu jazdy"""
+        if not styl_klienta or styl_klienta == "Wszystkie":
+            return 1.0  # Brak preferencji = pełny wynik
+        
+        if isinstance(przeznaczenie_narty_info, tuple) and len(przeznaczenie_narty_info) >= 2:
+            status, opis = przeznaczenie_narty_info[:2]
+            
+            if status == 'green' and 'OK' in opis:
+                return 1.0  # Idealne dopasowanie stylu
+            elif status == 'orange':
+                return 0.5  # Inne przeznaczenie
+            else:
+                return 0.2
+        
+        return 0.7  # Domyślny wynik gdy brak informacji
+    
+    def oblicz_wspolczynnik_idealnosci(self, dopasowanie, wzrost_klienta, waga_klienta, 
+                                     poziom_klienta, plec_klienta, styl_klienta=None):
+        """
+        Główna funkcja obliczająca współczynnik idealności (0-100%)
+        """
+        wyniki_kryteriow = {}
+        
+        # Oceń każde kryterium
+        if 'poziom' in dopasowanie:
+            wyniki_kryteriow['poziom'] = self.score_poziom(poziom_klienta, dopasowanie['poziom'])
+        
+        if 'waga' in dopasowanie:
+            wyniki_kryteriow['waga'] = self.score_waga(waga_klienta, dopasowanie['waga'])
+        
+        if 'wzrost' in dopasowanie:
+            wyniki_kryteriow['wzrost'] = self.score_wzrost(wzrost_klienta, dopasowanie['wzrost'])
+        
+        if 'plec' in dopasowanie:
+            wyniki_kryteriow['plec'] = self.score_plec(plec_klienta, dopasowanie['plec'])
+        
+        if 'przeznaczenie' in dopasowanie:
+            wyniki_kryteriow['przeznaczenie'] = self.score_przeznaczenie(styl_klienta, dopasowanie['przeznaczenie'])
+        
+        # Oblicz ważoną średnią
+        suma_wazona = 0.0
+        suma_wag = 0.0
+        
+        for kryterium, wynik in wyniki_kryteriow.items():
+            if kryterium in self.wagi_kryteriow:
+                waga = self.wagi_kryteriow[kryterium]
+                suma_wazona += wynik * waga
+                suma_wag += waga
+        
+        # Znormalizuj wynik do 0-100%
+        if suma_wag > 0:
+            wspolczynnik = (suma_wazona / suma_wag) * 100
+        else:
+            wspolczynnik = 0
+        
+        return round(wspolczynnik, 1), wyniki_kryteriow
+    
+    def ustaw_wagi(self, nowe_wagi):
+        """Pozwala na dostosowanie wag kryteriów"""
+        suma = sum(nowe_wagi.values())
+        if abs(suma - 1.0) > 0.01:
+            raise ValueError(f"Suma wag musi wynosić 1.0, a wynosi {suma}")
+        
+        self.wagi_kryteriow.update(nowe_wagi)
+        logger.info(f"Zaktualizowano wagi kryteriów: {self.wagi_kryteriow}")
+
+# Globalna instancja scorera
+compatibility_scorer = CompatibilityScorer()
+
 # ===== NOWOCZESNY MOTYW KOLORÓW - NIEBIESKI JAK LOGO =====
 class ModernTheme:
-    # Główne kolory - różne odcienie niebieskiego jak logo
-    PRIMARY = QColor(230, 243, 255)          # Bardzo jasny niebieski (główne tło)
-    SECONDARY = QColor(204, 231, 255)        # Jasny niebieski (sekundarne tło)
-    TERTIARY = QColor(179, 219, 255)         # Średni jasny niebieski (ramki)
+    # Główne kolory - różne odcienie niebieskiego
+    PRIMARY = QColor(240, 248, 255)          # Bardzo jasny niebieski (główne tło)
+    SECONDARY = QColor(220, 235, 255)        # Jasny niebieski (sekundarne tło)
+    TERTIARY = QColor(200, 220, 255)         # Średni jasny niebieski (ramki)
     
-    # Akcenty - inspirowane logo narciarskim
-    ACCENT = QColor(30, 64, 175)             # Głęboki niebieski (główny akcent)
-    ACCENT_HOVER = QColor(30, 58, 138)       # Ciemniejszy niebieski (hover)
+    # Akcenty - inspirowane niebieskim logo
+    ACCENT = QColor(30, 100, 175)            # Głęboki niebieski (główny akcent)
+    ACCENT_HOVER = QColor(20, 80, 140)       # Ciemniejszy niebieski (hover)
     ACCENT_LIGHT = QColor(59, 130, 246)      # Jaśniejszy niebieski (aktywne elementy)
     
     # Kolory funkcjonalne - kontrastowe na niebieskim tle
     SUCCESS = QColor(5, 150, 105)            # Zielony las (sukces)
     WARNING = QColor(217, 119, 6)            # Pomarańczowy zachód (ostrzeżenie)
-    ERROR = QColor(220, 38, 38)              # Czerwony sygnał (błąd)
+    ERROR = QColor(220, 38, 38)              # Ciemny czerwony (błąd)
     INFO = QColor(2, 132, 199)               # Niebieski lód (informacja)
     
     # Tekst - ciemny dla kontrastu na niebieskim tle
@@ -63,10 +247,17 @@ def wczytaj_rezerwacje_firesnow():
         
         # Użyj sprawdzonego pliku rez.csv
         if os.path.exists(rez_csv):
-            # Użyj pliku CSV (konwersja z Excel) - header=1 bo pierwszy wiersz to "Unnamed"
-            df = pd.read_csv(rez_csv, encoding='utf-8-sig', header=1)
-            logger.info("Wczytano dane z rez.csv")
-            return przetworz_dane_narty(df)
+            # Użyj pliku CSV - header=1 bo pierwszy wiersz to "Unnamed", ale sprawdź strukturę
+            try:
+                df = pd.read_csv(rez_csv, encoding='utf-8-sig', header=1)
+                logger.info("Wczytano dane z rez.csv")
+                return przetworz_dane_narty(df)
+            except Exception as e:
+                logger.warning(f"Błąd parsowania z header=1, próbuję header=0: {e}")
+                # Fallback: spróbuj z header=0
+                df = pd.read_csv(rez_csv, encoding='utf-8-sig', header=0)
+                logger.info("Wczytano dane z rez.csv (header=0)")
+                return przetworz_dane_narty(df)
         elif os.path.exists(rez_xlsx):
             # Wczytaj dane z Excel
             df = pd.read_excel(rez_xlsx, header=1)
@@ -83,11 +274,20 @@ def wczytaj_rezerwacje_firesnow():
 def przetworz_dane_narty(df):
     """Przetwarza surowe dane rezerwacji i wyciąga informacje o nartach"""
     try:
-        # Filtruj tylko wiersze z rezerwacjami (mają daty w kolumnach Od i Do)
-        df_rezerwacje = df.dropna(subset=['Od', 'Do']).copy()
-        
-        # Filtruj tylko narty (zawierają "NARTY" w kolumnie Sprzęt)
-        df_narty = df_rezerwacje[df_rezerwacje['Sprzęt'].str.contains('NARTY', na=False)].copy()
+        # Sprawdź czy kolumny istnieją - obsłuż różne formaty
+        if 'Od' in df.columns and 'Do' in df.columns and 'Sprzęt' in df.columns:
+            # Nowy format z polskimi nazwami kolumn
+            df_rezerwacje = df.dropna(subset=['Od', 'Do']).copy()
+            df_narty = df_rezerwacje[df_rezerwacje['Sprzęt'].str.contains('NARTY', na=False)].copy()
+        elif 'Data_Od' in df.columns and 'Data_Do' in df.columns and 'Sprzet' in df.columns:
+            # Stary format z angielskimi nazwami kolumn
+            df_rezerwacje = df.dropna(subset=['Data_Od', 'Data_Do']).copy()
+            df_narty = df_rezerwacje[df_rezerwacje['Sprzet'].str.contains('NARTY', na=False)].copy()
+            # Mapuj na nowe nazwy
+            df_narty = df_narty.rename(columns={'Data_Od': 'Od', 'Data_Do': 'Do', 'Sprzet': 'Sprzęt'})
+        else:
+            logger.warning(f"Nieznany format kolumn: {list(df.columns)}")
+            return pd.DataFrame()
         
         if len(df_narty) == 0:
             logger.info("Brak rezerwacji nart w pliku")
@@ -170,13 +370,13 @@ def sprawdz_czy_narta_zarezerwowana(marka, model, dlugosc, data_od=None, data_do
                 
                 # Konwertuj daty rezerwacji - sprawdź różne nazwy kolumn
                 try:
-                    # Sprawdź czy to nowy format (Data_Od, Data_Do) czy stary (Od, Do)
-                    if 'Data_Od' in rezerwacja and 'Data_Do' in rezerwacja:
-                        data_od_rez = pd.to_datetime(rezerwacja['Data_Od']).date()
-                        data_do_rez = pd.to_datetime(rezerwacja['Data_Do']).date()
-                    elif 'Od' in rezerwacja and 'Do' in rezerwacja:
+                    # Sprawdź czy to nowy format (Od, Do) czy stary (Data_Od, Data_Do)
+                    if 'Od' in rezerwacja and 'Do' in rezerwacja:
                         data_od_rez = pd.to_datetime(rezerwacja['Od']).date()
                         data_do_rez = pd.to_datetime(rezerwacja['Do']).date()
+                    elif 'Data_Od' in rezerwacja and 'Data_Do' in rezerwacja:
+                        data_od_rez = pd.to_datetime(rezerwacja['Data_Od']).date()
+                        data_do_rez = pd.to_datetime(rezerwacja['Data_Do']).date()
                     else:
                         continue
                     
@@ -490,6 +690,18 @@ def dobierz_narty(wzrost, waga, poziom, plec, styl_jazdy=None):
                     
                     narta_info = {'dane': row, 'dopasowanie': dopasowanie}
                     
+                    # ===== OBLICZ WSPÓŁCZYNNIK IDEALNOŚCI =====
+                    wspolczynnik, detale_oceny = compatibility_scorer.oblicz_wspolczynnik_idealnosci(
+                        dopasowanie, wzrost, waga, poziom, plec, styl_jazdy
+                    )
+                    
+                    # Dodaj współczynnik do informacji o narcie
+                    narta_info['wspolczynnik_idealnosci'] = wspolczynnik
+                    narta_info['detale_oceny'] = detale_oceny
+                    
+                    logger.debug(f"Narta {row.get('MARKA')} {row.get('MODEL')} - współczynnik: {wspolczynnik}%")
+                    # ===== KONIEC NOWEGO KODU =====
+                    
                     # Sprawdź czy narta ma niepasującą płeć - jeśli tak, przenieś do "INNA PŁEĆ"
                     plec_status = dopasowanie.get('plec')
                     if plec_status and plec_status[1] not in ['OK']:  # Nie jest OK
@@ -556,7 +768,10 @@ def dobierz_narty(wzrost, waga, poziom, plec, styl_jazdy=None):
             else:
                 poziom_priority = 1  # Niepasujący poziom
             
-            return (ideal_match, plec_priority, poziom_priority)
+            # NOWE: Dodaj współczynnik jako czwarte kryterium sortowania
+            wspolczynnik = narta_info.get('wspolczynnik_idealnosci', 0)
+            # Minus przed współczynnikiem żeby sortować od najwyższego do najniższego
+            return (ideal_match, plec_priority, poziom_priority, -wspolczynnik)
 
         idealne_dopasowanie.sort(key=sort_key)
         poziom_niżej.sort(key=sort_key)
@@ -771,6 +986,7 @@ class SkiApp(QMainWindow):
         self.cal_od_btn.setFixedSize(25, 25)
         self.cal_od_btn.setToolTip("Otwórz kalendarz")
         self.cal_od_btn.clicked.connect(lambda: self.open_calendar("od"))
+        
         self.cal_od_btn.setStyleSheet("""
             QPushButton {
                 background-color: #2196F3;
@@ -836,9 +1052,8 @@ class SkiApp(QMainWindow):
         row1_layout.addLayout(do_layout)
         form_layout.addLayout(row1_layout)
         
-        # Ustaw walidatory i obsługę dat
+        # Ustaw walidatory
         self.setup_date_validators()
-        self.setup_date_handlers()
         
         # RZĄD 2: Wzrost i Waga
         row2_layout = QHBoxLayout()
@@ -976,7 +1191,7 @@ class SkiApp(QMainWindow):
                 font-weight: bold;
             }}
             QPushButton:hover {{
-                background-color: #0284C7;
+                background-color: #B91C1C;
             }}
         """)
         self.odswiez_rezerwacje_button.clicked.connect(self.odswiez_rezerwacje)
@@ -991,6 +1206,9 @@ class SkiApp(QMainWindow):
         right_layout.addLayout(form_layout)
         
         header_layout.addWidget(right_side)
+        
+        # Ustaw obsługę automatycznego przechodzenia między polami (po utworzeniu wszystkich pól)
+        self.setup_date_handlers()
         
         return top_frame
         
@@ -1113,6 +1331,34 @@ class SkiApp(QMainWindow):
         self.do_dzien.textChanged.connect(lambda: self.auto_next_field(self.do_dzien, self.do_miesiac))
         self.do_miesiac.textChanged.connect(lambda: self.auto_next_field(self.do_miesiac, self.do_rok))
         self.do_rok.textChanged.connect(lambda: self.auto_complete_year_safe(self.do_rok))
+        self.do_rok.textChanged.connect(lambda: self.auto_next_field(self.do_rok, self.wzrost_entry))
+        
+        # Wzrost i waga - automatyczne przechodzenie
+        self.wzrost_entry.textChanged.connect(lambda: self.auto_next_field(self.wzrost_entry, self.waga_entry))
+    
+    def auto_complete_year_safe(self, year_field):
+        """Bezpieczne uzupełnianie roku i przechodzenie do następnego pola"""
+        text = year_field.text()
+        
+        # Jeśli wpisano 2 cyfry, uzupełnij do pełnego roku
+        if len(text) == 2 and text.isdigit():
+            year = int(text)
+            if year >= 0 and year <= 99:
+                # Jeśli rok jest mniejszy niż 50, zakładamy że to 20xx, w przeciwnym razie 19xx
+                if year < 50:
+                    full_year = 2000 + year
+                else:
+                    full_year = 1900 + year
+                
+                year_field.setText(str(full_year))
+                
+                # Przejdź do następnego pola
+                if year_field == self.od_rok:
+                    self.do_dzien.setFocus()
+                    self.do_dzien.selectAll()
+                elif year_field == self.do_rok:
+                    self.wzrost_entry.setFocus()
+                    self.wzrost_entry.selectAll()
     
     def auto_next_field(self, current_field, next_field):
         """Automatyczne przechodzenie do następnego pola"""
@@ -1123,31 +1369,28 @@ class SkiApp(QMainWindow):
             if len(text) == 4 and text.isdigit():
                 next_field.setFocus()
                 next_field.selectAll()
+        # Jeśli to pole wzrostu - sprawdź czy ma 3 cyfry
+        elif current_field == self.wzrost_entry:
+            if len(text) == 3 and text.isdigit():
+                next_field.setFocus()
+                next_field.selectAll()
+        # Jeśli to pole wagi - sprawdź czy ma 2-3 cyfry (20-200 kg)
+        elif current_field == self.waga_entry:
+            if len(text) >= 2 and text.isdigit():
+                # Sprawdź czy to rozsądna waga (20-200 kg)
+                try:
+                    waga = int(text)
+                    if 20 <= waga <= 200:
+                        # Przejdź do poziomu (combo box)
+                        self.poziom_combo.setFocus()
+                except ValueError:
+                    pass
         # Jeśli to inne pole - sprawdź czy ma 2 cyfry
         else:
             if len(text) == 2 and text.isdigit():
                 next_field.setFocus()
                 next_field.selectAll()
     
-    def auto_complete_year_safe(self, year_field):
-        """Bezpieczny auto-complete dla pola roku"""
-        text = year_field.text()
-        
-        # Jeśli użytkownik wpisał dokładnie 2 cyfry i to nie jest już pełny rok
-        if len(text) == 2 and text.isdigit() and not text.startswith("20"):
-            year_suffix = int(text)
-            if 20 <= year_suffix <= 99:
-                # Auto-complete: zamień "25" na "2025"
-                full_year = f"20{text}"
-                year_field.setText(full_year)
-                year_field.setCursorPosition(4)
-                year_field.setToolTip(f"Rok: {full_year}")
-            else:
-                year_field.setToolTip("Rok (25 = 2025)")
-        elif len(text) == 4 and text.isdigit():
-            year_field.setToolTip(f"Rok: {text}")
-        else:
-            year_field.setToolTip("Rok (25 = 2025)")
     
     def open_calendar(self, target):
         """Otwiera kalendarz dla wybranego pola"""
@@ -1329,8 +1572,22 @@ class SkiApp(QMainWindow):
         narta = narta_info['dane']
         dopasowanie = narta_info['dopasowanie']
         
-        # 1. Nazwa narty i długość
-        self.wyniki_text.append(f"► {narta['MARKA']} {narta['MODEL']} ({narta['DLUGOSC']} cm)")
+        # ===== WYŚWIETL WSPÓŁCZYNNIK IDEALNOŚCI =====
+        wspolczynnik = narta_info.get('wspolczynnik_idealnosci', 0)
+        if wspolczynnik >= 90:
+            wspolczynnik_emoji = "🎯"
+        elif wspolczynnik >= 80:
+            wspolczynnik_emoji = "✅"
+        elif wspolczynnik >= 70:
+            wspolczynnik_emoji = "👍"
+        elif wspolczynnik >= 60:
+            wspolczynnik_emoji = "⚡"
+        else:
+            wspolczynnik_emoji = "📊"
+        # ===== KONIEC NOWEGO KODU =====
+        
+        # 1. Nazwa narty i długość z współczynnikiem
+        self.wyniki_text.append(f"► {narta['MARKA']} {narta['MODEL']} ({narta['DLUGOSC']} cm) {wspolczynnik_emoji} {wspolczynnik}%")
         
         # 2. Sprawdź rezerwacje dla tej narty
         ilosc_sztuk = int(narta.get('ILOSC', '1') or '1')
@@ -1475,16 +1732,26 @@ class SkiApp(QMainWindow):
             self.wyniki_text.append("🔄 REZERWACJE Z FIRESNOW")
             self.wyniki_text.append("=" * 50)
             
-            # Wczytaj plik CSV
-            df = pd.read_csv(rez_file, encoding='utf-8-sig', header=1)
-            logger.info(f"Wczytano {len(df)} wierszy z rez.csv")
+            # Wczytaj plik CSV - spróbuj różne formaty
+            try:
+                df = pd.read_csv(rez_file, encoding='utf-8-sig', header=1)
+                logger.info(f"Wczytano {len(df)} wierszy z rez.csv (header=1)")
+            except Exception as e:
+                logger.warning(f"Błąd z header=1, próbuję header=0: {e}")
+                df = pd.read_csv(rez_file, encoding='utf-8-sig', header=0)
+                logger.info(f"Wczytano {len(df)} wierszy z rez.csv (header=0)")
             
-            # Filtruj tylko wiersze z rezerwacjami (mają daty w kolumnach Od i Do)
-            df_rezerwacje = df.dropna(subset=['Od', 'Do']).copy()
-            logger.info(f"Znaleziono {len(df_rezerwacje)} wierszy z datami")
-            
-            # Filtruj tylko narty (zawierają "NARTY" w kolumnie Sprzęt)
-            df_narty = df_rezerwacje[df_rezerwacje['Sprzęt'].str.contains('NARTY', na=False)].copy()
+            # Sprawdź czy kolumny istnieją
+            if 'Od' in df.columns and 'Do' in df.columns and 'Sprzęt' in df.columns:
+                # Nowy format z polskimi nazwami kolumn
+                df_rezerwacje = df.dropna(subset=['Od', 'Do']).copy()
+                logger.info(f"Znaleziono {len(df_rezerwacje)} wierszy z datami")
+                df_narty = df_rezerwacje[df_rezerwacje['Sprzęt'].str.contains('NARTY', na=False)].copy()
+            else:
+                logger.warning(f"Nieznany format kolumn: {list(df.columns)}")
+                self.wyniki_text.append(f"❌ BŁĄD: Nieznany format kolumn w pliku rez.csv")
+                self.wyniki_text.append(f"Dostępne kolumny: {', '.join(df.columns)}")
+                return
             logger.info(f"Znaleziono {len(df_narty)} rezerwacji nart")
             
             if len(df_narty) == 0:
@@ -1643,7 +1910,7 @@ class SkiApp(QMainWindow):
         add_button.clicked.connect(self.add_new_ski)
         add_button.setStyleSheet("""
             QPushButton {
-                background-color: #3B82F6;
+                background-color: #DC2626;
                 color: white;
                 border: none;
                 padding: 8px 16px;
@@ -1651,7 +1918,7 @@ class SkiApp(QMainWindow):
                 font-weight: bold;
             }
             QPushButton:hover {
-                background-color: #2563EB;
+                background-color: #B91C1C;
             }
         """)
         filters_layout.addWidget(add_button)
