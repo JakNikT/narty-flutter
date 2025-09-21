@@ -60,7 +60,7 @@ class SkiApp(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("🎿 Asystent Doboru Nart v6.0 - Modularna")
-        self.setGeometry(100, 100, 1000, 700)
+        self.setGeometry(100, 100, 900, 650)  # Zmniejszone okno
         self.setup_ui()
         self.setup_styles()
         logger.info("Aplikacja uruchomiona")
@@ -72,8 +72,8 @@ class SkiApp(QMainWindow):
         
         # Główny layout
         main_layout = QVBoxLayout(central_widget)
-        main_layout.setSpacing(12)
-        main_layout.setContentsMargins(15, 15, 15, 15)
+        main_layout.setSpacing(8)  # Zmniejszone odstępy
+        main_layout.setContentsMargins(10, 10, 10, 10)  # Zmniejszone marginesy
         
         # Nagłówek z logo i formularzem
         header_frame = self.create_header()
@@ -296,9 +296,13 @@ class SkiApp(QMainWindow):
         row4_layout.addWidget(styl_group_widget)
         form_layout.addLayout(row4_layout)
         
-        # Przyciski
-        button_layout = QHBoxLayout()
-        button_layout.setSpacing(8)
+        # Przyciski - układ 2x2
+        button_layout = QVBoxLayout()
+        button_layout.setSpacing(6)
+        
+        # Pierwszy rząd przycisków
+        row1_buttons = QHBoxLayout()
+        row1_buttons.setSpacing(8)
         
         self.znajdz_button = QPushButton("🔍 Znajdź")
         self.znajdz_button.setStyleSheet(get_button_style(ModernTheme.SUCCESS))
@@ -308,6 +312,14 @@ class SkiApp(QMainWindow):
         self.wyczysc_button.setStyleSheet(get_button_style(ModernTheme.WARNING))
         self.wyczysc_button.clicked.connect(self.wyczysc_formularz)
         
+        row1_buttons.addWidget(self.znajdz_button)
+        row1_buttons.addWidget(self.wyczysc_button)
+        row1_buttons.addStretch()
+        
+        # Drugi rząd przycisków
+        row2_buttons = QHBoxLayout()
+        row2_buttons.setSpacing(8)
+        
         self.przegladaj_button = QPushButton("📋 Przeglądaj")
         self.przegladaj_button.setStyleSheet(get_button_style(ModernTheme.ACCENT))
         self.przegladaj_button.clicked.connect(self.pokaz_wszystkie_narty)
@@ -316,11 +328,12 @@ class SkiApp(QMainWindow):
         self.odswiez_rezerwacje_button.setStyleSheet(get_button_style(ModernTheme.INFO))
         self.odswiez_rezerwacje_button.clicked.connect(self.odswiez_rezerwacje)
         
-        button_layout.addWidget(self.znajdz_button)
-        button_layout.addWidget(self.wyczysc_button)
-        button_layout.addWidget(self.przegladaj_button)
-        button_layout.addWidget(self.odswiez_rezerwacje_button)
-        button_layout.addStretch()
+        row2_buttons.addWidget(self.przegladaj_button)
+        row2_buttons.addWidget(self.odswiez_rezerwacje_button)
+        row2_buttons.addStretch()
+        
+        button_layout.addLayout(row1_buttons)
+        button_layout.addLayout(row2_buttons)
         
         form_layout.addLayout(button_layout)
         right_layout.addLayout(form_layout)
@@ -356,12 +369,12 @@ class SkiApp(QMainWindow):
         """)
         
         layout = QVBoxLayout(group)
-        layout.setContentsMargins(15, 20, 15, 15)
+        layout.setContentsMargins(10, 15, 10, 10)  # Zmniejszone marginesy
         
         # Pole tekstowe na wyniki
         self.wyniki_text = QTextEdit()
         self.wyniki_text.setReadOnly(True)
-        self.wyniki_text.setMinimumHeight(500)
+        self.wyniki_text.setMinimumHeight(350)  # Zmniejszona wysokość
         self.wyniki_text.setStyleSheet(get_results_text_style())
         
         layout.addWidget(self.wyniki_text)
