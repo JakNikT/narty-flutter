@@ -60,7 +60,7 @@ class SkiApp(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("🎿 Asystent Doboru Nart v6.0 - Modularna")
-        self.setGeometry(100, 100, 900, 650)  # Zmniejszone okno
+        self.setGeometry(100, 100, 1100, 650)  # Poszerzone okno
         self.setup_ui()
         self.setup_styles()
         logger.info("Aplikacja uruchomiona")
@@ -95,7 +95,7 @@ class SkiApp(QMainWindow):
         # Lewa strona - logo i tytuł
         left_side = QFrame()
         left_side.setStyleSheet(f"background-color: {ModernTheme.PRIMARY.name()};")
-        left_side.setFixedWidth(350)
+        left_side.setFixedWidth(300)  # Zmniejszone logo
         
         # Kontener pionowy - logo na górze, tekst pod spodem
         unified_container = QVBoxLayout()
@@ -262,42 +262,43 @@ class SkiApp(QMainWindow):
         row3_layout.addStretch()
         form_layout.addLayout(row3_layout)
         
-        # RZĄD 4: Przeznaczenie
-        row4_layout = QVBoxLayout()
-        row4_layout.addWidget(QLabel("🎿 Przeznaczenie:"))
+        # RZĄD 4: Przeznaczenie i Przyciski - obok siebie
+        row4_layout = QHBoxLayout()
+        row4_layout.setSpacing(15)
+        
+        # Lewa strona - Przeznaczenie
+        przeznaczenie_layout = QVBoxLayout()
+        przeznaczenie_layout.addWidget(QLabel("🎿 Przeznaczenie:"))
         
         styl_group_widget = QGroupBox()
         styl_group_widget.setStyleSheet("QGroupBox { border: none; }")
         styl_container_layout = QVBoxLayout(styl_group_widget)
-        styl_container_layout.setSpacing(2)  # Zmniejszony odstęp między liniami przeznaczenia
+        styl_container_layout.setSpacing(2)
         
         # Pierwsza linia stylów
         styl_line1 = QHBoxLayout()
         self.styl_group = QRadioButton("Wszystkie")
         self.styl_group2 = QRadioButton("Slalom (SL)")
         self.styl_group3 = QRadioButton("Gigant (G)")
-        self.styl_group4 = QRadioButton("Performance (SLG)")
-        self.styl_group.setChecked(True)
         styl_line1.addWidget(self.styl_group)
         styl_line1.addWidget(self.styl_group2)
         styl_line1.addWidget(self.styl_group3)
-        styl_line1.addWidget(self.styl_group4)
-        styl_line1.addStretch()
+        self.styl_group.setChecked(True)
         
         # Druga linia stylów
         styl_line2 = QHBoxLayout()
+        self.styl_group4 = QRadioButton("Performance (SLG)")
         self.styl_group5 = QRadioButton("Cały dzień (C)")
         self.styl_group6 = QRadioButton("Poza trasę (OFF)")
+        styl_line2.addWidget(self.styl_group4)
         styl_line2.addWidget(self.styl_group5)
         styl_line2.addWidget(self.styl_group6)
-        styl_line2.addStretch()
         
         styl_container_layout.addLayout(styl_line1)
         styl_container_layout.addLayout(styl_line2)
-        row4_layout.addWidget(styl_group_widget)
-        form_layout.addLayout(row4_layout)
+        przeznaczenie_layout.addWidget(styl_group_widget)
         
-        # Przyciski - układ 2x2
+        # Prawa strona - Przyciski 2x2
         button_layout = QVBoxLayout()
         button_layout.setSpacing(6)
         
@@ -315,7 +316,6 @@ class SkiApp(QMainWindow):
         
         row1_buttons.addWidget(self.znajdz_button)
         row1_buttons.addWidget(self.wyczysc_button)
-        row1_buttons.addStretch()
         
         # Drugi rząd przycisków
         row2_buttons = QHBoxLayout()
@@ -331,12 +331,15 @@ class SkiApp(QMainWindow):
         
         row2_buttons.addWidget(self.przegladaj_button)
         row2_buttons.addWidget(self.odswiez_rezerwacje_button)
-        row2_buttons.addStretch()
         
         button_layout.addLayout(row1_buttons)
         button_layout.addLayout(row2_buttons)
         
-        form_layout.addLayout(button_layout)
+        # Dodaj obie strony do głównego layoutu
+        row4_layout.addLayout(przeznaczenie_layout)
+        row4_layout.addLayout(button_layout)
+        
+        form_layout.addLayout(row4_layout)
         right_layout.addLayout(form_layout)
         
         header_layout.addWidget(right_side)
