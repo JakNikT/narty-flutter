@@ -216,20 +216,20 @@ compatibility_scorer = CompatibilityScorer()
 
 # ===== NOWOCZESNY MOTYW KOLORÓW - NIEBIESKI JAK LOGO =====
 class ModernTheme:
-    # Główne kolory - różne odcienie niebieskiego jak logo
-    PRIMARY = QColor(230, 243, 255)          # Bardzo jasny niebieski (główne tło)
-    SECONDARY = QColor(204, 231, 255)        # Jasny niebieski (sekundarne tło)
-    TERTIARY = QColor(179, 219, 255)         # Średni jasny niebieski (ramki)
+    # Główne kolory - różne odcienie niebieskiego
+    PRIMARY = QColor(240, 248, 255)          # Bardzo jasny niebieski (główne tło)
+    SECONDARY = QColor(220, 235, 255)        # Jasny niebieski (sekundarne tło)
+    TERTIARY = QColor(200, 220, 255)         # Średni jasny niebieski (ramki)
     
-    # Akcenty - inspirowane logo narciarskim
-    ACCENT = QColor(30, 64, 175)             # Głęboki niebieski (główny akcent)
-    ACCENT_HOVER = QColor(30, 58, 138)       # Ciemniejszy niebieski (hover)
+    # Akcenty - inspirowane niebieskim logo
+    ACCENT = QColor(30, 100, 175)            # Głęboki niebieski (główny akcent)
+    ACCENT_HOVER = QColor(20, 80, 140)       # Ciemniejszy niebieski (hover)
     ACCENT_LIGHT = QColor(59, 130, 246)      # Jaśniejszy niebieski (aktywne elementy)
     
     # Kolory funkcjonalne - kontrastowe na niebieskim tle
     SUCCESS = QColor(5, 150, 105)            # Zielony las (sukces)
     WARNING = QColor(217, 119, 6)            # Pomarańczowy zachód (ostrzeżenie)
-    ERROR = QColor(220, 38, 38)              # Czerwony sygnał (błąd)
+    ERROR = QColor(220, 38, 38)              # Ciemny czerwony (błąd)
     INFO = QColor(2, 132, 199)               # Niebieski lód (informacja)
     
     # Tekst - ciemny dla kontrastu na niebieskim tle
@@ -1191,7 +1191,7 @@ class SkiApp(QMainWindow):
                 font-weight: bold;
             }}
             QPushButton:hover {{
-                background-color: #0284C7;
+                background-color: #B91C1C;
             }}
         """)
         self.odswiez_rezerwacje_button.clicked.connect(self.odswiez_rezerwacje)
@@ -1206,6 +1206,9 @@ class SkiApp(QMainWindow):
         right_layout.addLayout(form_layout)
         
         header_layout.addWidget(right_side)
+        
+        # Ustaw obsługę automatycznego przechodzenia między polami (po utworzeniu wszystkich pól)
+        self.setup_date_handlers()
         
         return top_frame
         
@@ -1316,7 +1319,77 @@ class SkiApp(QMainWindow):
         self.od_rok.setValidator(year_validator)
         self.do_rok.setValidator(year_validator)
     
+    def setup_date_handlers(self):
+        """Ustawia obsługę automatycznego przechodzenia między polami"""
+        # Data od
+        self.od_dzien.textChanged.connect(lambda: self.auto_next_field(self.od_dzien, self.od_miesiac))
+        self.od_miesiac.textChanged.connect(lambda: self.auto_next_field(self.od_miesiac, self.od_rok))
+        self.od_rok.textChanged.connect(lambda: self.auto_complete_year_safe(self.od_rok))
+        self.od_rok.textChanged.connect(lambda: self.auto_next_field(self.od_rok, self.do_dzien))
+        
+        # Data do
+        self.do_dzien.textChanged.connect(lambda: self.auto_next_field(self.do_dzien, self.do_miesiac))
+        self.do_miesiac.textChanged.connect(lambda: self.auto_next_field(self.do_miesiac, self.do_rok))
+        self.do_rok.textChanged.connect(lambda: self.auto_complete_year_safe(self.do_rok))
+        self.do_rok.textChanged.connect(lambda: self.auto_next_field(self.do_rok, self.wzrost_entry))
+        
+        # Wzrost i waga - automatyczne przechodzenie
+        self.wzrost_entry.textChanged.connect(lambda: self.auto_next_field(self.wzrost_entry, self.waga_entry))
     
+    def auto_complete_year_safe(self, year_field):
+        """Bezpieczne uzupełnianie roku i przechodzenie do następnego pola"""
+        text = year_field.text()
+        
+        # Jeśli wpisano 2 cyfry, uzupełnij do pełnego roku
+        if len(text) == 2 and text.isdigit():
+            year = int(text)
+            if year >= 0 and year <= 99:
+                # Jeśli rok jest mniejszy niż 50, zakładamy że to 20xx, w przeciwnym razie 19xx
+                if year < 50:
+                    full_year = 2000 + year
+                else:
+                    full_year = 1900 + year
+                
+                year_field.setText(str(full_year))
+                
+                # Przejdź do następnego pola
+                if year_field == self.od_rok:
+                    self.do_dzien.setFocus()
+                    self.do_dzien.selectAll()
+                elif year_field == self.do_rok:
+                    self.wzrost_entry.setFocus()
+                    self.wzrost_entry.selectAll()
+    
+    def auto_next_field(self, current_field, next_field):
+        """Automatyczne przechodzenie do następnego pola"""
+        text = current_field.text()
+        
+        # Jeśli to pole roku - sprawdź czy ma 4 cyfry (pełny rok)
+        if current_field in [self.od_rok, self.do_rok]:
+            if len(text) == 4 and text.isdigit():
+                next_field.setFocus()
+                next_field.selectAll()
+        # Jeśli to pole wzrostu - sprawdź czy ma 3 cyfry
+        elif current_field == self.wzrost_entry:
+            if len(text) == 3 and text.isdigit():
+                next_field.setFocus()
+                next_field.selectAll()
+        # Jeśli to pole wagi - sprawdź czy ma 2-3 cyfry (20-200 kg)
+        elif current_field == self.waga_entry:
+            if len(text) >= 2 and text.isdigit():
+                # Sprawdź czy to rozsądna waga (20-200 kg)
+                try:
+                    waga = int(text)
+                    if 20 <= waga <= 200:
+                        # Przejdź do poziomu (combo box)
+                        self.poziom_combo.setFocus()
+                except ValueError:
+                    pass
+        # Jeśli to inne pole - sprawdź czy ma 2 cyfry
+        else:
+            if len(text) == 2 and text.isdigit():
+                next_field.setFocus()
+                next_field.selectAll()
     
     
     def open_calendar(self, target):
@@ -1837,7 +1910,7 @@ class SkiApp(QMainWindow):
         add_button.clicked.connect(self.add_new_ski)
         add_button.setStyleSheet("""
             QPushButton {
-                background-color: #3B82F6;
+                background-color: #DC2626;
                 color: white;
                 border: none;
                 padding: 8px 16px;
@@ -1845,7 +1918,7 @@ class SkiApp(QMainWindow):
                 font-weight: bold;
             }
             QPushButton:hover {
-                background-color: #2563EB;
+                background-color: #B91C1C;
             }
         """)
         filters_layout.addWidget(add_button)
