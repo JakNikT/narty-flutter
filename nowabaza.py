@@ -1036,9 +1036,8 @@ class SkiApp(QMainWindow):
         row1_layout.addLayout(do_layout)
         form_layout.addLayout(row1_layout)
         
-        # Ustaw walidatory i obsługę dat
+        # Ustaw walidatory
         self.setup_date_validators()
-        self.setup_date_handlers()
         
         # RZĄD 2: Wzrost i Waga
         row2_layout = QHBoxLayout()
@@ -1301,58 +1300,8 @@ class SkiApp(QMainWindow):
         self.od_rok.setValidator(year_validator)
         self.do_rok.setValidator(year_validator)
     
-    def setup_date_handlers(self):
-        """Ustawia obsługę automatycznego przechodzenia między polami"""
-        # Data od
-        self.od_dzien.textChanged.connect(lambda: self.auto_next_field(self.od_dzien, self.od_miesiac))
-        self.od_miesiac.textChanged.connect(lambda: self.auto_next_field(self.od_miesiac, self.od_rok))
-        self.od_rok.textChanged.connect(lambda: self.auto_complete_year_safe(self.od_rok))
-        self.od_rok.textChanged.connect(lambda: self.auto_next_field(self.od_rok, self.do_dzien))
-        
-        # Data do
-        self.do_dzien.textChanged.connect(lambda: self.auto_next_field(self.do_dzien, self.do_miesiac))
-        self.do_miesiac.textChanged.connect(lambda: self.auto_next_field(self.do_miesiac, self.do_rok))
-        self.do_rok.textChanged.connect(lambda: self.auto_complete_year_safe(self.do_rok))
     
-    def auto_next_field(self, current_field, next_field):
-        """Automatyczne przechodzenie do następnego pola"""
-        text = current_field.text()
-        
-        # Jeśli to pole roku - sprawdź czy ma 4 cyfry (pełny rok)
-        if current_field in [self.od_rok, self.do_rok]:
-            if len(text) == 4 and text.isdigit():
-                next_field.setFocus()
-                next_field.selectAll()
-        # Jeśli to pole wzrostu - sprawdź czy ma 3 cyfry
-        elif current_field == self.wzrost_entry:
-            if len(text) == 3 and text.isdigit():
-                next_field.setFocus()
-                next_field.selectAll()
-        # Jeśli to inne pole - sprawdź czy ma 2 cyfry
-        else:
-            if len(text) == 2 and text.isdigit():
-                next_field.setFocus()
-                next_field.selectAll()
     
-    def auto_complete_year_safe(self, year_field):
-        """Bezpieczny auto-complete dla pola roku"""
-        text = year_field.text()
-        
-        # Jeśli użytkownik wpisał dokładnie 2 cyfry i to nie jest już pełny rok
-        if len(text) == 2 and text.isdigit() and not text.startswith("20"):
-            year_suffix = int(text)
-            if 20 <= year_suffix <= 99:
-                # Auto-complete: zamień "25" na "2025"
-                full_year = f"20{text}"
-                year_field.setText(full_year)
-                year_field.setCursorPosition(4)
-                year_field.setToolTip(f"Rok: {full_year}")
-            else:
-                year_field.setToolTip("Rok (25 = 2025)")
-        elif len(text) == 4 and text.isdigit():
-            year_field.setToolTip(f"Rok: {text}")
-        else:
-            year_field.setToolTip("Rok (25 = 2025)")
     
     def open_calendar(self, target):
         """Otwiera kalendarz dla wybranego pola"""
