@@ -394,402 +394,321 @@ def sprawdz_czy_narta_zarezerwowana(marka, model, dlugosc, data_od=None, data_do
         return False, None, None
 
 # ===== GŁÓWNA LOGIKA DOBIERANIA NART (zachowana z oryginału) =====
-def dobierz_narty(wzrost, waga, poziom, plec, styl_jazdy=None):
-    logger.info(f"Szukanie nart: wzrost={wzrost}, waga={waga}, poziom={poziom}, plec={plec}, styl={styl_jazdy}")
-    
-    idealne_dopasowanie = []
-    poziom_niżej = []  # Nowa kategoria: 1 poziom za niski, reszta OK
-    dobre_alternatywy = []
-    ponizej_poziomu = []  # 2+ poziomy za niskie
-    inna_plec = []  # Nowa kategoria: narty z niepasującą płcią
-    
-    WAGA_TOLERANCJA = 5
-    WZROST_TOLERANCJA = 5
-    POZIOM_TOLERANCJA_W_DOL = 2
-
+def wczytaj_narty():
+    """Wczytuje wszystkie narty z bazy danych"""
     try:
-        # Sprawdź w katalogu programu
         current_dir = os.path.dirname(os.path.abspath(__file__))
         csv_file = os.path.join(current_dir, 'NOWABAZA_final.csv')
         
         with open(csv_file, 'r', newline='', encoding='utf-8-sig') as file:
             reader = csv.DictReader(file)
-            wszystkie_narty = list(reader)
+            return list(reader)
+    except Exception as e:
+        logger.error(f"Błąd podczas wczytywania nart: {e}")
+        return []
 
-            # Nie filtruj nart według przeznaczenia - przeznaczenie będzie uwzględnione w kategoryzacji
-            narty_do_analizy = wszystkie_narty
+def sprawdz_dopasowanie_narty(row, wzrost, waga, poziom, plec, styl_jazdy):
+    """Sprawdza dopasowanie pojedynczej narty do kryteriów klienta"""
+    try:
+        if not all(key in row and row[key] for key in ['POZIOM', 'WAGA_MIN', 'WAGA_MAX', 'WZROST_MIN', 'WZROST_MAX', 'DLUGOSC', 'PLEC']):
+            return None
+
+        waga_min = int(float(row['WAGA_MIN']))
+        waga_max = int(float(row['WAGA_MAX']))
+        min_wzrost_narciarza = int(float(row['WZROST_MIN']))
+        max_wzrost_narciarza = int(float(row['WZROST_MAX']))
+        narta_plec = row.get('PLEC', 'U').strip() or 'U'
+
+        # Parsuj poziom w zależności od formatu
+        poziom_text = row.get('POZIOM', '').strip()
+        poziom_min, poziom_display = parsuj_poziom(poziom_text, plec)
+        if poziom_min is None:
+            return None
+
+        # Sprawdź czy poziom nie jest o 2+ za niski - wyklucz całkowicie
+        POZIOM_TOLERANCJA_W_DOL = 2
+        if poziom < poziom_min - POZIOM_TOLERANCJA_W_DOL:
+            return None
+
+        dopasowanie = {}
+        zielone_punkty = 0
+        poziom_niżej_kandydat = False
+
+        # Sprawdź poziom
+        if poziom == poziom_min:
+            dopasowanie['poziom'] = ('green', 'OK', poziom_display)
+            zielone_punkty += 1
+        elif poziom == poziom_min + 1:
+            dopasowanie['poziom'] = ('orange', f'Narta słabsza o jeden poziom', poziom_display)
+            poziom_niżej_kandydat = True
+        elif poziom > poziom_min + 1:
+            return None  # Wyklucz całkowicie
+        else:
+            return None
+
+        # Sprawdź płeć
+        if plec == "Wszyscy":
+            dopasowanie['plec'] = ('green', 'OK', narta_plec)
+            zielone_punkty += 1
+        elif plec == "Kobieta":
+            if narta_plec in ["K", "D", "U"]:
+                dopasowanie['plec'] = ('green', 'OK', narta_plec)
+                zielone_punkty += 1
+            elif narta_plec == "M":
+                dopasowanie['plec'] = ('orange', 'Narta męska', narta_plec)
+            else:
+                dopasowanie['plec'] = ('orange', 'Nieznana płeć', narta_plec)
+        elif plec == "Mężczyzna":
+            if narta_plec in ["M", "U"]:
+                dopasowanie['plec'] = ('green', 'OK', narta_plec)
+                zielone_punkty += 1
+            elif narta_plec in ["K", "D"]:
+                dopasowanie['plec'] = ('orange', 'Narta kobieca', narta_plec)
+            else:
+                dopasowanie['plec'] = ('orange', 'Nieznana płeć', narta_plec)
+
+        # Sprawdź wagę
+        WAGA_TOLERANCJA = 5
+        if waga_min <= waga <= waga_max:
+            dopasowanie['waga'] = ('green', 'OK', waga_min, waga_max)
+            zielone_punkty += 1
+        elif waga > waga_max and waga <= waga_max + WAGA_TOLERANCJA:
+            dopasowanie['waga'] = ('orange', f'O {waga - waga_max} kg za duża (miększa)', waga_min, waga_max)
+        elif waga < waga_min and waga >= waga_min - WAGA_TOLERANCJA:
+            dopasowanie['waga'] = ('orange', f'O {waga_min - waga} kg za mała (sztywniejsza)', waga_min, waga_max)
+        else:
+            dopasowanie['waga'] = ('red', 'Niedopasowana', waga_min, waga_max)
+
+        # Sprawdź wzrost
+        WZROST_TOLERANCJA = 5
+        if min_wzrost_narciarza <= wzrost <= max_wzrost_narciarza:
+            dopasowanie['wzrost'] = ('green', 'OK', min_wzrost_narciarza, max_wzrost_narciarza)
+            zielone_punkty += 1
+        elif wzrost > max_wzrost_narciarza and wzrost <= max_wzrost_narciarza + WZROST_TOLERANCJA:
+            dopasowanie['wzrost'] = ('orange', f'O {wzrost - max_wzrost_narciarza} cm za duży (zwrotniejsza)', min_wzrost_narciarza, max_wzrost_narciarza)
+        elif wzrost < min_wzrost_narciarza and wzrost >= min_wzrost_narciarza - WZROST_TOLERANCJA:
+            dopasowanie['wzrost'] = ('orange', f'O {min_wzrost_narciarza - wzrost} cm za mały (stabilniejsza)', min_wzrost_narciarza, max_wzrost_narciarza)
+        else:
+            dopasowanie['wzrost'] = ('red', 'Niedopasowany', min_wzrost_narciarza, max_wzrost_narciarza)
+
+        # Sprawdź przeznaczenie
+        if styl_jazdy and styl_jazdy != "Wszystkie":
+            przeznaczenie = row.get('PRZEZNACZENIE', '')
+            if przeznaczenie:
+                przeznaczenia = [p.strip() for p in przeznaczenie.replace(',', ',').split(',')]
+                if styl_jazdy in przeznaczenia:
+                    dopasowanie['przeznaczenie'] = ('green', 'OK', przeznaczenie)
+                    zielone_punkty += 1
+                else:
+                    dopasowanie['przeznaczenie'] = ('orange', f'Inne przeznaczenie ({przeznaczenie})', przeznaczenie)
+            else:
+                dopasowanie['przeznaczenie'] = ('orange', 'Brak przeznaczenia', '')
+        else:
+            dopasowanie['przeznaczenie'] = ('green', 'OK', row.get('PRZEZNACZENIE', ''))
+
+        # Wyklucz narty z czerwonymi kryteriami
+        if any(v[0] == 'red' for v in dopasowanie.values()):
+            return None
+
+        # Oblicz współczynnik idealności
+        wspolczynnik, detale_oceny = compatibility_scorer.oblicz_wspolczynnik_idealnosci(
+            dopasowanie, wzrost, waga, poziom, plec, styl_jazdy
+        )
+
+        return {
+            'dane': row,
+            'dopasowanie': dopasowanie,
+            'wspolczynnik_idealnosci': wspolczynnik,
+            'detale_oceny': detale_oceny,
+            'zielone_punkty': zielone_punkty,
+            'poziom_niżej_kandydat': poziom_niżej_kandydat
+        }
+
+    except (ValueError, TypeError) as e:
+        logger.warning(f"Pominięto wiersz z powodu błędu danych: {row} - {e}")
+        return None
+
+def parsuj_poziom(poziom_text, plec):
+    """Parsuje poziom narty w zależności od formatu"""
+    if '/' in poziom_text:
+        # Format unisex: "5M/6D"
+        try:
+            parts = poziom_text.split('/')
+            pm_part = parts[0].replace('M', '').strip()
+            pd_part = parts[1].replace('D', '').strip()
+            poziom_m = int(float(pm_part))
+            poziom_d = int(float(pd_part))
             
-            for row in narty_do_analizy:
-                try:
-                    if not all(key in row and row[key] for key in ['POZIOM', 'WAGA_MIN', 'WAGA_MAX', 'WZROST_MIN', 'WZROST_MAX', 'DLUGOSC', 'PLEC']):
-                        continue
+            if plec == "Mężczyzna":
+                return poziom_m, f"PM{poziom_m}/PD{poziom_d}"
+            elif plec == "Kobieta":
+                return poziom_d, f"PM{poziom_m}/PD{poziom_d}"
+            else:  # Wszyscy
+                return min(poziom_m, poziom_d), f"PM{poziom_m}/PD{poziom_d}"
+        except:
+            return None, None
+    elif 'M' in poziom_text and 'D' in poziom_text:
+        # Format unisex ze spacją: "5M 6D"
+        try:
+            parts = poziom_text.split()
+            pm_part = None
+            pd_part = None
+            
+            for part in parts:
+                if 'M' in part:
+                    pm_part = part.replace('M', '').strip()
+                elif 'D' in part:
+                    pd_part = part.replace('D', '').strip()
+            
+            if pm_part and pd_part:
+                poziom_m = int(float(pm_part))
+                poziom_d = int(float(pd_part))
+                
+                if plec == "Mężczyzna":
+                    return poziom_m, f"PM{poziom_m} PD{poziom_d}"
+                elif plec == "Kobieta":
+                    return poziom_d, f"PM{poziom_m} PD{poziom_d}"
+                else:  # Wszyscy
+                    return min(poziom_m, poziom_d), f"PM{poziom_m} PD{poziom_d}"
+            else:
+                return None, None
+        except:
+            return None, None
+    elif 'M' in poziom_text:
+        # Format męski: "5M"
+        try:
+            poziom_min = int(float(poziom_text.replace('M', '').strip()))
+            return poziom_min, f"PM{poziom_text.replace('M', '').strip()}"
+        except:
+            return None, None
+    elif 'D' in poziom_text:
+        # Format damski: "5D"
+        try:
+            poziom_min = int(float(poziom_text.replace('D', '').strip()))
+            return poziom_min, f"PD{poziom_text.replace('D', '').strip()}"
+        except:
+            return None, None
+    elif poziom_text.strip().isdigit():
+        # Format prosty: tylko cyfra
+        try:
+            poziom_min = int(float(poziom_text.strip()))
+            return poziom_min, f"P{poziom_text.strip()}"
+        except:
+            return None, None
+    else:
+        return None, None
 
-                    waga_min = int(float(row['WAGA_MIN']))
-                    waga_max = int(float(row['WAGA_MAX']))
-                    min_wzrost_narciarza = int(float(row['WZROST_MIN']))
-                    max_wzrost_narciarza = int(float(row['WZROST_MAX']))
-                    narta_plec = row.get('PLEC', 'U').strip() or 'U'
+def znajdz_idealne_dopasowania(narty, wzrost, waga, poziom, plec, styl_jazdy):
+    """Znajduje narty z idealnym dopasowaniem (wszystkie kryteria spełnione)"""
+    idealne = []
+    max_punkty = 5 if (styl_jazdy and styl_jazdy != "Wszystkie") else 4
+    
+    for row in narty:
+        narta_info = sprawdz_dopasowanie_narty(row, wzrost, waga, poziom, plec, styl_jazdy)
+        if narta_info and narta_info['zielone_punkty'] == max_punkty:
+            # Sprawdź czy to nie problem z płcią
+            plec_status = narta_info['dopasowanie'].get('plec')
+            if plec_status and plec_status[1] not in ['OK']:
+                if 'Narta męska' in plec_status[1] or 'Narta kobieca' in plec_status[1]:
+                    continue  # Pomiń - to będzie w "INNA PŁEĆ"
+            idealne.append(narta_info)
+    
+    return idealne
 
-                    # Nowa logika poziomów z jedną kolumną POZIOM
-                    poziom_text = row.get('POZIOM', '').strip()
-                    
-                    # Parsuj poziom w zależności od formatu
-                    if '/' in poziom_text:
-                        # Format unisex: "5M/6D"
-                        try:
-                            parts = poziom_text.split('/')
-                            pm_part = parts[0].replace('M', '').strip()
-                            pd_part = parts[1].replace('D', '').strip()
-                            
-                            if plec == "Kobieta":
-                                # Dla kobiet: sprawdź oba poziomy - damski jako główny, męski jako alternatywa
-                                poziom_min = int(float(pd_part))
-                                poziom_display = f"PD{pd_part}"
-                                # Dodaj informację o poziomie męskim dla nart unisex
-                                if narta_plec == "U":
-                                    poziom_display += f" (PM{pm_part})"
-                            elif plec == "Mężczyzna":
-                                # Dla mężczyzn: sprawdź oba poziomy - męski jako główny, damski jako alternatywa
-                                poziom_min = int(float(pm_part))
-                                poziom_display = f"PM{pm_part}"
-                                # Dodaj informację o poziomie damskim dla nart unisex
-                                if narta_plec == "U":
-                                    poziom_display += f" (PD{pd_part})"
-                            else:  # Wszyscy
-                                poziom_min = min(int(float(pm_part)), int(float(pd_part)))
-                                poziom_display = f"PM{pm_part}/PD{pd_part}"
-                        except:
-                            continue  # Błąd parsowania
-                    elif ' ' in poziom_text and ('M' in poziom_text or 'D' in poziom_text):
-                        # Format unisex ze spacją: "5M 6D"
-                        try:
-                            parts = poziom_text.split()
-                            pm_part = None
-                            pd_part = None
-                            
-                            for part in parts:
-                                if 'M' in part:
-                                    pm_part = part.replace('M', '').strip()
-                                elif 'D' in part:
-                                    pd_part = part.replace('D', '').strip()
-                            
-                            if plec == "Kobieta" and pd_part:
-                                poziom_min = int(float(pd_part))
-                                poziom_display = f"PD{pd_part}"
-                            elif plec == "Mężczyzna" and pm_part:
-                                poziom_min = int(float(pm_part))
-                                poziom_display = f"PM{pm_part}"
-                            elif plec == "Wszyscy" and pm_part and pd_part:
-                                poziom_min = min(int(float(pm_part)), int(float(pd_part)))
-                                poziom_display = f"PM{pm_part}/PD{pd_part}"
-                            else:
-                                continue
-                        except:
-                            continue  # Błąd parsowania
-                    elif 'M' in poziom_text:
-                        # Format męski: "5M" - teraz dostępny dla wszystkich
-                        try:
-                            poziom_min = int(float(poziom_text.replace('M', '').strip()))
-                            poziom_display = f"PM{poziom_text.replace('M', '').strip()}"
-                            
-                            # Sprawdź czy poziom nie jest o 2+ za niski - wyklucz całkowicie
-                            if poziom < poziom_min - POZIOM_TOLERANCJA_W_DOL:
-                                continue  # Wyklucz narty o 2+ poziomy za niskie
-                        except:
-                            continue  # Błąd parsowania
-                    elif 'D' in poziom_text:
-                        # Format damski: "5D" - teraz dostępny dla wszystkich
-                        try:
-                            poziom_min = int(float(poziom_text.replace('D', '').strip()))
-                            poziom_display = f"PD{poziom_text.replace('D', '').strip()}"
-                            
-                            # Sprawdź czy poziom nie jest o 2+ za niski - wyklucz całkowicie
-                            if poziom < poziom_min - POZIOM_TOLERANCJA_W_DOL:
-                                continue  # Wyklucz narty o 2+ poziomy za niskie
-                        except:
-                            continue  # Błąd parsowania
-                    elif poziom_text.strip().isdigit():
-                        # Format prosty: tylko cyfra (np. "4", "6")
-                        try:
-                            poziom_min = int(float(poziom_text.strip()))
-                            poziom_display = f"P{poziom_text.strip()}"
-                        except:
-                            continue  # Błąd parsowania
-                    else:
-                        # Nieznany format - pomiń
-                        continue
+def znajdz_poziom_za_nisko(narty, wzrost, waga, poziom, plec, styl_jazdy):
+    """Znajduje narty z poziomem za niskim (wszystkie inne kryteria OK)"""
+    poziom_za_nisko = []
+    max_punkty = 5 if (styl_jazdy and styl_jazdy != "Wszystkie") else 4
+    
+    for row in narty:
+        narta_info = sprawdz_dopasowanie_narty(row, wzrost, waga, poziom, plec, styl_jazdy)
+        if narta_info and narta_info['poziom_niżej_kandydat']:
+            # Sprawdź czy reszta kryteriów jest OK
+            pozostałe_punkty = narta_info['zielone_punkty']
+            max_pozostałe_punkty = max_punkty - 1
+            
+            if pozostałe_punkty == max_pozostałe_punkty:
+                # Sprawdź czy to nie problem z płcią - jeśli tak, pomiń (będzie w "INNA PŁEĆ")
+                plec_status = narta_info['dopasowanie'].get('plec')
+                if plec_status and plec_status[1] not in ['OK']:
+                    if 'Narta męska' in plec_status[1] or 'Narta kobieca' in plec_status[1]:
+                        continue  # Pomiń - to będzie w "INNA PŁEĆ"
+                poziom_za_nisko.append(narta_info)
+    
+    return poziom_za_nisko
 
-                    dopasowanie = {}
-                    zielone_punkty = 0
-                    poziom_niżej_kandydat = False
+def znajdz_alternatywy(narty, wzrost, waga, poziom, plec, styl_jazdy):
+    """Znajduje narty alternatywne (poziom OK, ale inne kryteria nie idealne)"""
+    alternatywy = []
+    max_punkty = 5 if (styl_jazdy and styl_jazdy != "Wszystkie") else 4
+    
+    for row in narty:
+        narta_info = sprawdz_dopasowanie_narty(row, wzrost, waga, poziom, plec, styl_jazdy)
+        if narta_info and not narta_info['poziom_niżej_kandydat'] and narta_info['zielone_punkty'] < max_punkty:
+            # Sprawdź czy to nie problem z płcią - jeśli tak, pomiń (będzie w "INNA PŁEĆ")
+            plec_status = narta_info['dopasowanie'].get('plec')
+            if plec_status and plec_status[1] not in ['OK']:
+                if 'Narta męska' in plec_status[1] or 'Narta kobieca' in plec_status[1]:
+                    continue  # Pomiń - to będzie w "INNA PŁEĆ"
+            alternatywy.append(narta_info)
+    
+    return alternatywy
 
-                    # Specjalna logika dla nart unisex - sprawdź oba poziomy
-                    if narta_plec == "U" and '/' in poziom_text:
-                        # Dla nart unisex sprawdź oba poziomy
-                        parts = poziom_text.split('/')
-                        pm_part = parts[0].replace('M', '').strip()
-                        pd_part = parts[1].replace('D', '').strip()
-                        poziom_m = int(float(pm_part))
-                        poziom_d = int(float(pd_part))
-                        
-                        # Sprawdź czy poziom nie jest o 2+ za niski - wyklucz całkowicie
-                        if plec == "Kobieta":
-                            if poziom < poziom_d - POZIOM_TOLERANCJA_W_DOL:
-                                continue  # Wyklucz narty o 2+ poziomy za niskie
-                        elif plec == "Mężczyzna":
-                            if poziom < poziom_m - POZIOM_TOLERANCJA_W_DOL:
-                                continue  # Wyklucz narty o 2+ poziomy za niskie
-                        else:  # Wszyscy
-                            if poziom < min(poziom_m, poziom_d) - POZIOM_TOLERANCJA_W_DOL:
-                                continue  # Wyklucz narty o 2+ poziomy za niskie
-                        
-                        if plec == "Kobieta":
-                            # Sprawdź poziom damski jako główny, męski jako alternatywa
-                            if poziom == poziom_d:
-                                dopasowanie['poziom'] = ('green', 'OK', f"PD{poziom_d} (PM{poziom_m})")
-                                zielone_punkty += 1
-                            elif poziom == poziom_d + 1:
-                                dopasowanie['poziom'] = ('orange', f'Narta słabsza o jeden poziom', f"PD{poziom_d} (PM{poziom_m})")
-                                poziom_niżej_kandydat = True
-                            elif poziom == poziom_m:
-                                # Użyj poziom męski jako alternatywa
-                                if poziom == poziom_m + 1:
-                                    dopasowanie['poziom'] = ('orange', f'Narta słabsza o jeden poziom', f"PM{poziom_m} (PD{poziom_d})")
-                                else:
-                                    dopasowanie['poziom'] = ('orange', f'O {abs(poziom - poziom_m)} za łatwa (poziom męski)', f"PM{poziom_m} (PD{poziom_d})")
-                                poziom_niżej_kandydat = True
-                            elif poziom > poziom_d + 1:
-                                # Sprawdź czy to dokładnie o 1 poziom za niski
-                                if poziom == poziom_d + 1:
-                                    dopasowanie['poziom'] = ('orange', f'Narta słabsza o jeden poziom', f"PD{poziom_d} (PM{poziom_m})")
-                                    poziom_niżej_kandydat = True
-                                else:
-                                    # Więcej niż o 1 poziom za niski - wyklucz
-                                    continue
-                            else:
-                                continue
-                        elif plec == "Mężczyzna":
-                            # Sprawdź poziom męski jako główny, damski jako alternatywa
-                            if poziom == poziom_m:
-                                dopasowanie['poziom'] = ('green', 'OK', f"PM{poziom_m} (PD{poziom_d})")
-                                zielone_punkty += 1
-                            elif poziom == poziom_m + 1:
-                                dopasowanie['poziom'] = ('orange', f'Narta słabsza o jeden poziom', f"PM{poziom_m} (PD{poziom_d})")
-                                poziom_niżej_kandydat = True
-                            elif poziom == poziom_d:
-                                # Użyj poziom damski jako alternatywa
-                                if poziom == poziom_d + 1:
-                                    dopasowanie['poziom'] = ('orange', f'Narta słabsza o jeden poziom', f"PD{poziom_d} (PM{poziom_m})")
-                                else:
-                                    dopasowanie['poziom'] = ('orange', f'O {abs(poziom - poziom_d)} za łatwa (poziom damski)', f"PD{poziom_d} (PM{poziom_m})")
-                                poziom_niżej_kandydat = True
-                            elif poziom > poziom_m + 1:
-                                # Sprawdź czy to dokładnie o 1 poziom za niski
-                                if poziom == poziom_m + 1:
-                                    dopasowanie['poziom'] = ('orange', f'Narta słabsza o jeden poziom', f"PM{poziom_m} (PD{poziom_d})")
-                                    poziom_niżej_kandydat = True
-                                else:
-                                    # Więcej niż o 1 poziom za niski - wyklucz
-                                    continue
-                            else:
-                                continue
-                        else:  # Wszyscy
-                            # Użyj niższego poziomu
-                            poziom_min = min(poziom_m, poziom_d)
-                            
-                            if poziom == poziom_min:
-                                dopasowanie['poziom'] = ('green', 'OK', f"PM{poziom_m}/PD{poziom_d}")
-                                zielone_punkty += 1
-                            elif poziom > poziom_min:
-                                # Sprawdź czy to dokładnie o 1 poziom za niski
-                                if poziom == poziom_min + 1:
-                                    dopasowanie['poziom'] = ('orange', f'Narta słabsza o jeden poziom', f"PM{poziom_m}/PD{poziom_d}")
-                                    poziom_niżej_kandydat = True
-                                else:
-                                    # Więcej niż o 1 poziom za niski - wyklucz
-                                    continue
-                            else:
-                                continue
-                    else:
-                        # Normalna logika dla nart nie-unisex
-                        if poziom == poziom_min:
-                            # Klient ma dokładnie taki sam poziom jak narta - idealne dopasowanie
-                            dopasowanie['poziom'] = ('green', 'OK', poziom_display)
-                            zielone_punkty += 1
-                        elif poziom == poziom_min + 1:
-                            # Klient ma poziom o 1 wyższy niż narta - narta słabsza o jeden poziom
-                            dopasowanie['poziom'] = ('orange', f'Narta słabsza o jeden poziom', poziom_display)
-                            poziom_niżej_kandydat = True
-                        elif poziom > poziom_min + 1:
-                            # Klient ma poziom o 2+ wyższy niż narta - wyklucz całkowicie
-                            continue
-                        else:
-                            continue
+def znajdz_inna_plec(narty, wzrost, waga, poziom, plec, styl_jazdy):
+    """Znajduje narty z niepasującą płcią (wszystkie inne kryteria OK)"""
+    inna_plec = []
+    max_punkty = 5 if (styl_jazdy and styl_jazdy != "Wszystkie") else 4
+    
+    for row in narty:
+        narta_info = sprawdz_dopasowanie_narty(row, wzrost, waga, poziom, plec, styl_jazdy)
+        if narta_info and not narta_info['poziom_niżej_kandydat']:
+            # Sprawdź czy to problem z płcią
+            plec_status = narta_info['dopasowanie'].get('plec')
+            if plec_status and plec_status[1] not in ['OK']:
+                if 'Narta męska' in plec_status[1] or 'Narta kobieca' in plec_status[1]:
+                    # Sprawdź czy reszta kryteriów jest OK (poziom OK, waga OK, wzrost OK, przeznaczenie OK)
+                    pozostałe_punkty = narta_info['zielone_punkty']
+                    max_pozostałe_punkty = max_punkty - 1  # Płeć nie liczy się do punktów
                     
-                    if plec == "Wszyscy":
-                        dopasowanie['plec'] = ('green', 'OK', narta_plec)
-                        zielone_punkty += 1
-                    elif plec == "Kobieta":
-                        if narta_plec in ["K", "D", "U"]:  # Damskie i unisex - idealne
-                            dopasowanie['plec'] = ('green', 'OK', narta_plec)
-                            zielone_punkty += 1
-                        elif narta_plec == "M":  # Męskie - pokazuj ale jako alternatywę
-                            dopasowanie['plec'] = ('orange', 'Narta męska', narta_plec)
-                        else:
-                            dopasowanie['plec'] = ('orange', 'Nieznana płeć', narta_plec)
-                    elif plec == "Mężczyzna":
-                        if narta_plec in ["M", "U"]:  # Męskie i unisex - idealne
-                            dopasowanie['plec'] = ('green', 'OK', narta_plec)
-                            zielone_punkty += 1
-                        elif narta_plec in ["K", "D"]:  # Damskie - pokazuj ale jako alternatywę
-                            dopasowanie['plec'] = ('orange', 'Narta kobieca', narta_plec)
-                        else:
-                            dopasowanie['plec'] = ('orange', 'Nieznana płeć', narta_plec)
+                    if pozostałe_punkty == max_pozostałe_punkty:
+                        inna_plec.append(narta_info)
+    
+    return inna_plec
 
-                    if waga_min <= waga <= waga_max:
-                        dopasowanie['waga'] = ('green', 'OK', waga_min, waga_max)
-                        zielone_punkty += 1
-                    elif waga > waga_max and waga <= waga_max + WAGA_TOLERANCJA:
-                        dopasowanie['waga'] = ('orange', f'O {waga - waga_max} kg za duża (miększa)', waga_min, waga_max)
-                    elif waga < waga_min and waga >= waga_min - WAGA_TOLERANCJA:
-                        dopasowanie['waga'] = ('orange', f'O {waga_min - waga} kg za mała (sztywniejsza)', waga_min, waga_max)
-                    else:
-                        dopasowanie['waga'] = ('red', 'Niedopasowana', waga_min, waga_max)
+def dobierz_narty(wzrost, waga, poziom, plec, styl_jazdy=None):
+    """Główna funkcja dobierania nart - teraz z osobnymi wyszukiwaniami dla każdej kategorii"""
+    logger.info(f"Szukanie nart: wzrost={wzrost}, waga={waga}, poziom={poziom}, plec={plec}, styl={styl_jazdy}")
+    
+    try:
+        # Wczytaj wszystkie narty
+        wszystkie_narty = wczytaj_narty()
+        if not wszystkie_narty:
+            logger.error("Nie znaleziono nart w bazie danych")
+            return None, None, None, None
 
-                    if min_wzrost_narciarza <= wzrost <= max_wzrost_narciarza:
-                        dopasowanie['wzrost'] = ('green', 'OK', min_wzrost_narciarza, max_wzrost_narciarza)
-                        zielone_punkty += 1
-                    elif wzrost > max_wzrost_narciarza and wzrost <= max_wzrost_narciarza + WZROST_TOLERANCJA:
-                        dopasowanie['wzrost'] = ('orange', f'O {wzrost - max_wzrost_narciarza} cm za duży (zwrotniejsza)', min_wzrost_narciarza, max_wzrost_narciarza)
-                    elif wzrost < min_wzrost_narciarza and wzrost >= min_wzrost_narciarza - WZROST_TOLERANCJA:
-                        dopasowanie['wzrost'] = ('orange', f'O {min_wzrost_narciarza - wzrost} cm za mały (stabilniejsza)', min_wzrost_narciarza, max_wzrost_narciarza)
-                    else:
-                        dopasowanie['wzrost'] = ('red', 'Niedopasowany', min_wzrost_narciarza, max_wzrost_narciarza)
-                    
-                    # Sprawdź przeznaczenie - 5. kryterium
-                    if styl_jazdy and styl_jazdy != "Wszystkie":
-                        przeznaczenie = row.get('PRZEZNACZENIE', '')
-                        # Sprawdź czy wybrany styl jest w przeznaczeniu (elastyczne dopasowanie)
-                        if przeznaczenie:
-                            # Podziel przeznaczenie na części - obsługuj różne formaty (z spacją i bez)
-                            przeznaczenia = [p.strip() for p in przeznaczenie.replace(',', ',').split(',')]
-                            if styl_jazdy in przeznaczenia:
-                                dopasowanie['przeznaczenie'] = ('green', 'OK', przeznaczenie)
-                                zielone_punkty += 1
-                            else:
-                                dopasowanie['przeznaczenie'] = ('orange', f'Inne przeznaczenie ({przeznaczenie})', przeznaczenie)
-                        else:
-                            dopasowanie['przeznaczenie'] = ('orange', 'Brak przeznaczenia', '')
-                    else:
-                        # Gdy wybrano "Wszystkie" - przeznaczenie nie jest kryterium
-                        dopasowanie['przeznaczenie'] = ('green', 'OK', row.get('PRZEZNACZENIE', ''))
-                        # NIE dodajemy punktu za przeznaczenie gdy wybrano "Wszystkie"
-                    
-                    if any(v[0] == 'red' for v in dopasowanie.values()):
-                        continue
-                    
-                    narta_info = {'dane': row, 'dopasowanie': dopasowanie}
-                    
-                    # ===== OBLICZ WSPÓŁCZYNNIK IDEALNOŚCI =====
-                    wspolczynnik, detale_oceny = compatibility_scorer.oblicz_wspolczynnik_idealnosci(
-                        dopasowanie, wzrost, waga, poziom, plec, styl_jazdy
-                    )
-                    
-                    # Dodaj współczynnik do informacji o narcie
-                    narta_info['wspolczynnik_idealnosci'] = wspolczynnik
-                    narta_info['detale_oceny'] = detale_oceny
-                    
-                    logger.debug(f"Narta {row.get('MARKA')} {row.get('MODEL')} - współczynnik: {wspolczynnik}%")
-                    # ===== KONIEC NOWEGO KODU =====
-                    
-                    # Sprawdź czy narta ma niepasującą płeć - jeśli tak, przenieś do "INNA PŁEĆ"
-                    plec_status = dopasowanie.get('plec')
-                    if plec_status and plec_status[1] not in ['OK']:  # Nie jest OK
-                        # Sprawdź czy to rzeczywiście problem z płcią
-                        if 'Narta męska' in plec_status[1] or 'Narta kobieca' in plec_status[1]:
-                            # Przenieś do kategorii "Inna płeć" niezależnie od innych parametrów
-                            inna_plec.append(narta_info)
-                            continue  # Przenieś do kategorii "Inna płeć" i pomiń normalną kategoryzację
-                    
-                    # Sprawdź czy to kandydat do "poziom_niżej"
-                    if poziom_niżej_kandydat:
-                        # Sprawdź czy reszta parametrów jest OK (bez poziomu)
-                        pozostałe_punkty = zielone_punkty  # Poziom już nie liczy się do punktów
-                        max_pozostałe_punkty = (5 if (styl_jazdy and styl_jazdy != "Wszystkie") else 4) - 1
-                        
-                        if pozostałe_punkty == max_pozostałe_punkty:
-                            poziom_niżej.append(narta_info)
-                        else:
-                            dobre_alternatywy.append(narta_info)
-                    else:
-                        # Normalna kategoryzacja
-                        max_punkty = 5 if (styl_jazdy and styl_jazdy != "Wszystkie") else 4
-                        if zielone_punkty == max_punkty:
-                            idealne_dopasowanie.append(narta_info)
-                        else:
-                            dobre_alternatywy.append(narta_info)
+        # Znajdź narty w każdej kategorii osobno
+        idealne = znajdz_idealne_dopasowania(wszystkie_narty, wzrost, waga, poziom, plec, styl_jazdy)
+        poziom_za_nisko = znajdz_poziom_za_nisko(wszystkie_narty, wzrost, waga, poziom, plec, styl_jazdy)
+        alternatywy = znajdz_alternatywy(wszystkie_narty, wzrost, waga, poziom, plec, styl_jazdy)
+        inna_plec = znajdz_inna_plec(wszystkie_narty, wzrost, waga, poziom, plec, styl_jazdy)
 
-                except (ValueError, TypeError) as e:
-                    logger.warning(f"Pominięto wiersz z powodu błędu danych: {row} - {e}")
-                    continue
-        
+        # Sortuj wyniki
         def sort_key(narta_info):
-            narta_plec = narta_info['dane'].get('PLEC', 'U').upper()
-            dopasowanie = narta_info['dopasowanie']
-            
-            # Pierwsze sortowanie: czy narta ma pasujący poziom i płeć
-            ideal_match = 0
-            poziom_status = dopasowanie.get('poziom')
-            plec_status = dopasowanie.get('plec')
-            
-            if (poziom_status and poziom_status[1] == "OK" and 
-                plec_status and plec_status[1] == "OK"):
-                ideal_match = 0  # Idealne dopasowanie - pierwsze
-            else:
-                ideal_match = 1  # Nieidealne dopasowanie - drugie
-            
-            # Drugie sortowanie: płeć
-            plec_priority = 0
-            if plec == "Kobieta":
-                if narta_plec in ['K', 'D']: plec_priority = 0
-                elif narta_plec == 'U': plec_priority = 1
-                else: plec_priority = 2
-            elif plec == "Mężczyzna":
-                if narta_plec == 'M': plec_priority = 0
-                elif narta_plec == 'U': plec_priority = 1
-                else: plec_priority = 2
-            else:
-                plec_priority = 0
-            
-            # Trzecie sortowanie: poziom
-            poziom_priority = 0
-            if poziom_status and poziom_status[1] == "OK":
-                poziom_priority = 0  # Pasujący poziom
-            else:
-                poziom_priority = 1  # Niepasujący poziom
-            
-            # NOWE: Dodaj współczynnik jako czwarte kryterium sortowania
             wspolczynnik = narta_info.get('wspolczynnik_idealnosci', 0)
-            # Minus przed współczynnikiem żeby sortować od najwyższego do najniższego
-            return (ideal_match, plec_priority, poziom_priority, -wspolczynnik)
+            return -wspolczynnik  # Od najwyższego do najniższego
 
-        idealne_dopasowanie.sort(key=sort_key)
-        poziom_niżej.sort(key=sort_key)
-        dobre_alternatywy.sort(key=sort_key)
-        ponizej_poziomu.sort(key=sort_key)
+        idealne.sort(key=sort_key)
+        poziom_za_nisko.sort(key=sort_key)
+        alternatywy.sort(key=sort_key)
         inna_plec.sort(key=sort_key)
 
-    except FileNotFoundError:
-        logger.error("Nie znaleziono pliku 'NOWABAZA_final.csv'")
-        QMessageBox.critical(None, "Błąd Pliku", "Nie znaleziono pliku 'NOWABAZA_final.csv'.")
-        return None, None, None
+        logger.info(f"Znaleziono: {len(idealne)} idealnych, {len(poziom_za_nisko)} poziom za nisko, {len(alternatywy)} alternatyw, {len(inna_plec)} inna płeć")
+        return idealne, poziom_za_nisko, alternatywy, inna_plec
+
     except Exception as e:
         logger.error(f"Wystąpił nieoczekiwany błąd: {e}")
         QMessageBox.critical(None, "Błąd Krytyczny", f"Wystąpił nieoczekiwany błąd: {e}")
-        return None, None, None
-
-    logger.info(f"Znaleziono: {len(idealne_dopasowanie)} idealnych, {len(poziom_niżej)} poziom niżej, {len(dobre_alternatywy)} alternatyw, {len(ponizej_poziomu)} poniżej poziomu, {len(inna_plec)} inna płeć")
-    return idealne_dopasowanie, poziom_niżej, dobre_alternatywy, ponizej_poziomu, inna_plec
+        return None, None, None, None
 
 
 # ===== DIALOG KALENDARZA =====
@@ -1075,7 +994,7 @@ class SkiApp(QMainWindow):
         poziomy = ["1 - Świeżak", "2 - Początkujący Turysta", "3 - Niedzielny Śmigacz", 
                   "4 - Zajakowicz", "5 - Zawodnik", "6 - Lokalna Legenda"]
         self.poziom_combo.addItems(poziomy)
-        self.poziom_combo.setFixedWidth(150)  # Zmniejszone z 180
+        self.poziom_combo.setFixedWidth(150)  # Przywrócone do oryginalnej szerokości
         row3_layout.addWidget(self.poziom_combo)
         row3_layout.addWidget(QLabel("👤 Płeć:"))
         
@@ -1515,9 +1434,9 @@ class SkiApp(QMainWindow):
         
         logger.info(f"Wywołuję dobierz_narty z parametrami: wzrost={wzrost_klienta}, waga={waga_klienta}, poziom={poziom_klienta}, plec={plec_klienta}, styl={styl}")
         
-        idealne, poziom_niżej, alternatywy, ponizej, inna_plec = dobierz_narty(wzrost_klienta, waga_klienta, poziom_klienta, plec_klienta, styl)
+        idealne, poziom_za_nisko, alternatywy, inna_plec = dobierz_narty(wzrost_klienta, waga_klienta, poziom_klienta, plec_klienta, styl)
         
-        logger.info(f"Wyniki dobierz_narty: idealne={len(idealne) if idealne else 'None'}, poziom_niżej={len(poziom_niżej) if poziom_niżej else 'None'}, alternatywy={len(alternatywy) if alternatywy else 'None'}, ponizej={len(ponizej) if ponizej else 'None'}, inna_plec={len(inna_plec) if inna_plec else 'None'}")
+        logger.info(f"Wyniki dobierz_narty: idealne={len(idealne) if idealne else 'None'}, poziom_za_nisko={len(poziom_za_nisko) if poziom_za_nisko else 'None'}, alternatywy={len(alternatywy) if alternatywy else 'None'}, inna_plec={len(inna_plec) if inna_plec else 'None'}")
         
         # Wyczyść pole tekstowe
         self.wyniki_text.clear()
@@ -1525,6 +1444,19 @@ class SkiApp(QMainWindow):
         if idealne is None:
             logger.error("dobierz_narty zwróciło None - błąd w funkcji")
             QMessageBox.critical(self, "Błąd", "Wystąpił błąd podczas dobierania nart. Sprawdź logi.")
+            return
+        
+        # Sprawdź czy są jakieś wyniki
+        if not idealne and not poziom_za_nisko and not alternatywy and not inna_plec:
+            self.wyniki_text.append("❌ BRAK DOPASOWANYCH NART")
+            self.wyniki_text.append("=" * 50)
+            self.wyniki_text.append("Nie znaleziono nart spełniających kryteria wyszukiwania.")
+            self.wyniki_text.append("")
+            self.wyniki_text.append("💡 Spróbuj:")
+            self.wyniki_text.append("• Zmienić poziom umiejętności")
+            self.wyniki_text.append("• Wybrać inną płeć (np. 'Wszyscy')")
+            self.wyniki_text.append("• Zmienić styl jazdy na 'Wszystkie'")
+            self.wyniki_text.append("• Sprawdzić czy dane są poprawne")
             return
 
         # Wyświetl wyniki w polu tekstowym
@@ -1535,10 +1467,10 @@ class SkiApp(QMainWindow):
                 self.wyswietl_jedna_narte(narta_info, wzrost_klienta, waga_klienta, poziom_klienta, plec_klienta, data_od, data_do)
             self.wyniki_text.append("")
         
-        if poziom_niżej:
-            self.wyniki_text.append("🟡 POZIOM NIŻEJ (narty z niższym poziomem wymagania, reszta OK):")
+        if poziom_za_nisko:
+            self.wyniki_text.append("🟡 POZIOM ZA NISKO (narty z niższym poziomem wymagania, reszta OK):")
             self.wyniki_text.append("=" * 50)
-            for narta_info in poziom_niżej:
+            for narta_info in poziom_za_nisko:
                 self.wyswietl_jedna_narte(narta_info, wzrost_klienta, waga_klienta, poziom_klienta, plec_klienta, data_od, data_do)
             self.wyniki_text.append("")
         
@@ -1546,13 +1478,6 @@ class SkiApp(QMainWindow):
             self.wyniki_text.append("⚠️ ALTERNATYWY:")
             self.wyniki_text.append("=" * 50)
             for narta_info in alternatywy:
-                self.wyswietl_jedna_narte(narta_info, wzrost_klienta, waga_klienta, poziom_klienta, plec_klienta, data_od, data_do)
-            self.wyniki_text.append("")
-        
-        if ponizej:
-            self.wyniki_text.append("🔻 PONIŻEJ POZIOMU (2+ poziomy za niskie):")
-            self.wyniki_text.append("=" * 50)
-            for narta_info in ponizej:
                 self.wyswietl_jedna_narte(narta_info, wzrost_klienta, waga_klienta, poziom_klienta, plec_klienta, data_od, data_do)
             self.wyniki_text.append("")
         
@@ -1688,7 +1613,7 @@ class SkiApp(QMainWindow):
         """Czyści formularz"""
         self.wzrost_entry.clear()
         self.waga_entry.clear()
-        self.poziom_combo.setCurrentIndex(0)
+        self.poziom_combo.setCurrentIndex(0)  # Ustawi pierwszy poziom (1M)
         self.plec_group3.setChecked(True)
         self.styl_group.setChecked(True)
         

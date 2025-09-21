@@ -2709,3 +2709,1316 @@
 2025-09-21 14:32:08,058 - INFO - Przetworzono 4 rezerwacji nart
 2025-09-21 14:32:08,065 - INFO - Wczytano dane z rez.csv
 2025-09-21 14:32:08,070 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:26:22,434 - INFO - Próbuję załadować logo z: c:\Users\wacia\Desktop\asystent\APK\narty.png
+2025-09-21 17:26:22,435 - INFO - Plik istnieje: True
+2025-09-21 17:26:23,335 - INFO - Aplikacja uruchomiona
+2025-09-21 17:36:19,054 - INFO - Otwieranie okna przeglądania nart
+2025-09-21 17:36:19,142 - INFO - Załadowano 81 nart
+2025-09-21 17:37:49,333 - INFO - Próbuję załadować logo z: c:\Users\wacia\Desktop\asystent\APK\narty.png
+2025-09-21 17:37:49,334 - INFO - Plik istnieje: True
+2025-09-21 17:37:50,194 - INFO - Aplikacja uruchomiona
+2025-09-21 17:37:51,697 - INFO - Otwieranie okna przeglądania nart
+2025-09-21 17:37:51,729 - INFO - Załadowano 81 nart
+2025-09-21 17:42:33,601 - INFO - Próbuję załadować logo z: c:\Users\wacia\Desktop\asystent\APK\narty.png
+2025-09-21 17:42:33,601 - INFO - Plik istnieje: True
+2025-09-21 17:42:34,237 - INFO - Aplikacja uruchomiona
+2025-09-21 17:42:44,909 - INFO - Otwieranie okna przeglądania nart
+2025-09-21 17:42:44,954 - INFO - Załadowano 81 nart
+2025-09-21 17:45:57,450 - INFO - Próbuję załadować logo z: c:\Users\wacia\Desktop\asystent\APK\narty.png
+2025-09-21 17:45:57,451 - INFO - Plik istnieje: True
+2025-09-21 17:45:58,175 - INFO - Aplikacja uruchomiona
+2025-09-21 17:46:01,891 - INFO - Otwieranie okna przeglądania nart
+2025-09-21 17:46:01,928 - INFO - Załadowano 81 nart
+2025-09-21 17:46:24,609 - INFO - Rozpoczęto wyszukiwanie nart
+2025-09-21 17:46:28,428 - INFO - Rozpoczęto wyszukiwanie nart
+2025-09-21 17:47:11,225 - INFO - Próbuję załadować logo z: C:\Users\wacia\Desktop\asystent\APK\narty.png
+2025-09-21 17:47:11,227 - INFO - Plik istnieje: True
+2025-09-21 17:47:12,075 - INFO - Aplikacja uruchomiona
+2025-09-21 17:47:47,940 - INFO - Próbuję załadować logo z: C:\Users\wacia\Desktop\asystent\APK\narty.png
+2025-09-21 17:47:47,941 - INFO - Plik istnieje: True
+2025-09-21 17:47:48,604 - INFO - Aplikacja uruchomiona
+2025-09-21 17:47:55,727 - INFO - Otwieranie okna przeglądania nart
+2025-09-21 17:47:55,747 - INFO - Załadowano 81 nart
+2025-09-21 17:48:21,601 - INFO - Próbuję załadować logo z: C:\Users\wacia\Desktop\asystent\APK\narty.png
+2025-09-21 17:48:21,602 - INFO - Plik istnieje: True
+2025-09-21 17:48:22,518 - INFO - Aplikacja uruchomiona
+2025-09-21 17:48:38,663 - INFO - Próbuję załadować logo z: c:\Users\wacia\Desktop\asystent\APK\narty.png
+2025-09-21 17:48:38,664 - INFO - Plik istnieje: True
+2025-09-21 17:48:39,344 - INFO - Aplikacja uruchomiona
+2025-09-21 17:49:19,946 - INFO - Rozpoczęto wyszukiwanie nart
+2025-09-21 17:49:19,988 - INFO - Wywołuję dobierz_narty z parametrami: wzrost=155, waga=55, poziom=4, plec=Kobieta, styl=Wszystkie
+2025-09-21 17:49:19,988 - INFO - Szukanie nart: wzrost=155, waga=55, poziom=4, plec=Kobieta, styl=Wszystkie
+2025-09-21 17:49:19,992 - INFO - Znaleziono: 1 idealnych, 0 poziom niżej, 2 alternatyw, 0 poniżej poziomu, 0 inna płeć
+2025-09-21 17:49:19,993 - INFO - Wyniki dobierz_narty: idealne=1, poziom_niżej=None, alternatywy=2, ponizej=None, inna_plec=None
+2025-09-21 17:49:20,064 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:49:20,106 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:49:20,117 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:49:20,124 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:49:20,174 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:49:20,180 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:49:20,185 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:49:20,192 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:49:20,204 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:49:20,211 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:49:20,220 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:49:20,233 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:49:52,874 - INFO - Rozpoczęto wyszukiwanie nart
+2025-09-21 17:49:52,876 - INFO - Wywołuję dobierz_narty z parametrami: wzrost=155, waga=55, poziom=5, plec=Kobieta, styl=Wszystkie
+2025-09-21 17:49:52,876 - INFO - Szukanie nart: wzrost=155, waga=55, poziom=5, plec=Kobieta, styl=Wszystkie
+2025-09-21 17:49:52,878 - INFO - Znaleziono: 0 idealnych, 1 poziom niżej, 4 alternatyw, 0 poniżej poziomu, 0 inna płeć
+2025-09-21 17:49:52,879 - INFO - Wyniki dobierz_narty: idealne=None, poziom_niżej=1, alternatywy=4, ponizej=None, inna_plec=None
+2025-09-21 17:49:52,883 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:49:52,888 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:49:52,893 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:49:52,907 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:49:52,917 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:49:52,921 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:49:52,925 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:49:52,935 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:49:52,947 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:49:52,951 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:49:52,969 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:49:52,974 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:49:52,981 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:49:52,994 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:49:53,008 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:49:53,013 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:49:53,028 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:49:53,038 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:50:01,264 - INFO - Rozpoczęto wyszukiwanie nart
+2025-09-21 17:50:01,266 - INFO - Wywołuję dobierz_narty z parametrami: wzrost=155, waga=55, poziom=6, plec=Kobieta, styl=Wszystkie
+2025-09-21 17:50:01,266 - INFO - Szukanie nart: wzrost=155, waga=55, poziom=6, plec=Kobieta, styl=Wszystkie
+2025-09-21 17:50:01,268 - INFO - Znaleziono: 0 idealnych, 0 poziom niżej, 6 alternatyw, 0 poniżej poziomu, 0 inna płeć
+2025-09-21 17:50:01,268 - INFO - Wyniki dobierz_narty: idealne=None, poziom_niżej=None, alternatywy=6, ponizej=None, inna_plec=None
+2025-09-21 17:50:01,274 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:50:01,279 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:50:01,282 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:50:01,289 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:50:01,303 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:50:01,310 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:50:01,314 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:50:01,320 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:50:01,326 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:50:01,330 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:50:01,344 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:50:01,359 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:50:01,363 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:50:01,369 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:50:01,393 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:50:01,398 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:50:10,188 - INFO - Otwieranie okna przeglądania nart
+2025-09-21 17:50:10,222 - INFO - Załadowano 81 nart
+2025-09-21 17:52:14,281 - INFO - Próbuję załadować logo z: C:\Users\wacia\Desktop\asystent\APK\narty.png
+2025-09-21 17:52:14,293 - INFO - Plik istnieje: True
+2025-09-21 17:52:15,367 - INFO - Aplikacja uruchomiona
+2025-09-21 17:52:44,866 - INFO - Rozpoczęto wyszukiwanie nart
+2025-09-21 17:52:44,869 - INFO - Wywołuję dobierz_narty z parametrami: wzrost=175, waga=77, poziom=5, plec=Mężczyzna, styl=Wszystkie
+2025-09-21 17:52:44,869 - INFO - Szukanie nart: wzrost=175, waga=77, poziom=5, plec=Mężczyzna, styl=Wszystkie
+2025-09-21 17:52:44,872 - INFO - Znaleziono: 7 idealnych, 11 poziom niżej, 24 alternatyw, 0 poniżej poziomu, 0 inna płeć
+2025-09-21 17:52:44,872 - INFO - Wyniki dobierz_narty: idealne=7, poziom_niżej=11, alternatywy=24, ponizej=None, inna_plec=None
+2025-09-21 17:52:44,883 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:44,890 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:44,893 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:44,897 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:44,904 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:44,908 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:44,911 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:44,914 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:44,919 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:44,923 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:44,926 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:44,929 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:44,932 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:44,937 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:44,940 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:44,943 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:44,947 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:44,952 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:44,957 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:44,961 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:44,964 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:44,970 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:44,975 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:44,979 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:44,982 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:44,987 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:44,994 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:44,999 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,004 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,009 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,013 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,016 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,023 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,026 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,032 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,036 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,039 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,044 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,047 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,052 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,057 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,062 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,065 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,069 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,074 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,078 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,081 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,085 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,089 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,094 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,097 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,101 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,104 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,109 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,114 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,118 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,122 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,126 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,129 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,133 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,136 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,141 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,147 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,151 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,155 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,159 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,163 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,167 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,172 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,177 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,181 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,185 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,191 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,195 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,200 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,205 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,210 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,215 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,219 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,225 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,230 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,235 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,241 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,245 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,253 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,260 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,264 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,269 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,275 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,281 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,287 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,292 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,295 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,299 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,303 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,308 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,315 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,323 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,330 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,337 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,342 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,347 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,351 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,356 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,363 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,370 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,376 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,382 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,387 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,394 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,402 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,409 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,416 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,425 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,431 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,439 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,444 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,451 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,459 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,465 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,471 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,478 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,486 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,492 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,500 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,506 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,514 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,520 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,525 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,532 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,540 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,546 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,554 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,561 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,570 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,578 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,583 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,589 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,597 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,602 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,609 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,618 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,623 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,627 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,630 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,634 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,639 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,643 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,648 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,652 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,655 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,659 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,663 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,667 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,670 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,674 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,677 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,681 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,683 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,688 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,696 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,702 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,708 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,713 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,719 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,723 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,726 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,730 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,734 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,739 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,745 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,750 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,753 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,757 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,761 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,765 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,768 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,772 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,777 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,781 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,786 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,789 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,794 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,798 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,804 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,808 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,866 - INFO - Rozpoczęto wyszukiwanie nart
+2025-09-21 17:52:45,868 - INFO - Wywołuję dobierz_narty z parametrami: wzrost=175, waga=77, poziom=5, plec=Mężczyzna, styl=Wszystkie
+2025-09-21 17:52:45,868 - INFO - Szukanie nart: wzrost=175, waga=77, poziom=5, plec=Mężczyzna, styl=Wszystkie
+2025-09-21 17:52:45,872 - INFO - Znaleziono: 7 idealnych, 11 poziom niżej, 24 alternatyw, 0 poniżej poziomu, 0 inna płeć
+2025-09-21 17:52:45,873 - INFO - Wyniki dobierz_narty: idealne=7, poziom_niżej=11, alternatywy=24, ponizej=None, inna_plec=None
+2025-09-21 17:52:45,878 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,885 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,891 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,897 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,901 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,906 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,910 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,914 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,920 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,924 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,926 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,930 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,933 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,937 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,940 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,944 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,948 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,954 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,958 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,963 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,967 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,971 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,977 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,983 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:45,987 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:45,993 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,003 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,009 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,015 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,020 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,024 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,029 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,036 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,042 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,048 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,054 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,059 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,064 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,068 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,074 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,079 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,085 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,088 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,092 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,100 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,107 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,111 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,116 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,120 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,124 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,129 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,134 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,138 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,142 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,148 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,152 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,156 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,160 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,164 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,168 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,171 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,176 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,182 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,189 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,193 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,197 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,200 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,207 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,211 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,216 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,220 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,225 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,231 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,235 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,240 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,243 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,248 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,251 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,255 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,259 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,263 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,267 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,272 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,275 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,280 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,284 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,287 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,291 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,295 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,299 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,304 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,308 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,311 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,315 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,318 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,321 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,325 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,329 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,333 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,337 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,341 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,344 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,347 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,351 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,355 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,359 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,363 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,367 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,370 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,374 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,378 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,382 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,385 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,389 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,392 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,396 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,399 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,403 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,407 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,411 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,414 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,418 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,423 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,426 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,431 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,435 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,440 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,444 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,447 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,450 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,455 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,459 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,463 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,467 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,472 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,475 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,478 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,482 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,486 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,490 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,493 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,497 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,501 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,505 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,508 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,512 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,516 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,521 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,525 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,529 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,531 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,535 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,538 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,542 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,545 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,549 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,552 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,555 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,559 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,562 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,567 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,570 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,576 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,580 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,583 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,586 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,589 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,593 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,596 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,600 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,604 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,609 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,612 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,615 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,618 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,622 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,625 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,629 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,633 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,637 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,641 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,644 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,648 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,652 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:52:46,657 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:52:46,661 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:56:47,534 - INFO - Próbuję załadować logo z: C:\Users\wacia\Desktop\asystent\APK\narty.png
+2025-09-21 17:56:47,536 - INFO - Plik istnieje: True
+2025-09-21 17:56:48,697 - INFO - Aplikacja uruchomiona
+2025-09-21 17:57:11,299 - INFO - Rozpoczęto wyszukiwanie nart
+2025-09-21 17:57:11,312 - INFO - Wywołuję dobierz_narty z parametrami: wzrost=170, waga=69, poziom=5, plec=Mężczyzna, styl=Wszystkie
+2025-09-21 17:57:11,320 - INFO - Szukanie nart: wzrost=170, waga=69, poziom=5, plec=Mężczyzna, styl=Wszystkie
+2025-09-21 17:57:11,324 - INFO - Znaleziono: 3 idealnych, 11 poziom niżej, 21 alternatyw, 0 poniżej poziomu, 0 inna płeć
+2025-09-21 17:57:11,324 - INFO - Wyniki dobierz_narty: idealne=3, poziom_niżej=11, alternatywy=21, ponizej=None, inna_plec=None
+2025-09-21 17:57:11,342 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,354 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,359 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,367 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,380 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,385 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,389 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,394 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,410 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,435 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,450 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,456 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,485 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,493 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,498 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,503 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,509 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,514 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,519 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,523 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,528 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,532 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,535 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,540 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,543 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,547 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,550 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,555 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,560 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,564 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,567 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,571 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,576 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,580 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,583 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,588 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,591 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,595 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,600 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,604 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,608 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,611 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,616 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,621 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,624 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,628 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,631 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,636 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,639 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,643 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,646 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,651 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,656 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,660 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,665 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,670 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,673 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,677 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,683 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,687 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,692 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,696 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,699 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,704 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,707 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,711 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,715 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,721 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,724 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,728 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,733 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,738 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,741 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,745 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,750 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,755 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,759 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,764 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,767 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,771 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,776 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,780 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,785 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,789 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,792 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,796 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,802 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,806 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,809 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,813 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,816 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,821 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,824 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,828 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,831 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,835 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,840 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,844 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,847 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,852 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,856 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,860 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,863 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,868 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,873 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,876 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,880 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,884 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,888 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,893 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,900 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,904 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,909 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,913 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,916 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,920 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,925 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,929 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,932 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,937 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,940 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,945 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,948 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,952 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,957 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,961 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,964 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,969 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,972 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,976 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,979 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,983 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,989 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:11,993 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:11,997 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:12,001 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:12,006 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:12,010 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:12,016 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:12,021 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:12,026 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:12,030 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:12,035 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:12,039 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 17:57:12,043 - INFO - Wczytano dane z rez.csv
+2025-09-21 17:57:12,047 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:00:55,705 - INFO - Próbuję załadować logo z: C:\Users\wacia\Desktop\asystent\APK\narty.png
+2025-09-21 18:00:55,711 - INFO - Plik istnieje: True
+2025-09-21 18:00:56,914 - INFO - Aplikacja uruchomiona
+2025-09-21 18:01:12,637 - INFO - Rozpoczęto wyszukiwanie nart
+2025-09-21 18:01:12,649 - INFO - Wywołuję dobierz_narty z parametrami: wzrost=175, waga=70, poziom=5, plec=Mężczyzna, styl=Wszystkie
+2025-09-21 18:01:12,655 - INFO - Szukanie nart: wzrost=175, waga=70, poziom=5, plec=Mężczyzna, styl=Wszystkie
+2025-09-21 18:01:12,658 - INFO - Znaleziono: 7 idealnych, 11 poziom niżej, 24 alternatyw, 0 poniżej poziomu, 0 inna płeć
+2025-09-21 18:01:12,660 - INFO - Wyniki dobierz_narty: idealne=7, poziom_niżej=11, alternatywy=24, ponizej=None, inna_plec=None
+2025-09-21 18:01:12,679 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:12,691 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:12,697 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:12,706 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:12,717 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:12,726 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:12,732 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:12,740 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:12,747 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:12,753 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:12,758 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:12,762 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:12,765 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:12,770 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:12,773 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:12,777 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:12,781 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:12,786 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:12,791 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:12,796 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:12,800 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:12,806 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:12,811 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:12,816 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:12,819 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:12,823 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:12,830 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:12,835 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:12,839 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:12,844 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:12,847 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:12,851 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:12,856 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:12,860 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:12,866 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:12,870 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:12,875 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:12,879 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:12,883 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:12,888 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:12,892 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:12,897 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:12,902 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:12,906 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:12,911 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:12,915 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:12,918 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:12,923 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:12,926 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:12,930 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:12,935 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:12,939 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:12,942 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:12,947 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:12,951 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:12,955 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:12,958 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:12,963 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:12,966 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:12,971 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:12,974 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:12,978 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:12,981 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:12,985 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:12,990 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:12,995 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:12,998 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,002 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,005 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,009 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,013 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,016 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,021 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,026 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,029 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,033 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,037 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,041 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,044 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,048 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,052 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,056 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,061 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,065 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,072 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,076 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,081 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,085 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,089 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,093 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,097 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,102 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,107 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,111 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,115 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,119 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,124 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,128 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,132 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,137 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,140 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,144 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,147 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,152 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,157 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,161 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,166 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,171 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,175 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,179 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,183 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,187 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,192 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,195 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,199 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,203 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,208 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,213 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,216 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,220 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,224 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,228 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,231 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,236 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,241 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,244 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,249 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,254 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,258 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,263 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,266 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,270 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,275 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,280 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,284 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,289 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,292 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,296 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,301 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,305 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,308 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,312 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,317 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,322 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,325 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,329 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,334 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,338 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,343 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,347 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,352 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,356 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,359 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,364 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,367 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,371 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,375 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,378 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,383 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,387 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,391 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,395 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,398 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,402 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,405 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,409 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,413 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,416 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,419 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,424 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,428 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,433 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,436 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,440 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,444 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,447 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,450 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,455 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,460 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,464 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,469 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,473 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,477 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,481 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:01:13,488 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:01:13,492 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:06:14,251 - INFO - Próbuję załadować logo z: C:\Users\wacia\Desktop\asystent\APK\narty.png
+2025-09-21 18:06:14,252 - INFO - Plik istnieje: True
+2025-09-21 18:06:15,420 - INFO - Aplikacja uruchomiona
+2025-09-21 18:06:49,733 - INFO - Rozpoczęto wyszukiwanie nart
+2025-09-21 18:06:49,738 - INFO - Wywołuję dobierz_narty z parametrami: wzrost=176, waga=72, poziom=1, plec=Mężczyzna, styl=Wszystkie
+2025-09-21 18:06:49,738 - INFO - Szukanie nart: wzrost=176, waga=72, poziom=1, plec=Mężczyzna, styl=Wszystkie
+2025-09-21 18:06:49,740 - INFO - Znaleziono: 0 idealnych, 0 poziom za nisko, 0 alternatyw, 0 inna płeć
+2025-09-21 18:06:49,741 - INFO - Wyniki dobierz_narty: idealne=None, poziom_za_nisko=None, alternatywy=None, inna_plec=None
+2025-09-21 18:06:51,376 - INFO - Rozpoczęto wyszukiwanie nart
+2025-09-21 18:06:51,378 - INFO - Wywołuję dobierz_narty z parametrami: wzrost=176, waga=72, poziom=1, plec=Mężczyzna, styl=Wszystkie
+2025-09-21 18:06:51,378 - INFO - Szukanie nart: wzrost=176, waga=72, poziom=1, plec=Mężczyzna, styl=Wszystkie
+2025-09-21 18:06:51,380 - INFO - Znaleziono: 0 idealnych, 0 poziom za nisko, 0 alternatyw, 0 inna płeć
+2025-09-21 18:06:51,380 - INFO - Wyniki dobierz_narty: idealne=None, poziom_za_nisko=None, alternatywy=None, inna_plec=None
+2025-09-21 18:06:54,671 - INFO - Rozpoczęto wyszukiwanie nart
+2025-09-21 18:06:54,674 - INFO - Wywołuję dobierz_narty z parametrami: wzrost=176, waga=72, poziom=1, plec=Mężczyzna, styl=Wszystkie
+2025-09-21 18:06:54,674 - INFO - Szukanie nart: wzrost=176, waga=72, poziom=1, plec=Mężczyzna, styl=Wszystkie
+2025-09-21 18:06:54,676 - INFO - Znaleziono: 0 idealnych, 0 poziom za nisko, 0 alternatyw, 0 inna płeć
+2025-09-21 18:06:54,676 - INFO - Wyniki dobierz_narty: idealne=None, poziom_za_nisko=None, alternatywy=None, inna_plec=None
+2025-09-21 18:06:57,450 - INFO - Rozpoczęto wyszukiwanie nart
+2025-09-21 18:06:57,452 - INFO - Wywołuję dobierz_narty z parametrami: wzrost=176, waga=72, poziom=1, plec=Mężczyzna, styl=Wszystkie
+2025-09-21 18:06:57,452 - INFO - Szukanie nart: wzrost=176, waga=72, poziom=1, plec=Mężczyzna, styl=Wszystkie
+2025-09-21 18:06:57,455 - INFO - Znaleziono: 0 idealnych, 0 poziom za nisko, 0 alternatyw, 0 inna płeć
+2025-09-21 18:06:57,456 - INFO - Wyniki dobierz_narty: idealne=None, poziom_za_nisko=None, alternatywy=None, inna_plec=None
+2025-09-21 18:06:59,968 - INFO - Rozpoczęto wyszukiwanie nart
+2025-09-21 18:06:59,970 - INFO - Wywołuję dobierz_narty z parametrami: wzrost=176, waga=72, poziom=1, plec=Mężczyzna, styl=Wszystkie
+2025-09-21 18:06:59,970 - INFO - Szukanie nart: wzrost=176, waga=72, poziom=1, plec=Mężczyzna, styl=Wszystkie
+2025-09-21 18:06:59,972 - INFO - Znaleziono: 0 idealnych, 0 poziom za nisko, 0 alternatyw, 0 inna płeć
+2025-09-21 18:06:59,972 - INFO - Wyniki dobierz_narty: idealne=None, poziom_za_nisko=None, alternatywy=None, inna_plec=None
+2025-09-21 18:07:00,178 - INFO - Rozpoczęto wyszukiwanie nart
+2025-09-21 18:07:00,180 - INFO - Wywołuję dobierz_narty z parametrami: wzrost=176, waga=72, poziom=1, plec=Mężczyzna, styl=Wszystkie
+2025-09-21 18:07:00,180 - INFO - Szukanie nart: wzrost=176, waga=72, poziom=1, plec=Mężczyzna, styl=Wszystkie
+2025-09-21 18:07:00,182 - INFO - Znaleziono: 0 idealnych, 0 poziom za nisko, 0 alternatyw, 0 inna płeć
+2025-09-21 18:07:00,182 - INFO - Wyniki dobierz_narty: idealne=None, poziom_za_nisko=None, alternatywy=None, inna_plec=None
+2025-09-21 18:08:10,115 - INFO - Próbuję załadować logo z: C:\Users\wacia\Desktop\asystent\APK\narty.png
+2025-09-21 18:08:10,116 - INFO - Plik istnieje: True
+2025-09-21 18:08:12,073 - INFO - Aplikacja uruchomiona
+2025-09-21 18:08:28,262 - INFO - Rozpoczęto wyszukiwanie nart
+2025-09-21 18:08:28,265 - INFO - Wywołuję dobierz_narty z parametrami: wzrost=176, waga=70, poziom=4, plec=Mężczyzna, styl=Wszystkie
+2025-09-21 18:08:28,266 - INFO - Szukanie nart: wzrost=176, waga=70, poziom=4, plec=Mężczyzna, styl=Wszystkie
+2025-09-21 18:08:28,269 - INFO - Znaleziono: 11 idealnych, 0 poziom za nisko, 12 alternatyw, 0 inna płeć
+2025-09-21 18:08:28,269 - INFO - Wyniki dobierz_narty: idealne=11, poziom_za_nisko=None, alternatywy=12, inna_plec=None
+2025-09-21 18:08:28,287 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,292 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,295 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,300 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,307 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,310 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,315 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,319 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,323 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,327 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,330 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,334 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,337 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,341 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,345 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,350 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,353 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,357 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,365 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,369 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,372 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,376 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,380 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,384 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,387 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,391 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,394 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,398 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,403 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,407 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,412 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,415 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,420 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,424 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,428 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,432 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,435 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,439 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,442 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,447 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,450 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,454 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,459 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,463 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,466 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,470 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,473 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,477 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,481 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,485 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,490 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,493 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,499 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,503 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,508 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,513 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,516 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,520 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,525 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,529 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,534 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,539 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,543 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,548 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,551 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,555 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,558 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,563 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,566 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,571 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,575 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,581 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,584 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,588 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,593 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,597 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,600 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,604 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,609 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,614 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,617 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,621 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,625 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,629 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,632 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,636 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,641 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,645 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,649 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,653 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,657 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,661 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,668 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,672 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,675 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,680 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,684 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,688 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,691 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,696 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,699 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,703 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,706 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,710 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,716 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,720 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,724 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,729 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,732 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,736 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,739 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,744 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:08:28,749 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:08:28,753 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,122 - INFO - Rozpoczęto wyszukiwanie nart
+2025-09-21 18:09:26,124 - INFO - Wywołuję dobierz_narty z parametrami: wzrost=176, waga=70, poziom=5, plec=Mężczyzna, styl=Wszystkie
+2025-09-21 18:09:26,124 - INFO - Szukanie nart: wzrost=176, waga=70, poziom=5, plec=Mężczyzna, styl=Wszystkie
+2025-09-21 18:09:26,127 - INFO - Znaleziono: 8 idealnych, 11 poziom za nisko, 8 alternatyw, 0 inna płeć
+2025-09-21 18:09:26,128 - INFO - Wyniki dobierz_narty: idealne=8, poziom_za_nisko=11, alternatywy=8, inna_plec=None
+2025-09-21 18:09:26,133 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,139 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,143 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,147 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,152 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,155 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,159 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,163 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,166 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,171 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,174 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,178 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,182 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,186 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,190 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,194 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,198 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,202 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,206 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,210 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,213 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,218 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,222 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,227 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,230 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,234 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,241 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,245 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,249 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,252 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,257 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,261 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,266 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,270 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,275 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,280 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,283 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,288 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,292 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,297 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,302 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,306 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,311 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,315 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,318 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,322 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,326 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,330 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,335 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,339 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,342 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,346 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,351 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,355 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,358 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,362 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,365 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,370 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,373 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,378 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,382 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,385 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,391 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,394 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,400 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,404 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,408 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,413 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,416 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,421 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,424 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,428 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,431 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,436 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,439 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,443 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,449 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,453 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,456 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,460 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,463 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,469 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,472 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,476 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,481 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,486 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,491 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,496 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,500 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,505 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,508 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,511 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,517 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,520 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,524 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,528 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,533 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,537 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,541 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,545 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,549 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,553 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,556 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,560 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,565 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,569 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,572 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,576 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,581 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,585 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,590 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,594 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:09:26,598 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:09:26,602 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,206 - INFO - Rozpoczęto wyszukiwanie nart
+2025-09-21 18:10:14,209 - INFO - Wywołuję dobierz_narty z parametrami: wzrost=176, waga=70, poziom=5, plec=Mężczyzna, styl=SLG
+2025-09-21 18:10:14,209 - INFO - Szukanie nart: wzrost=176, waga=70, poziom=5, plec=Mężczyzna, styl=SLG
+2025-09-21 18:10:14,212 - INFO - Znaleziono: 2 idealnych, 9 poziom za nisko, 14 alternatyw, 0 inna płeć
+2025-09-21 18:10:14,213 - INFO - Wyniki dobierz_narty: idealne=2, poziom_za_nisko=9, alternatywy=14, inna_plec=None
+2025-09-21 18:10:14,216 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,220 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,224 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,228 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,232 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,237 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,240 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,244 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,249 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,253 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,256 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,260 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,265 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,269 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,276 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,280 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,285 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,289 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,292 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,296 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,299 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,303 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,309 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,313 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,316 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,320 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,325 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,329 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,332 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,337 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,340 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,345 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,348 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,352 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,356 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,361 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,366 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,370 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,373 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,378 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,381 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,385 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,388 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,392 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,396 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,400 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,404 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,409 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,412 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,417 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,420 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,423 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,427 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,431 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,436 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,440 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,445 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,450 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,453 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,457 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,462 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,466 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,469 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,474 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,477 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,481 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,484 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,488 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,492 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,496 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,501 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,505 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,510 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,514 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,517 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,521 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,526 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,530 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,533 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,539 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,544 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,548 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,553 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,558 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,561 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,566 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,569 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,572 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,578 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,582 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,585 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,590 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,594 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,599 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,602 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,606 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,611 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,615 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,618 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,622 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,627 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,631 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,635 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,640 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,643 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,647 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,652 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,656 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:10:14,661 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:10:14,664 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:13:12,027 - INFO - Próbuję załadować logo z: C:\Users\wacia\Desktop\asystent\APK\narty.png
+2025-09-21 18:13:12,036 - INFO - Plik istnieje: True
+2025-09-21 18:13:13,509 - INFO - Aplikacja uruchomiona
+2025-09-21 18:13:28,800 - INFO - Rozpoczęto wyszukiwanie nart
+2025-09-21 18:13:28,804 - INFO - Wywołuję dobierz_narty z parametrami: wzrost=170, waga=65, poziom=5, plec=Mężczyzna, styl=SLG
+2025-09-21 18:13:28,804 - INFO - Szukanie nart: wzrost=170, waga=65, poziom=5, plec=Mężczyzna, styl=SLG
+2025-09-21 18:13:28,808 - INFO - Znaleziono: 1 idealnych, 10 poziom za nisko, 8 alternatyw, 1 inna płeć
+2025-09-21 18:13:28,808 - INFO - Wyniki dobierz_narty: idealne=1, poziom_za_nisko=10, alternatywy=8, inna_plec=1
+2025-09-21 18:13:28,822 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:13:28,828 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:13:28,834 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:13:28,840 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:13:28,849 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:13:28,855 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:13:28,859 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:13:28,865 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:13:28,870 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:13:28,873 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:13:28,880 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:13:28,885 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:13:28,889 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:13:28,893 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:13:28,896 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:13:28,900 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:13:28,903 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:13:28,907 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:13:28,911 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:13:28,914 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:13:28,920 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:13:28,924 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:13:28,927 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:13:28,931 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:13:28,936 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:13:28,940 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:13:28,943 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:13:28,948 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:13:28,951 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:13:28,955 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:13:28,960 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:13:28,964 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:13:28,967 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:13:28,971 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:13:28,976 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:13:28,981 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:13:28,984 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:13:28,988 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:13:28,991 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:13:28,996 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:13:28,999 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:13:29,003 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:13:29,006 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:13:29,010 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:13:29,015 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:13:29,019 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:13:29,025 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:13:29,029 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:13:29,032 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:13:29,036 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:13:29,041 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:13:29,045 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:13:29,051 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:13:29,055 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:13:29,058 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:13:29,062 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:13:29,066 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:13:29,070 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:13:29,073 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:13:29,077 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:13:29,080 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:13:29,085 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:13:29,090 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:13:29,093 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:13:29,099 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:13:29,102 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:13:29,106 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:13:29,110 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:13:29,115 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:13:29,120 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:13:29,123 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:13:29,127 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:13:29,132 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:13:29,136 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:13:29,141 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:13:29,145 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:13:29,149 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:13:29,152 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:13:29,157 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:13:29,162 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:13:29,165 - INFO - Wczytano dane z rez.csv
+2025-09-21 18:13:29,170 - INFO - Przetworzono 4 rezerwacji nart
+2025-09-21 18:14:23,572 - INFO - Otwieranie okna przeglądania nart
+2025-09-21 18:14:23,623 - INFO - Załadowano 81 nart
