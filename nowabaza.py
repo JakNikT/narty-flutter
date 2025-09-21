@@ -216,23 +216,23 @@ compatibility_scorer = CompatibilityScorer()
 
 # ===== NOWOCZESNY MOTYW KOLORÓW - NIEBIESKI JAK LOGO =====
 class ModernTheme:
-    # Główne kolory - różne odcienie niebieskiego jak logo
-    PRIMARY = QColor(230, 243, 255)          # Bardzo jasny niebieski (główne tło)
-    SECONDARY = QColor(204, 231, 255)        # Jasny niebieski (sekundarne tło)
-    TERTIARY = QColor(179, 219, 255)         # Średni jasny niebieski (ramki)
+    # Główne kolory - różne odcienie czerwonego
+    PRIMARY = QColor(255, 240, 240)          # Bardzo jasny czerwony (główne tło)
+    SECONDARY = QColor(255, 220, 220)        # Jasny czerwony (sekundarne tło)
+    TERTIARY = QColor(255, 200, 200)         # Średni jasny czerwony (ramki)
     
-    # Akcenty - inspirowane logo narciarskim
-    ACCENT = QColor(30, 64, 175)             # Głęboki niebieski (główny akcent)
-    ACCENT_HOVER = QColor(30, 58, 138)       # Ciemniejszy niebieski (hover)
-    ACCENT_LIGHT = QColor(59, 130, 246)      # Jaśniejszy niebieski (aktywne elementy)
+    # Akcenty - inspirowane czerwonymi nartami
+    ACCENT = QColor(175, 30, 30)             # Głęboki czerwony (główny akcent)
+    ACCENT_HOVER = QColor(138, 30, 30)       # Ciemniejszy czerwony (hover)
+    ACCENT_LIGHT = QColor(246, 59, 59)       # Jaśniejszy czerwony (aktywne elementy)
     
-    # Kolory funkcjonalne - kontrastowe na niebieskim tle
+    # Kolory funkcjonalne - kontrastowe na czerwonym tle
     SUCCESS = QColor(5, 150, 105)            # Zielony las (sukces)
     WARNING = QColor(217, 119, 6)            # Pomarańczowy zachód (ostrzeżenie)
-    ERROR = QColor(220, 38, 38)              # Czerwony sygnał (błąd)
+    ERROR = QColor(220, 38, 38)              # Ciemny czerwony (błąd)
     INFO = QColor(2, 132, 199)               # Niebieski lód (informacja)
     
-    # Tekst - ciemny dla kontrastu na niebieskim tle
+    # Tekst - ciemny dla kontrastu na czerwonym tle
     TEXT_PRIMARY = QColor(31, 41, 55)        # Prawie czarny (główny tekst)
     TEXT_SECONDARY = QColor(55, 65, 81)      # Ciemny szary (drugorzędny tekst)
 
@@ -973,7 +973,7 @@ class SkiApp(QMainWindow):
         
         self.cal_od_btn.setStyleSheet("""
             QPushButton {
-                background-color: #2196F3;
+                background-color: #DC2626;
                 color: white;
                 border: none;
                 border-radius: 4px;
@@ -981,7 +981,7 @@ class SkiApp(QMainWindow):
                 font-size: 10px;
             }
             QPushButton:hover {
-                background-color: #1976D2;
+                background-color: #B91C1C;
             }
         """)
         od_layout.addWidget(self.cal_od_btn)
@@ -1018,7 +1018,7 @@ class SkiApp(QMainWindow):
         self.cal_do_btn.clicked.connect(lambda: self.open_calendar("do"))
         self.cal_do_btn.setStyleSheet("""
             QPushButton {
-                background-color: #2196F3;
+                background-color: #DC2626;
                 color: white;
                 border: none;
                 border-radius: 4px;
@@ -1026,7 +1026,7 @@ class SkiApp(QMainWindow):
                 font-size: 10px;
             }
             QPushButton:hover {
-                background-color: #1976D2;
+                background-color: #B91C1C;
             }
         """)
         do_layout.addWidget(self.cal_do_btn)
@@ -1176,7 +1176,7 @@ class SkiApp(QMainWindow):
                 font-weight: bold;
             }}
             QPushButton:hover {{
-                background-color: #0284C7;
+                background-color: #B91C1C;
             }}
         """)
         self.odswiez_rezerwacje_button.clicked.connect(self.odswiez_rezerwacje)
@@ -1862,7 +1862,7 @@ class SkiApp(QMainWindow):
         add_button.clicked.connect(self.add_new_ski)
         add_button.setStyleSheet("""
             QPushButton {
-                background-color: #3B82F6;
+                background-color: #DC2626;
                 color: white;
                 border: none;
                 padding: 8px 16px;
@@ -1870,7 +1870,7 @@ class SkiApp(QMainWindow):
                 font-weight: bold;
             }
             QPushButton:hover {
-                background-color: #2563EB;
+                background-color: #B91C1C;
             }
         """)
         filters_layout.addWidget(add_button)
