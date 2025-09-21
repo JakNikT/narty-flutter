@@ -216,23 +216,23 @@ compatibility_scorer = CompatibilityScorer()
 
 # ===== NOWOCZESNY MOTYW KOLORÓW - NIEBIESKI JAK LOGO =====
 class ModernTheme:
-    # Główne kolory - różne odcienie czerwonego
-    PRIMARY = QColor(255, 240, 240)          # Bardzo jasny czerwony (główne tło)
-    SECONDARY = QColor(255, 220, 220)        # Jasny czerwony (sekundarne tło)
-    TERTIARY = QColor(255, 200, 200)         # Średni jasny czerwony (ramki)
+    # Główne kolory - różne odcienie niebieskiego
+    PRIMARY = QColor(240, 248, 255)          # Bardzo jasny niebieski (główne tło)
+    SECONDARY = QColor(220, 235, 255)        # Jasny niebieski (sekundarne tło)
+    TERTIARY = QColor(200, 220, 255)         # Średni jasny niebieski (ramki)
     
-    # Akcenty - inspirowane czerwonymi nartami
-    ACCENT = QColor(175, 30, 30)             # Głęboki czerwony (główny akcent)
-    ACCENT_HOVER = QColor(138, 30, 30)       # Ciemniejszy czerwony (hover)
-    ACCENT_LIGHT = QColor(246, 59, 59)       # Jaśniejszy czerwony (aktywne elementy)
+    # Akcenty - inspirowane niebieskim logo
+    ACCENT = QColor(30, 100, 175)            # Głęboki niebieski (główny akcent)
+    ACCENT_HOVER = QColor(20, 80, 140)       # Ciemniejszy niebieski (hover)
+    ACCENT_LIGHT = QColor(59, 130, 246)      # Jaśniejszy niebieski (aktywne elementy)
     
-    # Kolory funkcjonalne - kontrastowe na czerwonym tle
+    # Kolory funkcjonalne - kontrastowe na niebieskim tle
     SUCCESS = QColor(5, 150, 105)            # Zielony las (sukces)
     WARNING = QColor(217, 119, 6)            # Pomarańczowy zachód (ostrzeżenie)
     ERROR = QColor(220, 38, 38)              # Ciemny czerwony (błąd)
     INFO = QColor(2, 132, 199)               # Niebieski lód (informacja)
     
-    # Tekst - ciemny dla kontrastu na czerwonym tle
+    # Tekst - ciemny dla kontrastu na niebieskim tle
     TEXT_PRIMARY = QColor(31, 41, 55)        # Prawie czarny (główny tekst)
     TEXT_SECONDARY = QColor(55, 65, 81)      # Ciemny szary (drugorzędny tekst)
 
@@ -973,7 +973,7 @@ class SkiApp(QMainWindow):
         
         self.cal_od_btn.setStyleSheet("""
             QPushButton {
-                background-color: #DC2626;
+                background-color: #2196F3;
                 color: white;
                 border: none;
                 border-radius: 4px;
@@ -981,7 +981,7 @@ class SkiApp(QMainWindow):
                 font-size: 10px;
             }
             QPushButton:hover {
-                background-color: #B91C1C;
+                background-color: #1976D2;
             }
         """)
         od_layout.addWidget(self.cal_od_btn)
@@ -1018,7 +1018,7 @@ class SkiApp(QMainWindow):
         self.cal_do_btn.clicked.connect(lambda: self.open_calendar("do"))
         self.cal_do_btn.setStyleSheet("""
             QPushButton {
-                background-color: #DC2626;
+                background-color: #2196F3;
                 color: white;
                 border: none;
                 border-radius: 4px;
@@ -1026,7 +1026,7 @@ class SkiApp(QMainWindow):
                 font-size: 10px;
             }
             QPushButton:hover {
-                background-color: #B91C1C;
+                background-color: #1976D2;
             }
         """)
         do_layout.addWidget(self.cal_do_btn)
@@ -1038,7 +1038,6 @@ class SkiApp(QMainWindow):
         
         # Ustaw walidatory i obsługę dat
         self.setup_date_validators()
-        self.setup_date_handlers()
         
         # RZĄD 2: Wzrost i Waga
         row2_layout = QHBoxLayout()
@@ -1192,6 +1191,9 @@ class SkiApp(QMainWindow):
         
         header_layout.addWidget(right_side)
         
+        # Ustaw obsługę automatycznego przechodzenia między polami (po utworzeniu wszystkich pól)
+        self.setup_date_handlers()
+        
         return top_frame
         
         
@@ -1312,7 +1314,11 @@ class SkiApp(QMainWindow):
         # Data do
         self.do_dzien.textChanged.connect(lambda: self.auto_next_field(self.do_dzien, self.do_miesiac))
         self.do_miesiac.textChanged.connect(lambda: self.auto_next_field(self.do_miesiac, self.do_rok))
+        self.do_rok.textChanged.connect(lambda: self.auto_next_field(self.do_rok, self.wzrost_entry))
         self.do_rok.textChanged.connect(lambda: self.auto_complete_year_safe(self.do_rok))
+        
+        # Wzrost i waga - automatyczne przechodzenie
+        self.wzrost_entry.textChanged.connect(lambda: self.auto_next_field(self.wzrost_entry, self.waga_entry))
     
     def auto_next_field(self, current_field, next_field):
         """Automatyczne przechodzenie do następnego pola"""
@@ -1328,6 +1334,17 @@ class SkiApp(QMainWindow):
             if len(text) == 3 and text.isdigit():
                 next_field.setFocus()
                 next_field.selectAll()
+        # Jeśli to pole wagi - sprawdź czy ma 2-3 cyfry (20-200 kg)
+        elif current_field == self.waga_entry:
+            if len(text) >= 2 and text.isdigit():
+                # Sprawdź czy to rozsądna waga (20-200 kg)
+                try:
+                    waga = int(text)
+                    if 20 <= waga <= 200:
+                        # Przejdź do poziomu (combo box)
+                        self.poziom_combo.setFocus()
+                except ValueError:
+                    pass
         # Jeśli to inne pole - sprawdź czy ma 2 cyfry
         else:
             if len(text) == 2 and text.isdigit():
