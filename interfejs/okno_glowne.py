@@ -95,14 +95,14 @@ class SkiApp(QMainWindow):
         # Lewa strona - logo i tytuł
         left_side = QFrame()
         left_side.setStyleSheet(f"background-color: {ModernTheme.PRIMARY.name()};")
-        left_side.setFixedWidth(300)  # Zmniejszone logo
+        left_side.setFixedWidth(250)  # Jeszcze bardziej zmniejszone logo
         
         # Kontener pionowy - logo na górze, tekst pod spodem
         unified_container = QVBoxLayout()
         unified_container.setContentsMargins(0, 0, 0, 0)
         unified_container.setAlignment(Qt.AlignCenter)
         
-        # Logo
+        # Logo - zmniejszone do 180x180
         try:
             current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
             logo_path = os.path.join(current_dir, "zasoby", "narty.png")
@@ -110,33 +110,33 @@ class SkiApp(QMainWindow):
             
             logo_pixmap = QPixmap(logo_path)
             if not logo_pixmap.isNull():
-                scaled_logo = logo_pixmap.scaled(260, 260, Qt.KeepAspectRatio, Qt.SmoothTransformation)
+                scaled_logo = logo_pixmap.scaled(180, 180, Qt.KeepAspectRatio, Qt.SmoothTransformation)
                 logo_label = QLabel()
                 logo_label.setPixmap(scaled_logo)
                 logo_label.setAlignment(Qt.AlignCenter)
                 logo_label.setStyleSheet(f"background-color: {ModernTheme.PRIMARY.name()};")
-                logo_label.setFixedSize(260, 260)
+                logo_label.setFixedSize(180, 180)
                 unified_container.addWidget(logo_label)
             else:
                 # Fallback
                 fallback_logo = QLabel("🎿")
-                fallback_logo.setFont(QFont("Segoe UI", 120))
+                fallback_logo.setFont(QFont("Segoe UI", 80))
                 fallback_logo.setStyleSheet(f"color: {ModernTheme.ACCENT.name()}; background-color: {ModernTheme.PRIMARY.name()};")
-                fallback_logo.setFixedSize(260, 260)
+                fallback_logo.setFixedSize(180, 180)
                 fallback_logo.setAlignment(Qt.AlignCenter)
                 unified_container.addWidget(fallback_logo)
         except Exception as e:
             logger.warning(f"Nie można załadować logo: {e}")
             fallback_logo = QLabel("🎿")
-            fallback_logo.setFont(QFont("Segoe UI", 120))
+            fallback_logo.setFont(QFont("Segoe UI", 80))
             fallback_logo.setStyleSheet(f"color: {ModernTheme.ACCENT.name()}; background-color: {ModernTheme.PRIMARY.name()};")
-            fallback_logo.setFixedSize(260, 260)
+            fallback_logo.setFixedSize(180, 180)
             fallback_logo.setAlignment(Qt.AlignCenter)
             unified_container.addWidget(fallback_logo)
         
-        # Tekst pod logo
+        # Tekst pod logo - zmniejszony font
         title_text = QLabel("System doboru nart")
-        title_text.setFont(QFont("Segoe UI", 16, QFont.Bold))
+        title_text.setFont(QFont("Segoe UI", 14, QFont.Bold))
         title_text.setStyleSheet(f"color: {ModernTheme.ACCENT.name()}; background-color: {ModernTheme.PRIMARY.name()};")
         title_text.setAlignment(Qt.AlignCenter)
         unified_container.addWidget(title_text)
@@ -163,7 +163,7 @@ class SkiApp(QMainWindow):
         
         # LEWA STRONA - Formularz danych
         left_form_layout = QVBoxLayout()
-        left_form_layout.setSpacing(4)  # Zmniejszony odstęp między elementami
+        left_form_layout.setSpacing(2)  # Jeszcze bardziej zmniejszony odstęp między elementami
         
         # RZĄD 1: Daty rezerwacji (na wysokości przeznaczenia)
         row1_layout = QVBoxLayout()
@@ -264,11 +264,11 @@ class SkiApp(QMainWindow):
         row3_layout.addWidget(self.plec_entry)
         row3_layout.addStretch()
         left_form_layout.addLayout(row3_layout)
-        left_form_layout.addStretch()  # Wyrównanie do góry
+        # Usunięto addStretch() - elementy będą na dole bez dodatkowej przestrzeni
         
         # PRAWA STRONA - Przeznaczenie i Przyciski
         right_form_layout = QVBoxLayout()
-        right_form_layout.setSpacing(4)
+        right_form_layout.setSpacing(2)
         
         # Przeznaczenie
         przeznaczenie_layout = QVBoxLayout()
@@ -306,7 +306,7 @@ class SkiApp(QMainWindow):
         
         # Przyciski 2x2 pod przeznaczeniem (wyrównane długością)
         button_layout = QVBoxLayout()
-        button_layout.setSpacing(2)  # Zmniejszony odstęp między rzędami przycisków
+        button_layout.setSpacing(1)  # Jeszcze bardziej zmniejszony odstęp między rzędami przycisków
         
         # Pierwszy rząd przycisków (2 przyciski)
         row1_buttons = QHBoxLayout()
@@ -348,7 +348,7 @@ class SkiApp(QMainWindow):
         # Dodaj przeznaczenie i przyciski do prawej strony
         right_form_layout.addLayout(przeznaczenie_layout)
         right_form_layout.addLayout(button_layout)
-        right_form_layout.addStretch()  # Wyrównanie do góry
+        # Usunięto addStretch() - przyciski będą na dole bez dodatkowej przestrzeni
         
         # Połącz lewą i prawą stronę
         form_layout.addLayout(left_form_layout)
@@ -391,7 +391,7 @@ class SkiApp(QMainWindow):
         # Pole tekstowe na wyniki
         self.wyniki_text = QTextEdit()
         self.wyniki_text.setReadOnly(True)
-        self.wyniki_text.setMinimumHeight(600)  # Maksymalna wysokość - teraz mamy więcej miejsca!
+        self.wyniki_text.setMinimumHeight(700)  # Zwiększona wysokość - teraz mamy więcej miejsca po zmniejszeniu logo!
         self.wyniki_text.setStyleSheet(get_results_text_style())
         
         layout.addWidget(self.wyniki_text)
