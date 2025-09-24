@@ -1,4 +1,4 @@
-import 'package:flutter/services.dart';
+import 'dart:io';
 import '../models/ski.dart';
 import '../models/ski_match.dart';
 
@@ -16,18 +16,17 @@ class DataService {
     if (_allSkis.isNotEmpty) return _allSkis;
 
     try {
-      final contents = await rootBundle.loadString(
-        'assets/data/NOWABAZA_final.csv',
-      );
+      final file = File('assets/data/NOWABAZA_final.csv');
+      final contents = await file.readAsString();
       final lines = contents.split('\n');
-
+      
       _allSkis = [];
-
+      
       // Pomiń nagłówek (pierwszy wiersz)
       for (int i = 1; i < lines.length; i++) {
         final line = lines[i].trim();
         if (line.isEmpty) continue;
-
+        
         final values = _parseCsvLine(line);
         if (values.length >= 14) {
           final ski = Ski.fromMap({
@@ -49,7 +48,7 @@ class DataService {
           _allSkis.add(ski);
         }
       }
-
+      
       return _allSkis;
     } catch (e) {
       print('Błąd podczas wczytywania nart: $e');
@@ -62,10 +61,10 @@ class DataService {
     final result = <String>[];
     final buffer = StringBuffer();
     bool inQuotes = false;
-
+    
     for (int i = 0; i < line.length; i++) {
       final char = line[i];
-
+      
       if (char == '"') {
         inQuotes = !inQuotes;
       } else if (char == ',' && !inQuotes) {
@@ -75,7 +74,7 @@ class DataService {
         buffer.write(char);
       }
     }
-
+    
     result.add(buffer.toString().trim());
     return result;
   }
@@ -88,69 +87,55 @@ class DataService {
     _reservations = [
       // Przykładowe rezerwacje
     ];
-
+    
     return _reservations;
   }
 
   /// Sprawdza czy narta jest zarezerwowana w danym terminie
-  Future<bool> isSkiReserved(
-    String marka,
-    String model,
-    int dlugosc,
-    DateTime dataOd,
-    DateTime dataDo,
-  ) async {
+  Future<bool> isSkiReserved(String marka, String model, int dlugosc, DateTime dataOd, DateTime dataDo) async {
     final reservations = await loadReservations();
-
+    
     for (final reservation in reservations) {
-      if (reservation.marka == marka &&
-          reservation.model == model &&
+      if (reservation.marka == marka && 
+          reservation.model == model && 
           reservation.dlugosc == dlugosc) {
+        
         // Sprawdź czy terminy się nakładają
-        if (!(dataDo.isBefore(reservation.dataOd) ||
-            dataOd.isAfter(reservation.dataDo))) {
+        if (!(dataDo.isBefore(reservation.dataOd) || dataOd.isAfter(reservation.dataDo))) {
           return true;
         }
       }
     }
-
+    
     return false;
   }
 
   /// Pobiera informacje o rezerwacji narty
-  Future<Map<String, dynamic>?> getReservationInfo(
-    String marka,
-    String model,
-    int dlugosc,
-    DateTime dataOd,
-    DateTime dataDo,
-  ) async {
+  Future<Map<String, dynamic>?> getReservationInfo(String marka, String model, int dlugosc, DateTime dataOd, DateTime dataDo) async {
     final reservations = await loadReservations();
-
+    
     for (final reservation in reservations) {
-      if (reservation.marka == marka &&
-          reservation.model == model &&
+      if (reservation.marka == marka && 
+          reservation.model == model && 
           reservation.dlugosc == dlugosc) {
+        
         // Sprawdź czy terminy się nakładają
-        if (!(dataDo.isBefore(reservation.dataOd) ||
-            dataOd.isAfter(reservation.dataDo))) {
+        if (!(dataDo.isBefore(reservation.dataOd) || dataOd.isAfter(reservation.dataDo))) {
           return {
             'isReserved': true,
-            'period':
-                '${reservation.dataOd.day}/${reservation.dataOd.month}/${reservation.dataOd.year} - ${reservation.dataDo.day}/${reservation.dataDo.month}/${reservation.dataDo.year}',
+            'period': '${reservation.dataOd.day}/${reservation.dataOd.month}/${reservation.dataOd.year} - ${reservation.dataDo.day}/${reservation.dataDo.month}/${reservation.dataDo.year}',
             'number': reservation.numerNarty,
             'client': reservation.klient,
           };
         }
       }
     }
-
+    
     return {'isReserved': false};
   }
 
   /// Filtruje narty według kryteriów
-  List<Ski> filterSkis(
-    List<Ski> skis, {
+  List<Ski> filterSkis(List<Ski> skis, {
     String? marka,
     String? poziom,
     String? plec,
@@ -160,23 +145,23 @@ class DataService {
       if (marka != null && marka != 'Wszystkie' && ski.marka != marka) {
         return false;
       }
-
+      
       if (poziom != null && poziom != 'Wszystkie' && ski.poziom != poziom) {
         return false;
       }
-
+      
       if (plec != null && plec != 'Wszystkie' && ski.plec != plec) {
         return false;
       }
-
+      
       if (searchText != null && searchText.isNotEmpty) {
         final searchLower = searchText.toLowerCase();
-        if (!ski.marka.toLowerCase().contains(searchLower) &&
+        if (!ski.marka.toLowerCase().contains(searchLower) && 
             !ski.model.toLowerCase().contains(searchLower)) {
           return false;
         }
       }
-
+      
       return true;
     }).toList();
   }

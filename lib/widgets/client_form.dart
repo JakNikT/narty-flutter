@@ -150,8 +150,7 @@ class _ClientFormState extends State<ClientForm> {
           //                     LengthLimitingTextInputFormatter(2),
           //                   ],
           //                   validator: (value) {
-          //                     if (value == null || value.isEmpty)
-          //                       return 'Wpisz dzień';
+          //                     if (value == null || value.isEmpty) return 'Wpisz dzień';
           //                     final day = int.tryParse(value);
           //                     if (day == null || day < 1 || day > 31) {
           //                       return 'Nieprawidłowy dzień';
@@ -175,8 +174,7 @@ class _ClientFormState extends State<ClientForm> {
           //                     LengthLimitingTextInputFormatter(2),
           //                   ],
           //                   validator: (value) {
-          //                     if (value == null || value.isEmpty)
-          //                       return 'Wpisz miesiąc';
+          //                     if (value == null || value.isEmpty) return 'Wpisz miesiąc';
           //                     final month = int.tryParse(value);
           //                     if (month == null || month < 1 || month > 12) {
           //                       return 'Nieprawidłowy miesiąc';
@@ -200,8 +198,7 @@ class _ClientFormState extends State<ClientForm> {
           //                     LengthLimitingTextInputFormatter(4),
           //                   ],
           //                   validator: (value) {
-          //                     if (value == null || value.isEmpty)
-          //                       return 'Wpisz rok';
+          //                     if (value == null || value.isEmpty) return 'Wpisz rok';
           //                     final year = int.tryParse(value);
           //                     if (year == null || year < 2000) {
           //                       return 'Nieprawidłowy rok';
@@ -238,8 +235,7 @@ class _ClientFormState extends State<ClientForm> {
           //                     LengthLimitingTextInputFormatter(2),
           //                   ],
           //                   validator: (value) {
-          //                     if (value == null || value.isEmpty)
-          //                       return 'Wpisz dzień';
+          //                     if (value == null || value.isEmpty) return 'Wpisz dzień';
           //                     final day = int.tryParse(value);
           //                     if (day == null || day < 1 || day > 31) {
           //                       return 'Nieprawidłowy dzień';
@@ -263,8 +259,7 @@ class _ClientFormState extends State<ClientForm> {
           //                     LengthLimitingTextInputFormatter(2),
           //                   ],
           //                   validator: (value) {
-          //                     if (value == null || value.isEmpty)
-          //                       return 'Wpisz miesiąc';
+          //                     if (value == null || value.isEmpty) return 'Wpisz miesiąc';
           //                     final month = int.tryParse(value);
           //                     if (month == null || month < 1 || month > 12) {
           //                       return 'Nieprawidłowy miesiąc';
@@ -288,8 +283,7 @@ class _ClientFormState extends State<ClientForm> {
           //                     LengthLimitingTextInputFormatter(4),
           //                   ],
           //                   validator: (value) {
-          //                     if (value == null || value.isEmpty)
-          //                       return 'Wpisz rok';
+          //                     if (value == null || value.isEmpty) return 'Wpisz rok';
           //                     final year = int.tryParse(value);
           //                     if (year == null || year < 2000) {
           //                       return 'Nieprawidłowy rok';

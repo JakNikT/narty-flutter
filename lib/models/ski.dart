@@ -52,9 +52,7 @@ class Ski {
       przeznaczenie: map['PRZEZNACZENIE']?.toString() ?? '',
       rok: map['ROK']?.toString() ?? '',
       uwagi: map['UWAGI']?.toString() ?? '',
-      promien: double.tryParse(
-        map['PROMIEN']?.toString().replaceAll(',', '.') ?? '0',
-      ),
+      promien: double.tryParse(map['PROMIEN']?.toString().replaceAll(',', '.') ?? '0'),
       podButem: double.tryParse(map['POD_BUTEM']?.toString() ?? '0'),
     );
   }

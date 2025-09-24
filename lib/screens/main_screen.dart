@@ -34,7 +34,7 @@ class _MainScreenState extends State<MainScreen> {
       setState(() {
         _isLoading = false;
       });
-
+      
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -90,20 +90,25 @@ class _MainScreenState extends State<MainScreen> {
                       ),
                     ),
                     const SizedBox(height: 16),
-                    ClientForm(onFindSkis: _findSkis, onClearForm: _clearForm),
+                    ClientForm(
+                      onFindSkis: _findSkis,
+                      onClearForm: _clearForm,
+                    ),
                   ],
                 ),
               ),
             ),
-
+            
             const SizedBox(height: 16),
-
+            
             // Wyniki
             if (_isLoading)
               const Center(
                 child: Padding(
                   padding: EdgeInsets.all(32),
-                  child: CircularProgressIndicator(color: AppTheme.accent),
+                  child: CircularProgressIndicator(
+                    color: AppTheme.accent,
+                  ),
                 ),
               )
             else if (_results.isNotEmpty)
