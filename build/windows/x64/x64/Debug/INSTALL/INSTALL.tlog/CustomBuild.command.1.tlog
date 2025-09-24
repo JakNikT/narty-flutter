@@ -1,0 +1,10 @@
+^C:\USERS\WACIA\DESKTOP\NARTY FLUTTER\BUILD\WINDOWS\X64\CMAKEFILES\777D94502C06451E7A8B355C11E9911E\INSTALL_FORCE.RULE
+setlocal
+cd .
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

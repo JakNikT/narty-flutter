@@ -2,19 +2,27 @@ import 'package:flutter/material.dart';
 import '../models/ski_match.dart';
 import '../models/ski.dart';
 import '../utils/theme.dart';
+import '../services/data_service.dart';
 
 /// Widget do wyświetlania wyników dobierania nart
-class ResultsDisplay extends StatelessWidget {
+class ResultsDisplay extends StatefulWidget {
   final Map<String, List<SkiMatch>> results;
 
   const ResultsDisplay({super.key, required this.results});
 
   @override
+  State<ResultsDisplay> createState() => _ResultsDisplayState();
+}
+
+class _ResultsDisplayState extends State<ResultsDisplay> {
+  final DataService _dataService = DataService();
+
+  @override
   Widget build(BuildContext context) {
-    final idealne = results['idealne'] ?? [];
-    final poziomZaNisko = results['poziom_za_nisko'] ?? [];
-    final alternatywy = results['alternatywy'] ?? [];
-    final innaPlec = results['inna_plec'] ?? [];
+    final idealne = widget.results['idealne'] ?? [];
+    final poziomZaNisko = widget.results['poziom_za_nisko'] ?? [];
+    final alternatywy = widget.results['alternatywy'] ?? [];
+    final innaPlec = widget.results['inna_plec'] ?? [];
 
     return Card(
       child: Padding(
@@ -99,7 +107,7 @@ class ResultsDisplay extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 8),
-        const Divider(color: AppTheme.tertiary),
+        const Divider(color: AppTheme.accentLight),
         const SizedBox(height: 8),
         ...matches.map((match) => _buildSkiCard(match)),
         const SizedBox(height: 16),
@@ -151,8 +159,8 @@ class ResultsDisplay extends StatelessWidget {
 
             const SizedBox(height: 8),
 
-            // Dostępność (symulacja)
-            _buildAvailability(ski),
+            // Dostępność z informacjami o rezerwacjach
+            _buildAvailabilityWithReservations(ski),
 
             const SizedBox(height: 8),
 
@@ -169,32 +177,89 @@ class ResultsDisplay extends StatelessWidget {
     );
   }
 
-  /// Wyświetla dostępność nart
-  Widget _buildAvailability(Ski ski) {
-    return Row(
-      children: [
-        const Text('📦 Dostępność: '),
-        ...List.generate(ski.ilosc, (index) {
-          return Padding(
-            padding: const EdgeInsets.only(right: 4),
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-              decoration: BoxDecoration(
-                color: Colors.green,
-                borderRadius: BorderRadius.circular(4),
+  /// Wyświetla dostępność nart z informacjami o rezerwacjach
+  Widget _buildAvailabilityWithReservations(Ski ski) {
+    return FutureBuilder<Map<String, dynamic>?>(
+      future: _dataService.getReservationInfo(
+        ski.marka,
+        ski.model,
+        ski.dlugosc,
+        DateTime.now(),
+        DateTime.now().add(const Duration(days: 7)),
+      ),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Row(
+            children: [
+              Text('📦 Dostępność: '),
+              SizedBox(
+                width: 12,
+                height: 12,
+                child: CircularProgressIndicator(strokeWidth: 2),
               ),
-              child: Text(
-                '${index + 1}',
+            ],
+          );
+        }
+
+        final reservationInfo = snapshot.data;
+        final isReserved = reservationInfo?['isReserved'] ?? false;
+        final period = reservationInfo?['period'] ?? '';
+        final number = reservationInfo?['number'] ?? '';
+
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                const Text('📦 Dostępność: '),
+                ...List.generate(ski.ilosc, (index) {
+                  // Sprawdź czy ta konkretna sztuka jest zarezerwowana
+                  final isThisSkiReserved =
+                      isReserved &&
+                      (number.isEmpty ||
+                          number.contains(
+                            '//${(index + 1).toString().padLeft(2, '0')}',
+                          ) ||
+                          number.contains('//${index + 1}'));
+
+                  return Padding(
+                    padding: const EdgeInsets.only(right: 4),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 6,
+                        vertical: 2,
+                      ),
+                      decoration: BoxDecoration(
+                        color: isThisSkiReserved ? Colors.red : Colors.green,
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: Text(
+                        '${index + 1}',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  );
+                }),
+              ],
+            ),
+            if (isReserved && period.isNotEmpty) ...[
+              const SizedBox(height: 4),
+              Text(
+                '🚫 Zarezerwowana: $period${number.isNotEmpty ? ' (Nr: $number)' : ''}',
                 style: const TextStyle(
-                  color: Colors.white,
                   fontSize: 12,
-                  fontWeight: FontWeight.bold,
+                  color: Colors.red,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
-            ),
-          );
-        }),
-      ],
+            ],
+          ],
+        );
+      },
     );
   }
 

@@ -99,7 +99,7 @@ class ResultsDisplay extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 8),
-        const Divider(color: AppTheme.tertiary),
+        const Divider(color: AppTheme.accentLight),
         const SizedBox(height: 8),
         ...matches.map((match) => _buildSkiCard(match)),
         const SizedBox(height: 16),

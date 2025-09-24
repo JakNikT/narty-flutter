@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../models/ski_match.dart';
 import '../utils/theme.dart';
+import 'date_picker_dialog.dart' as custom;
 
 /// Formularz danych klienta
 class ClientForm extends StatefulWidget {
@@ -69,16 +70,76 @@ class _ClientFormState extends State<ClientForm> {
     _doRokController.text = future.year.toString().substring(2);
   }
 
+  /// Otwiera kalendarz dla wybranego pola
+  Future<void> _openCalendar(String target) async {
+    final now = DateTime.now();
+    final selectedDate = await custom.CustomDatePickerDialog.showCustom(
+      context,
+      initialDate: now,
+      firstDate: now.subtract(const Duration(days: 365)),
+      lastDate: now.add(const Duration(days: 365)),
+    );
+
+    if (selectedDate != null) {
+      final day = selectedDate.day.toString().padLeft(2, '0');
+      final month = selectedDate.month.toString().padLeft(2, '0');
+      final year = selectedDate.year.toString().substring(2);
+
+      if (target == "od") {
+        _odDzienController.text = day;
+        _odMiesiacController.text = month;
+        _odRokController.text = year;
+      } else {
+        _doDzienController.text = day;
+        _doMiesiacController.text = month;
+        _doRokController.text = year;
+      }
+    }
+  }
+
   /// Waliduje i wysyła formularz
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
       try {
-        // Używamy domyślnych dat zamiast pól wejściowych
-        final now = DateTime.now();
-        final future = now.add(const Duration(days: 7));
+        // Parsuj daty z pól formularza
+        final odDzien = _odDzienController.text.trim();
+        final odMiesiac = _odMiesiacController.text.trim();
+        final odRok = _odRokController.text.trim();
+        final doDzien = _doDzienController.text.trim();
+        final doMiesiac = _doMiesiacController.text.trim();
+        final doRok = _doRokController.text.trim();
 
-        final dataOd = now;
-        final dataDo = future;
+        if (odDzien.isEmpty ||
+            odMiesiac.isEmpty ||
+            odRok.isEmpty ||
+            doDzien.isEmpty ||
+            doMiesiac.isEmpty ||
+            doRok.isEmpty) {
+          _showError('Wypełnij wszystkie pola dat rezerwacji!');
+          return;
+        }
+
+        // Konwertuj na pełne daty
+        final odFullYear = odRok.length == 4 ? odRok : '20$odRok';
+        final doFullYear = doRok.length == 4 ? doRok : '20$doRok';
+
+        final dataOd = DateTime(
+          int.parse(odFullYear),
+          int.parse(odMiesiac),
+          int.parse(odDzien),
+        );
+        final dataDo = DateTime(
+          int.parse(doFullYear),
+          int.parse(doMiesiac),
+          int.parse(doDzien),
+        );
+
+        if (dataOd.isAfter(dataDo)) {
+          _showError(
+            'Data rozpoczęcia musi być wcześniejsza niż data zakończenia!',
+          );
+          return;
+        }
 
         final client = Client(
           wzrost: int.parse(_wzrostController.text),
@@ -125,182 +186,240 @@ class _ClientFormState extends State<ClientForm> {
       key: _formKey,
       child: Column(
         children: [
-          // Daty rezerwacji - WYŁĄCZONE
-          // Row(
-          //   children: [
-          //     Expanded(
-          //       child: Column(
-          //         crossAxisAlignment: CrossAxisAlignment.start,
-          //         children: [
-          //           const Text('📅 Data od:'),
-          //           const SizedBox(height: 4),
-          //           Row(
-          //             children: [
-          //               SizedBox(
-          //                 width: 50,
-          //                 child: TextFormField(
-          //                   controller: _odDzienController,
-          //                   decoration: const InputDecoration(
-          //                     hintText: 'DD',
-          //                     isDense: true,
-          //                   ),
-          //                   keyboardType: TextInputType.number,
-          //                   inputFormatters: [
-          //                     FilteringTextInputFormatter.digitsOnly,
-          //                     LengthLimitingTextInputFormatter(2),
-          //                   ],
-          //                   validator: (value) {
-          //                     if (value == null || value.isEmpty) return 'Wpisz dzień';
-          //                     final day = int.tryParse(value);
-          //                     if (day == null || day < 1 || day > 31) {
-          //                       return 'Nieprawidłowy dzień';
-          //                     }
-          //                     return null;
-          //                   },
-          //                 ),
-          //               ),
-          //               const SizedBox(width: 4),
-          //               SizedBox(
-          //                 width: 50,
-          //                 child: TextFormField(
-          //                   controller: _odMiesiacController,
-          //                   decoration: const InputDecoration(
-          //                     hintText: 'MM',
-          //                     isDense: true,
-          //                   ),
-          //                   keyboardType: TextInputType.number,
-          //                   inputFormatters: [
-          //                     FilteringTextInputFormatter.digitsOnly,
-          //                     LengthLimitingTextInputFormatter(2),
-          //                   ],
-          //                   validator: (value) {
-          //                     if (value == null || value.isEmpty) return 'Wpisz miesiąc';
-          //                     final month = int.tryParse(value);
-          //                     if (month == null || month < 1 || month > 12) {
-          //                       return 'Nieprawidłowy miesiąc';
-          //                     }
-          //                     return null;
-          //                   },
-          //                 ),
-          //               ),
-          //               const SizedBox(width: 4),
-          //               SizedBox(
-          //                 width: 60,
-          //                 child: TextFormField(
-          //                   controller: _odRokController,
-          //                   decoration: const InputDecoration(
-          //                     hintText: 'RR',
-          //                     isDense: true,
-          //                   ),
-          //                   keyboardType: TextInputType.number,
-          //                   inputFormatters: [
-          //                     FilteringTextInputFormatter.digitsOnly,
-          //                     LengthLimitingTextInputFormatter(4),
-          //                   ],
-          //                   validator: (value) {
-          //                     if (value == null || value.isEmpty) return 'Wpisz rok';
-          //                     final year = int.tryParse(value);
-          //                     if (year == null || year < 2000) {
-          //                       return 'Nieprawidłowy rok';
-          //                     }
-          //                     return null;
-          //                   },
-          //                 ),
-          //               ),
-          //             ],
-          //           ),
-          //         ],
-          //       ),
-          //     ),
-          //     const SizedBox(width: 16),
-          //     Expanded(
-          //       child: Column(
-          //         crossAxisAlignment: CrossAxisAlignment.start,
-          //         children: [
-          //           const Text('📅 Data do:'),
-          //           const SizedBox(height: 4),
-          //           Row(
-          //             children: [
-          //               SizedBox(
-          //                 width: 50,
-          //                 child: TextFormField(
-          //                   controller: _doDzienController,
-          //                   decoration: const InputDecoration(
-          //                     hintText: 'DD',
-          //                     isDense: true,
-          //                   ),
-          //                   keyboardType: TextInputType.number,
-          //                   inputFormatters: [
-          //                     FilteringTextInputFormatter.digitsOnly,
-          //                     LengthLimitingTextInputFormatter(2),
-          //                   ],
-          //                   validator: (value) {
-          //                     if (value == null || value.isEmpty) return 'Wpisz dzień';
-          //                     final day = int.tryParse(value);
-          //                     if (day == null || day < 1 || day > 31) {
-          //                       return 'Nieprawidłowy dzień';
-          //                     }
-          //                     return null;
-          //                   },
-          //                 ),
-          //               ),
-          //               const SizedBox(width: 4),
-          //               SizedBox(
-          //                 width: 50,
-          //                 child: TextFormField(
-          //                   controller: _doMiesiacController,
-          //                   decoration: const InputDecoration(
-          //                     hintText: 'MM',
-          //                     isDense: true,
-          //                   ),
-          //                   keyboardType: TextInputType.number,
-          //                   inputFormatters: [
-          //                     FilteringTextInputFormatter.digitsOnly,
-          //                     LengthLimitingTextInputFormatter(2),
-          //                   ],
-          //                   validator: (value) {
-          //                     if (value == null || value.isEmpty) return 'Wpisz miesiąc';
-          //                     final month = int.tryParse(value);
-          //                     if (month == null || month < 1 || month > 12) {
-          //                       return 'Nieprawidłowy miesiąc';
-          //                     }
-          //                     return null;
-          //                   },
-          //                 ),
-          //               ),
-          //               const SizedBox(width: 4),
-          //               SizedBox(
-          //                 width: 60,
-          //                 child: TextFormField(
-          //                   controller: _doRokController,
-          //                   decoration: const InputDecoration(
-          //                     hintText: 'RR',
-          //                     isDense: true,
-          //                   ),
-          //                   keyboardType: TextInputType.number,
-          //                   inputFormatters: [
-          //                     FilteringTextInputFormatter.digitsOnly,
-          //                     LengthLimitingTextInputFormatter(4),
-          //                   ],
-          //                   validator: (value) {
-          //                     if (value == null || value.isEmpty) return 'Wpisz rok';
-          //                     final year = int.tryParse(value);
-          //                     if (year == null || year < 2000) {
-          //                       return 'Nieprawidłowy rok';
-          //                     }
-          //                     return null;
-          //                   },
-          //                 ),
-          //               ),
-          //             ],
-          //           ),
-          //         ],
-          //       ),
-          //     ),
-          //   ],
-          // ),
+          // Daty rezerwacji
+          Row(
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text('📅 Data od:', style: TextStyle(fontSize: 12)),
+                    const SizedBox(height: 2),
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 40,
+                          child: TextFormField(
+                            controller: _odDzienController,
+                            decoration: const InputDecoration(
+                              hintText: 'DD',
+                              isDense: true,
+                              contentPadding: EdgeInsets.symmetric(
+                                horizontal: 4,
+                                vertical: 6,
+                              ),
+                            ),
+                            keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly,
+                              LengthLimitingTextInputFormatter(2),
+                            ],
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Wpisz dzień';
+                              }
+                              final day = int.tryParse(value);
+                              if (day == null || day < 1 || day > 31) {
+                                return 'Nieprawidłowy dzień';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                        const SizedBox(width: 2),
+                        SizedBox(
+                          width: 40,
+                          child: TextFormField(
+                            controller: _odMiesiacController,
+                            decoration: const InputDecoration(
+                              hintText: 'MM',
+                              isDense: true,
+                              contentPadding: EdgeInsets.symmetric(
+                                horizontal: 4,
+                                vertical: 6,
+                              ),
+                            ),
+                            keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly,
+                              LengthLimitingTextInputFormatter(2),
+                            ],
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Wpisz miesiąc';
+                              }
+                              final month = int.tryParse(value);
+                              if (month == null || month < 1 || month > 12) {
+                                return 'Nieprawidłowy miesiąc';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                        const SizedBox(width: 2),
+                        SizedBox(
+                          width: 50,
+                          child: TextFormField(
+                            controller: _odRokController,
+                            decoration: const InputDecoration(
+                              hintText: 'RR',
+                              isDense: true,
+                              contentPadding: EdgeInsets.symmetric(
+                                horizontal: 4,
+                                vertical: 6,
+                              ),
+                            ),
+                            keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly,
+                              LengthLimitingTextInputFormatter(4),
+                            ],
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Wpisz rok';
+                              }
+                              final year = int.tryParse(value);
+                              if (year == null || year < 2000) {
+                                return 'Nieprawidłowy rok';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                        const SizedBox(width: 2),
+                        IconButton(
+                          onPressed: () => _openCalendar("od"),
+                          icon: const Icon(Icons.calendar_today, size: 16),
+                          tooltip: "Otwórz kalendarz",
+                          style: AppTheme.infoButton,
+                          constraints: const BoxConstraints(
+                            minWidth: 24,
+                            minHeight: 24,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text('📅 Data do:', style: TextStyle(fontSize: 12)),
+                    const SizedBox(height: 2),
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 40,
+                          child: TextFormField(
+                            controller: _doDzienController,
+                            decoration: const InputDecoration(
+                              hintText: 'DD',
+                              isDense: true,
+                              contentPadding: EdgeInsets.symmetric(
+                                horizontal: 4,
+                                vertical: 6,
+                              ),
+                            ),
+                            keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly,
+                              LengthLimitingTextInputFormatter(2),
+                            ],
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Wpisz dzień';
+                              }
+                              final day = int.tryParse(value);
+                              if (day == null || day < 1 || day > 31) {
+                                return 'Nieprawidłowy dzień';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                        const SizedBox(width: 2),
+                        SizedBox(
+                          width: 40,
+                          child: TextFormField(
+                            controller: _doMiesiacController,
+                            decoration: const InputDecoration(
+                              hintText: 'MM',
+                              isDense: true,
+                              contentPadding: EdgeInsets.symmetric(
+                                horizontal: 4,
+                                vertical: 6,
+                              ),
+                            ),
+                            keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly,
+                              LengthLimitingTextInputFormatter(2),
+                            ],
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Wpisz miesiąc';
+                              }
+                              final month = int.tryParse(value);
+                              if (month == null || month < 1 || month > 12) {
+                                return 'Nieprawidłowy miesiąc';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                        const SizedBox(width: 2),
+                        SizedBox(
+                          width: 50,
+                          child: TextFormField(
+                            controller: _doRokController,
+                            decoration: const InputDecoration(
+                              hintText: 'RR',
+                              isDense: true,
+                              contentPadding: EdgeInsets.symmetric(
+                                horizontal: 4,
+                                vertical: 6,
+                              ),
+                            ),
+                            keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly,
+                              LengthLimitingTextInputFormatter(4),
+                            ],
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Wpisz rok';
+                              }
+                              final year = int.tryParse(value);
+                              if (year == null || year < 2000) {
+                                return 'Nieprawidłowy rok';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                        const SizedBox(width: 2),
+                        IconButton(
+                          onPressed: () => _openCalendar("do"),
+                          icon: const Icon(Icons.calendar_today, size: 16),
+                          tooltip: "Otwórz kalendarz",
+                          style: AppTheme.infoButton,
+                          constraints: const BoxConstraints(
+                            minWidth: 24,
+                            minHeight: 24,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
 
-          // const SizedBox(height: 16),
+          const SizedBox(height: 8),
 
           // Wzrost i waga
           Row(
@@ -310,7 +429,12 @@ class _ClientFormState extends State<ClientForm> {
                   controller: _wzrostController,
                   decoration: const InputDecoration(
                     labelText: '📏 Wzrost (cm)',
-                    hintText: 'np. 175',
+                    hintText: '175',
+                    isDense: true,
+                    contentPadding: EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 8,
+                    ),
                   ),
                   keyboardType: TextInputType.number,
                   inputFormatters: [
@@ -327,13 +451,18 @@ class _ClientFormState extends State<ClientForm> {
                   },
                 ),
               ),
-              const SizedBox(width: 16),
+              const SizedBox(width: 8),
               Expanded(
                 child: TextFormField(
                   controller: _wagaController,
                   decoration: const InputDecoration(
                     labelText: '⚖️ Waga (kg)',
-                    hintText: 'np. 70',
+                    hintText: '70',
+                    isDense: true,
+                    contentPadding: EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 8,
+                    ),
                   ),
                   keyboardType: TextInputType.number,
                   inputFormatters: [
@@ -353,7 +482,7 @@ class _ClientFormState extends State<ClientForm> {
             ],
           ),
 
-          const SizedBox(height: 16),
+          const SizedBox(height: 8),
 
           // Poziom i płeć
           Row(
@@ -364,6 +493,11 @@ class _ClientFormState extends State<ClientForm> {
                   decoration: const InputDecoration(
                     labelText: '🎯 Poziom',
                     hintText: '1-6',
+                    isDense: true,
+                    contentPadding: EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 8,
+                    ),
                   ),
                   keyboardType: TextInputType.number,
                   inputFormatters: [
@@ -380,11 +514,18 @@ class _ClientFormState extends State<ClientForm> {
                   },
                 ),
               ),
-              const SizedBox(width: 16),
+              const SizedBox(width: 8),
               Expanded(
                 child: DropdownButtonFormField<String>(
-                  value: _plec,
-                  decoration: const InputDecoration(labelText: '👤 Płeć'),
+                  initialValue: _plec,
+                  decoration: const InputDecoration(
+                    labelText: '👤 Płeć',
+                    isDense: true,
+                    contentPadding: EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 8,
+                    ),
+                  ),
                   items: const [
                     DropdownMenuItem(value: 'Wszyscy', child: Text('Wszyscy')),
                     DropdownMenuItem(
@@ -403,29 +544,33 @@ class _ClientFormState extends State<ClientForm> {
             ],
           ),
 
-          const SizedBox(height: 16),
+          const SizedBox(height: 8),
 
           // Przeznaczenie
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('🎿 Przeznaczenie:'),
-              const SizedBox(height: 8),
+              const Text(
+                '🎿 Przeznaczenie:',
+                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+              ),
+              const SizedBox(height: 4),
               Wrap(
-                spacing: 8,
+                spacing: 4,
+                runSpacing: 2,
                 children: [
                   _buildStyleRadio('Wszystkie', 'Wszystkie'),
-                  _buildStyleRadio('Slalom (SL)', 'SL'),
-                  _buildStyleRadio('Gigant (G)', 'G'),
-                  _buildStyleRadio('Performance (SLG)', 'SLG'),
-                  _buildStyleRadio('Cały dzień (C)', 'C'),
-                  _buildStyleRadio('Poza trasę (OFF)', 'OFF'),
+                  _buildStyleRadio('SL', 'SL'),
+                  _buildStyleRadio('G', 'G'),
+                  _buildStyleRadio('SLG', 'SLG'),
+                  _buildStyleRadio('C', 'C'),
+                  _buildStyleRadio('OFF', 'OFF'),
                 ],
               ),
             ],
           ),
 
-          const SizedBox(height: 24),
+          const SizedBox(height: 12),
 
           // Przyciski
           Row(
@@ -433,18 +578,22 @@ class _ClientFormState extends State<ClientForm> {
               Expanded(
                 child: ElevatedButton.icon(
                   onPressed: _submitForm,
-                  icon: const Icon(Icons.search),
+                  icon: const Icon(Icons.search, size: 16),
                   label: const Text('🔍 Znajdź'),
-                  style: AppTheme.successButton,
+                  style: AppTheme.successButton.copyWith(
+                    minimumSize: WidgetStateProperty.all(const Size(0, 32)),
+                  ),
                 ),
               ),
-              const SizedBox(width: 8),
+              const SizedBox(width: 6),
               Expanded(
                 child: ElevatedButton.icon(
                   onPressed: _clearForm,
-                  icon: const Icon(Icons.clear),
+                  icon: const Icon(Icons.clear, size: 16),
                   label: const Text('🗑️ Wyczyść'),
-                  style: AppTheme.warningButton,
+                  style: AppTheme.warningButton.copyWith(
+                    minimumSize: WidgetStateProperty.all(const Size(0, 32)),
+                  ),
                 ),
               ),
             ],
@@ -467,8 +616,9 @@ class _ClientFormState extends State<ClientForm> {
               _stylJazdy = newValue ?? 'Wszystkie';
             });
           },
+          materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         ),
-        Text(label),
+        Text(label, style: const TextStyle(fontSize: 12)),
       ],
     );
   }

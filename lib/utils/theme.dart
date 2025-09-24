@@ -1,28 +1,30 @@
 import 'package:flutter/material.dart';
 
-/// Nowoczesny motyw kolorów - niebieski jak logo
+/// Motyw kolorów zgodny z projektem Figma
 class AppTheme {
-  // Główne kolory - różne odcienie niebieskiego
-  static const Color primary = Color(
-    0xFFF0F8FF,
-  ); // Bardzo jasny niebieski (główne tło)
-  static const Color secondary = Color(
-    0xFFDCEDFF,
-  ); // Jasny niebieski (sekundarne tło)
-  static const Color tertiary = Color(
-    0xFFC8DCFF,
-  ); // Średni jasny niebieski (ramki)
+  // Kolory z projektu Figma
+  static const Color primary = Color(0xFFFFFFFF); // Białe tło główne
+  static const Color headerBackground = Color(0xFF386BB2); // Niebieski nagłówek
+  static const Color resultsBackground = Color(
+    0xFF386BB2,
+  ); // Niebieski tło wyników
+  static const Color formBackground = Color(
+    0xFF194576,
+  ); // Ciemny niebieski formularz
+  static const Color sectionBackground = Color(
+    0xFF2C699F,
+  ); // Średni niebieski sekcje
+  static const Color inputBackground = Color(
+    0xFF194576,
+  ); // Ciemny niebieski pola
+  static const Color resultsInnerBackground = Color(
+    0xFFA6C2EF,
+  ); // Jasny niebieski wewnątrz wyników
 
-  // Akcenty - inspirowane niebieskim logo
-  static const Color accent = Color(
-    0xFF1E64AF,
-  ); // Głęboki niebieski (główny akcent)
-  static const Color accentHover = Color(
-    0xFF14508C,
-  ); // Ciemniejszy niebieski (hover)
-  static const Color accentLight = Color(
-    0xFF3B82F6,
-  ); // Jaśniejszy niebieski (aktywne elementy)
+  // Akcenty
+  static const Color accent = Color(0xFF194576); // Główny akcent
+  static const Color accentHover = Color(0xFF2C699F); // Hover
+  static const Color accentLight = Color(0xFFA6C2EF); // Jaśniejszy akcent
 
   // Kolory funkcjonalne - kontrastowe na niebieskim tle
   static const Color success = Color(0xFF059669); // Zielony las (sukces)
@@ -32,13 +34,10 @@ class AppTheme {
   static const Color error = Color(0xFFDC2626); // Ciemny czerwony (błąd)
   static const Color info = Color(0xFF0284C7); // Niebieski lód (informacja)
 
-  // Tekst - ciemny dla kontrastu na niebieskim tle
-  static const Color textPrimary = Color(
-    0xFF1F2937,
-  ); // Prawie czarny (główny tekst)
-  static const Color textSecondary = Color(
-    0xFF374151,
-  ); // Ciemny szary (drugorzędny tekst)
+  // Tekst - biały dla kontrastu na niebieskim tle
+  static const Color textPrimary = Color(0xFFFFFFFF); // Biały tekst
+  static const Color textSecondary = Color(0xFFE5E7EB); // Jasny szary tekst
+  static const Color textDark = Color(0xFF000000); // Czarny tekst na jasnym tle
 
   /// Główny motyw aplikacji
   static ThemeData get lightTheme {
@@ -50,23 +49,39 @@ class AppTheme {
         primary: accent,
         secondary: accentLight,
         surface: primary,
-        background: primary,
         error: error,
       ),
       textTheme: const TextTheme(
         headlineLarge: TextStyle(
-          fontSize: 24,
-          fontWeight: FontWeight.bold,
+          fontSize: 30,
+          fontWeight: FontWeight.w900,
+          fontStyle: FontStyle.italic,
           color: textPrimary,
         ),
         headlineMedium: TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
+          fontSize: 18,
+          fontWeight: FontWeight.w900,
+          fontStyle: FontStyle.italic,
           color: textPrimary,
         ),
-        bodyLarge: TextStyle(fontSize: 16, color: textPrimary),
-        bodyMedium: TextStyle(fontSize: 14, color: textPrimary),
-        bodySmall: TextStyle(fontSize: 12, color: textSecondary),
+        bodyLarge: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w900,
+          fontStyle: FontStyle.italic,
+          color: textPrimary,
+        ),
+        bodyMedium: TextStyle(
+          fontSize: 10,
+          fontWeight: FontWeight.w900,
+          fontStyle: FontStyle.italic,
+          color: textPrimary,
+        ),
+        bodySmall: TextStyle(
+          fontSize: 12,
+          fontWeight: FontWeight.w900,
+          fontStyle: FontStyle.italic,
+          color: textPrimary,
+        ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
@@ -78,23 +93,29 @@ class AppTheme {
       ),
       inputDecorationTheme: InputDecorationTheme(
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(color: tertiary, width: 2),
+          borderRadius: BorderRadius.circular(5),
+          borderSide: const BorderSide(color: Colors.white, width: 1),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(color: accent, width: 2),
+          borderRadius: BorderRadius.circular(5),
+          borderSide: const BorderSide(color: Colors.white, width: 1),
         ),
         filled: true,
-        fillColor: Colors.white,
-        contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        fillColor: inputBackground,
+        contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+        labelStyle: const TextStyle(
+          color: textPrimary,
+          fontWeight: FontWeight.w900,
+          fontStyle: FontStyle.italic,
+          fontSize: 16,
+        ),
       ),
       cardTheme: CardThemeData(
-        color: secondary,
-        elevation: 2,
+        color: sectionBackground,
+        elevation: 0,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-          side: const BorderSide(color: tertiary, width: 2),
+          borderRadius: BorderRadius.circular(10),
+          side: const BorderSide(color: Colors.white, width: 1),
         ),
       ),
     );

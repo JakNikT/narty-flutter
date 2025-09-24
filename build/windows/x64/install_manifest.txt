@@ -1,0 +1,14 @@
+C:/Users/wacia/Desktop/narty flutter/build/windows/x64/runner/Debug/data/icudtl.dat
+C:/Users/wacia/Desktop/narty flutter/build/windows/x64/runner/Debug/flutter_windows.dll
+C:/Users/wacia/Desktop/narty flutter/build/windows/x64/runner/Debug/data/flutter_assets/AssetManifest.bin
+C:/Users/wacia/Desktop/narty flutter/build/windows/x64/runner/Debug/data/flutter_assets/AssetManifest.json
+C:/Users/wacia/Desktop/narty flutter/build/windows/x64/runner/Debug/data/flutter_assets/assets/data/NOWABAZA_final.csv
+C:/Users/wacia/Desktop/narty flutter/build/windows/x64/runner/Debug/data/flutter_assets/assets/data/rez.csv
+C:/Users/wacia/Desktop/narty flutter/build/windows/x64/runner/Debug/data/flutter_assets/assets/data/rez.xlsx
+C:/Users/wacia/Desktop/narty flutter/build/windows/x64/runner/Debug/data/flutter_assets/FontManifest.json
+C:/Users/wacia/Desktop/narty flutter/build/windows/x64/runner/Debug/data/flutter_assets/fonts/MaterialIcons-Regular.otf
+C:/Users/wacia/Desktop/narty flutter/build/windows/x64/runner/Debug/data/flutter_assets/kernel_blob.bin
+C:/Users/wacia/Desktop/narty flutter/build/windows/x64/runner/Debug/data/flutter_assets/NativeAssetsManifest.json
+C:/Users/wacia/Desktop/narty flutter/build/windows/x64/runner/Debug/data/flutter_assets/NOTICES.Z
+C:/Users/wacia/Desktop/narty flutter/build/windows/x64/runner/Debug/data/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf
+C:/Users/wacia/Desktop/narty flutter/build/windows/x64/runner/Debug/data/flutter_assets/shaders/ink_sparkle.frag
