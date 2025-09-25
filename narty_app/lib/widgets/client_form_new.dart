@@ -164,10 +164,10 @@ class _ClientFormNewState extends State<ClientFormNew> {
               child: Stack(
                 clipBehavior: Clip.none,
                 children: [
-                  // Left side - Date and physical data (left: 15px, top: -80px relative to form)
+                  // Left side - Date and physical data (left: 15px, centered vertically)
                   Positioned(
                     left: 15,
-                    top: -80,
+                    top: 10,
                     child: Container(
                       width: 307,
                       height: 160,
@@ -566,10 +566,10 @@ class _ClientFormNewState extends State<ClientFormNew> {
                     ),
                   ),
 
-                  // Center - Gender and level (left: 340px, top: 80px relative to form)
+                  // Center - Gender and level (center bottom)
                   Positioned(
-                    left: 340,
-                    top: 80,
+                    left: 350,
+                    top: 120,
                     child: Container(
                       width: 230,
                       height: 96,
@@ -686,10 +686,10 @@ class _ClientFormNewState extends State<ClientFormNew> {
                     ),
                   ),
 
-                  // Right side - Preferences (left: 590px, top: 15px relative to form)
+                  // Right side - Preferences (right side, centered vertically)
                   Positioned(
-                    left: 590,
-                    top: 15,
+                    left: 680,
+                    top: 10,
                     child: Container(
                       width: 307,
                       height: 160,
