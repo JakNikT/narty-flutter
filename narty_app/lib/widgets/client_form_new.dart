@@ -186,7 +186,7 @@ class _ClientFormNewState extends State<ClientFormNew> {
                 children: [
                   // TEST: Red square for left container position
                   Positioned(
-                    left: 15,
+                    left: 10,
                     top: 10,
                     child: Container(
                       width: 307,
@@ -206,9 +206,9 @@ class _ClientFormNewState extends State<ClientFormNew> {
                     ),
                   ),
                   
-                  // Left side - Date and physical data (left: 15px, centered vertically)
+                  // Left side - Date and physical data (x:10, y:10, w:307, h:160)
                   Positioned(
-                    left: 15,
+                    left: 10,
                     top: 10,
                     child: Container(
                       width: 307,

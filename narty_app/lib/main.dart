@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
-import 'utils/theme.dart';
-import 'screens/main_screen.dart';
+import 'screens/frame_demo_screen.dart';
 
 void main() {
-  runApp(const NartyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(const FrameDemoApp());
 }
 
-class NartyApp extends StatelessWidget {
-  const NartyApp({super.key});
+class FrameDemoApp extends StatelessWidget {
+  const FrameDemoApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Asystent Doboru Nart',
-      theme: AppTheme.lightTheme,
-      home: const MainScreen(),
+      title: 'Frame Demo - Figma-like Layout',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        useMaterial3: true,
+      ),
+      home: const FrameDemoScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
