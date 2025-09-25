@@ -1,1 +1,0 @@
- C:\\Users\\wacia\\Desktop\\narty\ flutter\\.dart_tool\\flutter_build\\9a2dfd1dadaf24ae8c64424c477f4c83\\native_assets.json: 
