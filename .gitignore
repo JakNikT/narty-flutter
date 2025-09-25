@@ -33,3 +33,8 @@ ENV/
 # Excel temporary files
 ~$*.xlsx
 ~$*.xls
+
+# Flutter build files
+build/
+windows/flutter/ephemeral/
+*.pdb
