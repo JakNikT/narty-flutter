@@ -751,16 +751,18 @@ class _ClientFormNewState extends State<ClientFormNew> {
                                       backgroundColor: AppTheme.inputBackground,
                                       foregroundColor: AppTheme.textPrimary,
                                       padding: const EdgeInsets.symmetric(
-                                        vertical: 4,
+                                        vertical: 8,
+                                        horizontal: 12,
                                       ),
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(5),
                                       ),
+                                      minimumSize: const Size(0, 32),
                                     ),
                                     child: const Text(
                                       '🔍 Znajdź',
                                       style: TextStyle(
-                                        fontSize: 10,
+                                        fontSize: 12,
                                         fontWeight: FontWeight.w900,
                                         fontStyle: FontStyle.italic,
                                       ),
@@ -775,16 +777,18 @@ class _ClientFormNewState extends State<ClientFormNew> {
                                       backgroundColor: AppTheme.inputBackground,
                                       foregroundColor: AppTheme.textPrimary,
                                       padding: const EdgeInsets.symmetric(
-                                        vertical: 4,
+                                        vertical: 8,
+                                        horizontal: 12,
                                       ),
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(5),
                                       ),
+                                      minimumSize: const Size(0, 32),
                                     ),
                                     child: const Text(
                                       '🗑️ Wyczyść',
                                       style: TextStyle(
-                                        fontSize: 10,
+                                        fontSize: 12,
                                         fontWeight: FontWeight.w900,
                                         fontStyle: FontStyle.italic,
                                       ),
@@ -793,7 +797,7 @@ class _ClientFormNewState extends State<ClientFormNew> {
                                 ),
                               ],
                             ),
-                            const SizedBox(height: 4),
+                            const SizedBox(height: 8),
                             Row(
                               children: [
                                 Expanded(
@@ -803,16 +807,18 @@ class _ClientFormNewState extends State<ClientFormNew> {
                                       backgroundColor: AppTheme.inputBackground,
                                       foregroundColor: AppTheme.textPrimary,
                                       padding: const EdgeInsets.symmetric(
-                                        vertical: 4,
+                                        vertical: 8,
+                                        horizontal: 12,
                                       ),
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(5),
                                       ),
+                                      minimumSize: const Size(0, 32),
                                     ),
                                     child: const Text(
                                       '📋 Przeglądaj',
                                       style: TextStyle(
-                                        fontSize: 10,
+                                        fontSize: 12,
                                         fontWeight: FontWeight.w900,
                                         fontStyle: FontStyle.italic,
                                       ),
@@ -827,16 +833,18 @@ class _ClientFormNewState extends State<ClientFormNew> {
                                       backgroundColor: AppTheme.inputBackground,
                                       foregroundColor: AppTheme.textPrimary,
                                       padding: const EdgeInsets.symmetric(
-                                        vertical: 4,
+                                        vertical: 8,
+                                        horizontal: 12,
                                       ),
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(5),
                                       ),
+                                      minimumSize: const Size(0, 32),
                                     ),
                                     child: const Text(
                                       '🔄 Rezerwacje',
                                       style: TextStyle(
-                                        fontSize: 10,
+                                        fontSize: 12,
                                         fontWeight: FontWeight.w900,
                                         fontStyle: FontStyle.italic,
                                       ),
