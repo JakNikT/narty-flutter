@@ -197,10 +197,10 @@ class _FrameDemoScreenState extends State<FrameDemoScreen> {
         borderRadius: 3,
       ),
       
-      // Elementy w środku
+      // Elementy w "Dane klienta" frame
       const FrameElement(
-        id: 'client_data',
-        frameId: 'center',
+        id: 'client_data_title',
+        frameId: 'client_data',
         left: 10,
         top: 10,
         width: 210,
@@ -212,11 +212,12 @@ class _FrameDemoScreenState extends State<FrameDemoScreen> {
         textColor: Colors.white,
       ),
       
+      // Elementy w środku (dół)
       const FrameElement(
         id: 'level_label',
         frameId: 'center',
         left: 10,
-        top: 50,
+        top: 10,
         width: 100,
         height: 25,
         color: Color(0xFF194576),
@@ -230,7 +231,32 @@ class _FrameDemoScreenState extends State<FrameDemoScreen> {
         id: 'level_dropdown',
         frameId: 'center',
         left: 110,
-        top: 50,
+        top: 10,
+        width: 100,
+        height: 25,
+        color: Color(0xFF194576),
+        borderRadius: 3,
+      ),
+      
+      const FrameElement(
+        id: 'gender_label',
+        frameId: 'center',
+        left: 10,
+        top: 45,
+        width: 100,
+        height: 25,
+        color: Color(0xFF194576),
+        text: 'Płeć:',
+        fontSize: 12,
+        fontWeight: FontWeight.bold,
+        textColor: Colors.white,
+      ),
+      
+      const FrameElement(
+        id: 'gender_dropdown',
+        frameId: 'center',
+        left: 110,
+        top: 45,
         width: 100,
         height: 25,
         color: Color(0xFF194576),
