@@ -164,10 +164,10 @@ class _ClientFormNewState extends State<ClientFormNew> {
               child: Stack(
                 clipBehavior: Clip.none,
                 children: [
-                  // Left side - Date and physical data (left: 15px, top: 15px relative to form)
+                  // Left side - Date and physical data (left: 15px, top: -80px relative to form)
                   Positioned(
                     left: 15,
-                    top: 15,
+                    top: -80,
                     child: Container(
                       width: 307,
                       height: 160,
