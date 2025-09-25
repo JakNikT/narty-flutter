@@ -612,7 +612,7 @@ class _ClientFormNewState extends State<ClientFormNew> {
                             borderRadius: BorderRadius.circular(5),
                           ),
                           child: DropdownButtonFormField<String>(
-                            value: _plec,
+                            initialValue: _plec,
                             decoration: const InputDecoration(
                               labelText: '👤 Płeć:',
                               labelStyle: TextStyle(

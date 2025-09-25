@@ -494,8 +494,9 @@ class _ClientFormNewState extends State<ClientFormNew> {
                                         LengthLimitingTextInputFormatter(3),
                                       ],
                                       validator: (value) {
-                                        if (value == null || value.isEmpty)
+                                        if (value == null || value.isEmpty) {
                                           return 'Wpisz wzrost';
+                                        }
                                         final height = int.tryParse(value);
                                         if (height == null ||
                                             height < 100 ||
@@ -543,8 +544,9 @@ class _ClientFormNewState extends State<ClientFormNew> {
                                         LengthLimitingTextInputFormatter(3),
                                       ],
                                       validator: (value) {
-                                        if (value == null || value.isEmpty)
+                                        if (value == null || value.isEmpty) {
                                           return 'Wpisz wagę';
+                                        }
                                         final weight = int.tryParse(value);
                                         if (weight == null ||
                                             weight < 20 ||
@@ -615,8 +617,9 @@ class _ClientFormNewState extends State<ClientFormNew> {
                                   LengthLimitingTextInputFormatter(1),
                                 ],
                                 validator: (value) {
-                                  if (value == null || value.isEmpty)
+                                  if (value == null || value.isEmpty) {
                                     return 'Wpisz poziom';
+                                  }
                                   final level = int.tryParse(value);
                                   if (level == null || level < 1 || level > 6) {
                                     return 'Poziom musi być między 1 a 6';
@@ -634,7 +637,7 @@ class _ClientFormNewState extends State<ClientFormNew> {
                                 borderRadius: BorderRadius.circular(5),
                               ),
                               child: DropdownButtonFormField<String>(
-                                value: _plec,
+                                initialValue: _plec,
                                 decoration: const InputDecoration(
                                   labelText: '👤 Płeć:',
                                   labelStyle: TextStyle(
