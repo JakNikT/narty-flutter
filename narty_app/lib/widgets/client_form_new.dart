@@ -127,6 +127,26 @@ class _ClientFormNewState extends State<ClientFormNew> {
         padding: const EdgeInsets.all(15),
         child: Column(
           children: [
+            // TEST: Yellow square for header position
+            Container(
+              width: 230,
+              height: 50,
+              color: Colors.yellow.withValues(alpha: 0.3),
+              child: const Center(
+                child: Text(
+                  'DANE KLIENTA\n(center top)',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+            
+            const SizedBox(height: 5),
+            
             // Dane klienta header
             Container(
               width: 230,
@@ -164,6 +184,28 @@ class _ClientFormNewState extends State<ClientFormNew> {
               child: Stack(
                 clipBehavior: Clip.none,
                 children: [
+                  // TEST: Red square for left container position
+                  Positioned(
+                    left: 15,
+                    top: 10,
+                    child: Container(
+                      width: 307,
+                      height: 160,
+                      color: Colors.red.withValues(alpha: 0.3),
+                      child: const Center(
+                        child: Text(
+                          'LEWY\n(15, 10)',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                  ),
+                  
                   // Left side - Date and physical data (left: 15px, centered vertically)
                   Positioned(
                     left: 15,
@@ -566,6 +608,28 @@ class _ClientFormNewState extends State<ClientFormNew> {
                     ),
                   ),
 
+                  // TEST: Blue square for center container position
+                  Positioned(
+                    left: 350,
+                    top: 120,
+                    child: Container(
+                      width: 230,
+                      height: 96,
+                      color: Colors.blue.withValues(alpha: 0.3),
+                      child: const Center(
+                        child: Text(
+                          'ŚRODEK\n(350, 120)',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                  ),
+                  
                   // Center - Gender and level (center bottom)
                   Positioned(
                     left: 350,
@@ -686,6 +750,28 @@ class _ClientFormNewState extends State<ClientFormNew> {
                     ),
                   ),
 
+                  // TEST: Green square for right container position
+                  Positioned(
+                    left: 680,
+                    top: 10,
+                    child: Container(
+                      width: 307,
+                      height: 160,
+                      color: Colors.green.withValues(alpha: 0.3),
+                      child: const Center(
+                        child: Text(
+                          'PRAWY\n(680, 10)',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                  ),
+                  
                   // Right side - Preferences (right side, centered vertically)
                   Positioned(
                     left: 680,
