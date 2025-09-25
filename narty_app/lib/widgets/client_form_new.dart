@@ -124,7 +124,7 @@ class _ClientFormNewState extends State<ClientFormNew> {
     return Form(
       key: _formKey,
       child: Padding(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.all(15),
         child: Column(
           children: [
             // Dane klienta header
@@ -156,7 +156,7 @@ class _ClientFormNewState extends State<ClientFormNew> {
               ),
             ),
 
-            const SizedBox(height: 10),
+            const SizedBox(height: 15),
 
             // Three sections positioned
             SizedBox(
@@ -164,10 +164,10 @@ class _ClientFormNewState extends State<ClientFormNew> {
               child: Stack(
                 clipBehavior: Clip.none,
                 children: [
-                  // Left side - Date and physical data (left: 10px, top: 10px relative to form)
+                  // Left side - Date and physical data (left: 15px, top: 15px relative to form)
                   Positioned(
-                    left: 10,
-                    top: 10,
+                    left: 15,
+                    top: 15,
                     child: Container(
                       width: 307,
                       height: 160,
@@ -566,10 +566,10 @@ class _ClientFormNewState extends State<ClientFormNew> {
                     ),
                   ),
 
-                  // Center - Gender and level (left: 330px, top: 74px relative to form)
+                  // Center - Gender and level (left: 340px, top: 80px relative to form)
                   Positioned(
-                    left: 330,
-                    top: 74,
+                    left: 340,
+                    top: 80,
                     child: Container(
                       width: 230,
                       height: 96,
@@ -686,10 +686,10 @@ class _ClientFormNewState extends State<ClientFormNew> {
                     ),
                   ),
 
-                  // Right side - Preferences (left: 573px, top: 10px relative to form)
+                  // Right side - Preferences (left: 590px, top: 15px relative to form)
                   Positioned(
-                    left: 573,
-                    top: 10,
+                    left: 590,
+                    top: 15,
                     child: Container(
                       width: 307,
                       height: 160,
